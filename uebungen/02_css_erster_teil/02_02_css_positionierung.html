@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ü2.2.2</title>
+
+    <style>
+        .target {
+            border: 1px solid black;
+            padding: 0.5em;
+        }
+
+        .target img {
+            visibility: hidden;
+            width: 100%;
+        }
+
+        /* preceeded by checked switch */
+        #switch:checked ~ .target img {
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Übung 2.2</h1>
+
+<input type="checkbox" id="switch">
+<label for="switch">hide and show via checkbox</label>
+
+<div class="target">
+    <img alt="wikipedia image" src="./02_02.jpg">
+</div>
+
+
+</body>
+</html>
