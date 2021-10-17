@@ -38,6 +38,10 @@
             text-decoration: none;
         }
 
+        nav > a:hover{
+            text-decoration: underline;
+        }
+
         header {
             grid-area: header;
             background-color: rgb(235, 234, 230);
@@ -115,7 +119,6 @@
             cursor: pointer;
         }
 
-        /* einen breakpoint bei 400 zu setzen, fand ich überflüssig :-) */
         @media screen and (min-width: 600px) {
             body {
                 grid-template-columns: 50% 50%;
@@ -139,6 +142,15 @@
 
             footer {
                 flex-direction: column;
+            }
+        }
+
+        @media screen and (min-width: 1000px) {
+            section.right{
+                align-content: flex-start;
+            }
+            section.left{
+                align-content: flex-end;
             }
         }
     </style>
