@@ -135,9 +135,8 @@
                 height: 100%;
             }
 
-            section.right {
-                padding-top: 10%;
-                text-align: left;
+            section.right{
+                justify-content: center;
             }
 
             footer {
@@ -148,9 +147,15 @@
         @media screen and (min-width: 1000px) {
             section.right{
                 align-content: flex-start;
+                justify-content: flex-start;
+                padding-top: 5%;
             }
             section.left{
                 align-content: flex-end;
+            }
+
+            footer button {
+                width:33%;
             }
         }
     </style>
