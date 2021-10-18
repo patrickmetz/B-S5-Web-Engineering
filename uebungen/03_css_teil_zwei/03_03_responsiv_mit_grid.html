@@ -6,6 +6,18 @@
     <title>Ü 3.3</title>
 
     <style>
+
+        /* Basis-Schriftgröße von 12px bis 18px skalieren,
+        für Viewports von 300px bis 1920px Breite.
+        Skaliert nach erreichen von 1920px weiter.
+        clamp(Mindestwert, bevorzugter Wert, Maximalwert).
+        Verwendung von rem verhindert Accesibility-Probleme.
+        https://websemantics.uk/tools/responsive-font-calculator/ */
+        :root {
+            font-size: clamp(12px, calc(0.75rem + ((1vw - 3px) * 0.3704)), 18px);
+            min-height: 0vw; /* safari fix */
+        }
+
         * {
             box-sizing: border-box;
             font-family: Verdana, sans-serif;
@@ -15,7 +27,7 @@
             height: 100vh;
             margin: 0;
             display: grid;
-            grid-template-rows: 10% 10% 160% 20%;
+            grid-template-rows: 7.5% 10% 164% 20%;
             grid-template-areas:
                 "nav"
                 "header"
@@ -39,7 +51,7 @@
             text-decoration: none;
         }
 
-        nav > a:hover{
+        nav > a:hover {
             text-decoration: underline;
         }
 
@@ -55,6 +67,7 @@
 
         header > h1 {
             text-align: center;
+            padding:0.5em;
         }
 
         article {
@@ -67,7 +80,7 @@
 
         section {
             width: 100%;
-            height: 50%; /* hälfte von 160% = 80% */
+            height: 50%; /* hälfte von 164% */
             display: flex;
             flex-direction: column;
             flex-wrap: wrap;
@@ -87,6 +100,8 @@
 
         section.right {
             justify-content: flex-start;
+            flex-wrap: nowrap;
+            padding:5%;
         }
 
         footer {
@@ -104,14 +119,14 @@
             background-color: rgb(234, 147, 75);
             border: 1px solid transparent;
             border-radius: 5%;
-            padding: 0.5em;
+            padding: 0.25rem;
             color: rgb(240, 225, 220);
             text-transform: uppercase;
             font-weight: bold;
             width: 50%;
         }
 
-        button:hover{
+        button:hover {
             filter: brightness(1.20);
             cursor: pointer;
         }
@@ -120,10 +135,10 @@
             text-align: center;
         }
 
-        @media screen and (min-width: 600px) {
+        @media screen and (min-width: 400px) {
             body {
                 grid-template-columns: 50% 50%;
-                grid-template-rows: 5% 5% 75% 15%;
+                grid-template-rows: 7.5% 10% 67.5% 15%;
                 grid-template-areas:
                 "nav nav"
                 "header header"
@@ -136,7 +151,7 @@
                 height: 100%;
             }
 
-            section.right{
+            section.right {
                 justify-content: center;
             }
 
@@ -146,17 +161,17 @@
         }
 
         @media screen and (min-width: 960px) {
-            section.right{
+            section.right {
                 align-content: flex-start;
                 justify-content: flex-start;
-                padding-top: 5%;
             }
-            section.left{
+
+            section.left {
                 align-content: flex-end;
             }
 
             footer button {
-                width:33%;
+                width: 33%;
             }
         }
     </style>
