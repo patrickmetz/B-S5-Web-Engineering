@@ -30,7 +30,7 @@ header {
     padding:0.1em;
 }
 
-header h1,h2{
+header h1, header h2{
     display:inline;
 }
 
@@ -100,3 +100,29 @@ section > .taskDetails {
     align-content: center;
 }
 
+/* breakpoint: 400px width --------------------------------------------------*/
+
+@media screen and (min-width: 400px) {
+    header h1, header h2{
+        display:block;
+    }
+
+    section > .taskDetails {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-content: center;
+    }
+
+    .taskDetails > img.template {
+        max-height:65vh;
+        order:2;
+    }
+
+    .taskDetails > .links {
+        flex-direction: column;
+        order:1;
+    }
+
+}
