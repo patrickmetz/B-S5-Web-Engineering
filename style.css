@@ -17,7 +17,7 @@ body {
     height: 100vh;
     margin: 0;
     display: grid;
-    grid-template-rows: 15vh auto 10vh;
+    grid-template-rows: 16vh auto 10vh;
     grid-template-areas:
                 "header"
                 "article"
@@ -27,7 +27,7 @@ body {
 header {
     grid-area: header;
     background: red;
-    padding:0.25em;
+    padding:0.1em;
 }
 
 header h1,h2{
@@ -45,13 +45,13 @@ footer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-content: space-between;
+    align-content: space-evenly;
     justify-content: center;
     padding:0.25em;
 }
 
 footer > div{
-    padding:0 0.5em 0 0.5em;
+    padding:0 0.5em 0 0;
     width:25%;
     height:100%;
 }
@@ -60,19 +60,19 @@ footer > div{
 
 section > h3 {
     background: brown;
-    height: 5vh;
+    min-height: 5vh;
     padding:0.25em;
 }
 
 section > h4 {
     background: cadetblue;
-    height: 5vh;
+    min-height: 5vh;
     padding:0.25em;
 }
 
 section > .taskInfo {
     background: purple;
-    min-height: 10vh;
+    min-height: 9vh;
     padding:0.25em 0.25em 0.25em 2em;
 }
 
