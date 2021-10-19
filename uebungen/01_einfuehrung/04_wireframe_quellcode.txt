@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ü1.4</title>
+</head>
+<body>
+
+<h1>Übung 1.2: Inventors of the Web</h1>
+
+<ul>
+  <li><b><u><mark>Tim Berners-Lee:</mark></u></b> WWW, HTTP, HTML, URI</li>
+  <li><b>Hakom Lie und Bert Bos:</b> CSS</li>
+  <li><b>Brendan Eich:</b> JavaScript</li>
+</ul>
+
+<hr />
+<br />
+
+<h2>Inventors of the WWW</h2>
+
+<table frame="box" rules="all" border="10" >
+
+    <tr><th colspan="4">Inventors of the WWW</th></tr>
+    <tr>
+        <th>WWW</th>
+        <th>HTML</th>
+        <th>CSS</th>
+        <th>JavaScript</th>
+    </tr>
+    <tr>
+        <td><mark>Tim Berners-Lee</mark></td>
+        <td><mark>Tim Berners-Lee</mark></td>
+        <td>Hakom Lie und Bert Bos</td>
+        <td>Brendan Eich</td>
+    </tr>
+</table>
+
+<br />
+<hr />
+
+<table>
+    <!-- th mit colspan wäre auch möglich-->
+    <caption><b>Inventors of the WWW</b></caption>
+    <tr><td colspan="3"><hr></td></tr>
+    <tr>
+        <th>HTML</th>
+        <th>|</th>
+        <th>JavaScript</th>
+    </tr>
+    <tr>
+        <td><img width="110" height="150" alt="Tim Berners-Lee" src="https://kaul.inf.h-brs.de/we/assets/img/tbl.jpg"></td>
+        <th>|</th>
+        <td><img width="110" height="150" alt="Brendan Eich" src="https://kaul.inf.h-brs.de/we/assets/img/eich.jpg"></td>
+    </tr>
+    <tr>
+        <td><mark>Tim Berners-Lee</mark></td>
+        <th>|</th>
+        <td>Brendan Eich</td>
+    </tr>
+</table>
+
+<br />
+<hr />
+
+</body>
+</html>
