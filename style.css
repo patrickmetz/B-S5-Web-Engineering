@@ -27,11 +27,11 @@ body {
 header {
     grid-area: header;
     background: red;
-    padding:0.1em;
+    padding: 0.1em;
 }
 
-header h1, header h2{
-    display:inline;
+header h1, header h2 {
+    display: inline;
 }
 
 article {
@@ -49,10 +49,10 @@ footer {
     justify-content: center;
 }
 
-footer div{
-    padding:0.2em;
-    width:25%;
-    height:100%;
+footer div {
+    padding: 0.2em;
+    width: 25%;
+    height: 100%;
 }
 
 /* sections -----------------------------------------------------------------*/
@@ -60,19 +60,19 @@ footer div{
 section h3 {
     background: brown;
     min-height: 5vh;
-    padding:0.25em;
+    padding: 0.25em;
 }
 
 section h4 {
     background: cadetblue;
     min-height: 5vh;
-    padding:0.25em;
+    padding: 0.25em;
 }
 
 section .taskInfo {
     background: purple;
     min-height: 9vh;
-    padding:0.25em 0.25em 0.25em 2em;
+    padding: 0.25em 0.25em 0.25em 2em;
 }
 
 section .taskDetails {
@@ -85,9 +85,9 @@ section .taskDetails {
 
 .taskDetails img.template {
     width: auto;
-    height:auto;
-    max-width:90vw;
-    max-height:60vh;
+    height: auto;
+    max-width: 90vw;
+    max-height: 60vh;
 }
 
 .taskDetails .links {
@@ -103,26 +103,24 @@ section .taskDetails {
 /* breakpoint: 400px width --------------------------------------------------*/
 
 @media screen and (min-width: 400px) {
-    header h1, header h2{
-        display:block;
+    header h1, header h2 {
+        display: block;
     }
 
-    section .taskDetails {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        align-content: center;
+    .taskDetails {
+        display: grid;
+        grid-template-columns: 20vw auto;
+        grid-template-areas:
+                "links template";
     }
 
     .taskDetails img.template {
-        max-height:65vh;
-        order:2;
+        grid-area: template;
+        max-height: 65vh;
     }
 
     .taskDetails .links {
+        grid-area: links;
         flex-direction: column;
-        order:1;
     }
-
 }
