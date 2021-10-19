@@ -49,7 +49,7 @@ footer {
     justify-content: center;
 }
 
-footer > div{
+footer div{
     padding:0.2em;
     width:25%;
     height:100%;
@@ -57,25 +57,25 @@ footer > div{
 
 /* sections -----------------------------------------------------------------*/
 
-section > h3 {
+section h3 {
     background: brown;
     min-height: 5vh;
     padding:0.25em;
 }
 
-section > h4 {
+section h4 {
     background: cadetblue;
     min-height: 5vh;
     padding:0.25em;
 }
 
-section > .taskInfo {
+section .taskInfo {
     background: purple;
     min-height: 9vh;
     padding:0.25em 0.25em 0.25em 2em;
 }
 
-section > .taskDetails {
+section .taskDetails {
     min-height: 65vh;
     background: skyblue;
     text-align: center;
@@ -83,14 +83,14 @@ section > .taskDetails {
 
 /* task details -------------------------------------------------------------*/
 
-.taskDetails > img.template {
+.taskDetails img.template {
     width: auto;
     height:auto;
     max-width:90vw;
     max-height:60vh;
 }
 
-.taskDetails > .links {
+.taskDetails .links {
     min-height: 5vh;
     background: orange;
     display: flex;
@@ -107,7 +107,7 @@ section > .taskDetails {
         display:block;
     }
 
-    section > .taskDetails {
+    section .taskDetails {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -115,12 +115,12 @@ section > .taskDetails {
         align-content: center;
     }
 
-    .taskDetails > img.template {
+    .taskDetails img.template {
         max-height:65vh;
         order:2;
     }
 
-    .taskDetails > .links {
+    .taskDetails .links {
         flex-direction: column;
         order:1;
     }
