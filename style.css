@@ -59,7 +59,7 @@ footer div {
 
 section h3 {
     background: brown;
-    min-height: 5vh;
+    min-height: 5vh; /* expands when wrapping when using very small screens */
     padding: 0.25em;
 }
 
@@ -130,22 +130,31 @@ section .taskDetails {
 
     /* correct scrollbar because footer is 10 vh high and the moved task info */
     /* was 9vh high. so we reduce a headline by 1vh, too show footer completely */
-    section h4{
+    section h4 {
         min-height: 4vh;
     }
 
-    .task{
+    .task {
         display: grid;
         grid-template-columns: 20vw auto;
         grid-template-areas:
                 "info details";
     }
 
-    .taskInfo{
+    .taskInfo {
         grid-area: info;
+        display: flex;
+        flex-direction: column;
+        gap: 10%;
     }
 
-    .taskDetails{
+    .taskDetails {
         grid-area: details;
+    }
+
+    .taskDetails .links{
+        justify-content: flex-start;
+        align-content: flex-start;
+        gap: 10%;
     }
 }
