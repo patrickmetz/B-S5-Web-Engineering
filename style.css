@@ -109,18 +109,43 @@ section .taskDetails {
 
     .taskDetails {
         display: grid;
-        grid-template-columns: 20vw auto;
+        grid-template-columns: 20vw 40vw;
         grid-template-areas:
                 "links template";
     }
 
     .taskDetails img.template {
         grid-area: template;
-        max-height: 65vh;
+        max-height: 64vh;
+        align-self: center;
     }
 
     .taskDetails .links {
         grid-area: links;
         flex-direction: column;
+    }
+}
+
+@media screen and (min-width: 600px) {
+
+    /* correct scrollbar because footer is 10 vh high and the moved task info */
+    /* was 9vh high. so we reduce a headline by 1vh, too show footer completely */
+    section h4{
+        min-height: 4vh;
+    }
+
+    .task{
+        display: grid;
+        grid-template-columns: 20vw auto;
+        grid-template-areas:
+                "info details";
+    }
+
+    .taskInfo{
+        grid-area: info;
+    }
+
+    .taskDetails{
+        grid-area: details;
     }
 }
