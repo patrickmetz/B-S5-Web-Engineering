@@ -45,14 +45,14 @@ footer {
     background: lightcoral;
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
 }
 
 footer div {
     width: 25%;
-    height: 100%;
     background:violet;
-    padding:0.5em;
     text-align: center;
 }
 
@@ -88,6 +88,10 @@ section .task{
     padding: 0.25em 0.25em 0.25em 2em;
 }
 
+.taskInfo > li:not(:first-child) {
+    display: none;
+}
+
 .task .taskDetails {
     height: 55vh;
     background: skyblue;
@@ -120,6 +124,11 @@ section .task{
 @media screen and (min-width: 400px) {
     header h1, header h2 {
         display: block;
+    }
+
+    .taskInfo > li:not(:first-child) {
+        display: initial;
+        list-style-position: initial;
     }
 
     .taskDetails {
@@ -183,10 +192,10 @@ section .task{
 }
 
 
-/* fix headline on very narrow screens --------------------------------------*/
+/* fixes vor very narrow screens --------------------------------------------*/
 
 @media screen and (max-width: 300px) {
-    header h2 span{
+    header h1 span, header h2 span{
         display:none;
     }
 }
