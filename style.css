@@ -1,3 +1,4 @@
+
 * {
     box-sizing: border-box;
     font-family: Verdana, sans-serif;
@@ -44,15 +45,15 @@ footer {
     background: lightcoral;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    align-content: space-evenly;
-    justify-content: center;
+    flex-wrap: nowrap;
 }
 
 footer div {
-    padding: 0.2em;
     width: 25%;
     height: 100%;
+    background:violet;
+    padding:0.5em;
+    text-align: center;
 }
 
 /* sections -----------------------------------------------------------------*/
@@ -126,6 +127,8 @@ section .taskDetails {
     }
 }
 
+/* breakpoint: 400px width --------------------------------------------------*/
+
 @media screen and (min-width: 600px) {
 
     /* correct scrollbar because footer is 10 vh high and the moved task info */
@@ -156,5 +159,6 @@ section .taskDetails {
         justify-content: flex-start;
         align-content: flex-start;
         gap: 10%;
+        text-align: left;
     }
 }
