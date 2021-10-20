@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ü 2.3</title>
+
+    <style>
+        /* entwickelt mit Safari und Mac OS Big Sur */
+
+        * {
+            font-family: Verdana, sans-serif;
+            color: dimgray;
+        }
+
+        html {
+            background: white;
+        }
+
+        body {
+            background: rgb(178, 214, 209);
+            font-size: 16px;
+            margin:0;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 0;
+            padding: 0.6em;
+            color: black;
+        }
+
+        #survey_container {
+            min-height: 50%;
+            background: rgb(250, 250, 250);
+            /* top, right, bottom, left */
+            margin: 0 5% 0 4%;
+            padding: 5% 5% 0 5%;
+        }
+
+        #survey_container table {
+            width: 100%;
+        }
+
+        #survey_container caption {
+            padding: 0 0.5em 0.7em 0.5em;
+        }
+
+        #survey_container td {
+            width: 50%;
+            padding: 0.75em;
+        }
+
+        #survey_container td:first-child {
+            text-align: right;
+        }
+
+        #survey_container tr:last-child td {
+            padding-bottom: 0;
+        }
+
+        #survey_container input[type=text],
+        #survey_container input[type=number] {
+            width: 66%;
+            border:1px solid lightgray;
+            padding:0.25em;
+            font-size:14px;
+        }
+
+        #survey_container select {
+            width: 40%;
+            border:1px solid lightgray;
+            padding:0.5em;
+            font-size:14px;
+            letter-spacing: -0.5px;
+        }
+
+        #survey_container fieldset {
+            border: none;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+<h1>Survey Form</h1>
+
+<div id="survey_container">
+    <form>
+        <table>
+            <caption>Let us know how we can improve freeCodeCamp</caption>
+            <tr>
+                <td>
+                    <sup>*</sup>
+                    <label for="data_name">Name</label>
+                </td>
+                <td>
+                    <input type="text" name="name" id="data_name" placeholder="Enter your name"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <sup>*</sup>
+                    <label for="data_email">Email</label>
+                </td>
+                <td>
+                    <input type="text" name="email" id="data_email" placeholder="Enter your Email"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <sup>*</sup>
+                    <label for="data_age">Age</label>
+                </td>
+                <td>
+                    <input type="number" name="age" id="data_age" placeholder="Age"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="role_description">
+                        Which option best describes your current role?
+                    </label>
+                </td>
+                <td>
+                    <select name="role_description" id="role_description">
+                        <option>Student</option>
+                        <option>Professor</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <sup>*</sup>
+                    How likely is that you would recommend freeCodeCamp to a friend?
+                </td>
+                <td>
+                    <fieldset>
+                        <input type="radio" name="likelihood" id="likelihood_definitely" value="Definitely"/>
+                        <label for="likelihood_definitely">Definitely</label>
+                        <br/>
+
+                        <input type="radio" name="likelihood" id="likelihood_maybe" value="Maybe"/>
+                        <label for="likelihood_maybe">Maybe</label>
+                        <br/>
+
+                        <input type="radio" name="likelihood" id="likelihood_not_sure" value="Not sure"/>
+                        <label for="likelihood_not_sure">Not sure</label>
+                    </fieldset>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="most_liked">
+                        What do you like most in FCC:
+                    </label>
+                </td>
+                <td>
+                    <select name="most_liked" id="most_liked">
+                        <option>Select an option</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Things that should be improved in the future <br/> (Check all that apply):
+                </td>
+                <td>
+                    <fieldset>
+                        <input type="checkbox" name="improvement" id="improvement_frontend" value="Definitely"/>
+                        <label for="improvement_frontend">Front-end Projects</label>
+                        <br/>
+
+                        <input type="checkbox" name="improvement" id="improvement_backend" value="Maybe"/>
+                        <label for="improvement_backend">Back-end Projects</label>
+                        <br/>
+
+                        <input type="checkbox" name="improvement" id="improvement_visualization" value="Not sure"/>
+                        <label for="improvement_visualization">Data Visualization</label>
+                    </fieldset>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

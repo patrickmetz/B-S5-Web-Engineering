@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
-    <title>Ãœ 3.3</title>
+    <title>Ü 3.3</title>
 
     <style>
 
-        /* Basis-SchriftgrÃ¶ÃŸe von 12px bis 18px skalieren,
-        fÃ¼r Viewports von 300px bis 1920px Breite.
+        /* Basis-Schriftgröße von 12px bis 18px skalieren,
+        für Viewports von 300px bis 1920px Breite.
         Skaliert nach erreichen von 1920px weiter.
         clamp(Mindestwert, bevorzugter Wert, Maximalwert).
         Verwendung von rem verhindert Accesibility-Probleme.
@@ -80,7 +80,7 @@
 
         section {
             width: 100%;
-            height: 50%; /* hÃ¤lfte von 164% */
+            height: 50%; /* hälfte von 164% */
             display: flex;
             flex-direction: column;
             flex-wrap: wrap;

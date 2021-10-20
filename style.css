@@ -59,7 +59,7 @@ footer div {
 /* sections -----------------------------------------------------------------*/
 
 section {
-    height: 75vh;
+    min-height: 75vh;
     background: black;
 }
 
@@ -76,7 +76,7 @@ section h4 {
 }
 
 section .task {
-    height: 65vh;
+    min-height: 65vh;
     background: yellow;
 }
 
