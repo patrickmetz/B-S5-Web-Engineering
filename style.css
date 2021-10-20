@@ -211,6 +211,10 @@ section .task {
 /* fixes vor very narrow screens --------------------------------------------*/
 
 @media screen and (max-width: 300px) {
+    body{
+        overflow-x: hidden;
+    }
+
     header h1 span, header h2 span {
         display: none;
     }
