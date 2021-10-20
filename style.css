@@ -84,7 +84,7 @@ section .taskDetails {
 
 /* task details -------------------------------------------------------------*/
 
-.taskDetails img.template {
+.taskDetails .template {
     width: auto;
     height: auto;
     max-width: 90vw;
@@ -110,14 +110,15 @@ section .taskDetails {
 
     .taskDetails {
         display: grid;
-        grid-template-columns: 20vw 40vw;
+        grid-template-columns: 20vw 60vw;
         grid-template-areas:
                 "links template";
     }
 
-    .taskDetails img.template {
+    .taskDetails .template {
         grid-area: template;
         max-height: 64vh;
+        max-width: 60vw;
         align-self: center;
     }
 
@@ -130,18 +131,18 @@ section .taskDetails {
 /* breakpoint: 400px width --------------------------------------------------*/
 
 @media screen and (min-width: 600px) {
-
-    /* correct scrollbar because footer is 10 vh high and the moved task info */
-    /* was 9vh high. so we reduce a headline by 1vh, too show footer completely */
-    section h4 {
-        min-height: 4vh;
-    }
-
     .task {
         display: grid;
         grid-template-columns: 20vw auto;
         grid-template-areas:
                 "info details";
+    }
+
+    .taskDetails {
+        grid-area: details;
+        grid-template-columns: 20vw 40vw;
+        grid-template-areas:
+                "links template";
     }
 
     .taskInfo {
@@ -151,14 +152,15 @@ section .taskDetails {
         gap: 10%;
     }
 
-    .taskDetails {
-        grid-area: details;
-    }
-
     .taskDetails .links{
         justify-content: flex-start;
         align-content: flex-start;
         gap: 10%;
         text-align: left;
+    }
+
+    .taskDetails .template {
+        max-width: 55vw;
+        align-self: flex-start;
     }
 }
