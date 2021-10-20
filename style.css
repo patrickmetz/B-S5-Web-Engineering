@@ -84,7 +84,7 @@ section .taskDetails {
 
 /* task details -------------------------------------------------------------*/
 
-.taskDetails .template {
+.taskDetails .template img{
     width: auto;
     height: auto;
     max-width: 90vw;
