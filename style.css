@@ -60,6 +60,7 @@ footer div {
 
 section{
     height: 75vh;
+    background: black;
 }
 
 section h3 {
@@ -75,7 +76,7 @@ section h4 {
 }
 
 section .task{
-    height:55vh;
+    height:65vh;
     background: yellow;
 }
 
@@ -91,6 +92,10 @@ section .task{
     height: 55vh;
     background: skyblue;
     text-align: center;
+}
+
+.taskDetails .template{
+    background:forestgreen;
 }
 
 .taskDetails .template img{
@@ -124,20 +129,23 @@ section .task{
                 "links template";
     }
 
-    .taskDetails .template {
-        grid-area: template;
-        max-height: 64vh;
-        max-width: 60vw;
-        align-self: center;
-    }
-
     .taskDetails .links {
         grid-area: links;
         flex-direction: column;
+        max-height:55vh;
+    }
+
+    .taskDetails .template {
+        grid-area: template;
+        align-self: center;
+    }
+
+    .taskDetails .template img{
+        max-height:55vh;
     }
 }
 
-/* breakpoint: 400px width --------------------------------------------------*/
+/* breakpoint: 600px width --------------------------------------------------*/
 
 @media screen and (min-width: 600px) {
     .task {
