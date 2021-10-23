@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ü 4.2</title>
+</head>
+<body>
+<p>Die Ergebnisse stehen in der Konsole :-)</p>
+
+<script>
+
+    // prototype chains -------------------------------------------------------
+
+    var Auto = {
+        marke : "",
+        getMarke: function () {
+            return this.marke;
+        }
+    }
+
+    var Person = {
+        name : "",
+        autos: [],
+
+        getName: function () {
+            return this.name;
+        },
+
+        addAuto: function (auto) {
+            this.autos.push(auto);
+        },
+
+        getAutos: function () {
+            return this.autos;
+        },
+    }
+
+    var tesla = {
+        __proto__: Auto,
+        marke: "Tesla"
+    }
+
+    var volkswagen = {
+        __proto__: Auto,
+        marke: "Volkswagen"
+    }
+
+    var arthur = {
+        __proto__: Person,
+        autos: [], // prevents "car-sharing" (haha...) with prototype
+        name: "Arthur Dent"
+    }
+
+    var zaphod = {
+        __proto__: Person,
+        autos: [],
+        name: "Zaphod Beeblebrox"
+    }
+
+    // conflict test ----------------------------------------------------------
+
+    function conflict(personen, auto) {
+        var foundAutoOnce = false;
+
+        for (var i = 0; i < personen.length; i++) {
+            var autos = personen[i].getAutos();
+
+            for (var j = 0; j < autos.length; j++) {
+                if (autos[j] === auto) {
+                    if (foundAutoOnce === false) {
+                        foundAutoOnce = true;
+                    } else {
+                        console.log(`Auto "${auto.getMarke()}" wird von mehreren Personen besessen.`);
+                        return true;
+                    }
+                }
+            }
+        }
+
+        console.log(`Auto "${auto.getMarke()}" hat nur einen Besitzer.`);
+        return false;
+    }
+
+    // persons ----------------------------------------------------------------
+
+    var personen = [];
+    personen.push(arthur);
+    personen.push(zaphod)
+
+    // cars -------------------------------------------------------------------
+
+    arthur.addAuto(volkswagen);
+    zaphod.addAuto(volkswagen);
+    zaphod.addAuto(tesla);
+
+    // execute conflict test --------------------------------------------------
+
+    console.log(zaphod.getName(), zaphod.getAutos())
+    console.log(arthur.getName(), arthur.getAutos())
+
+    console.log(conflict(personen, tesla));
+    console.log(conflict(personen, volkswagen));
+</script>
+
+
+</body>
+</html>
