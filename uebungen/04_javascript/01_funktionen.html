@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ü 4.1</title>
+</head>
+<body>
+<p>Die Ergebnisse stehen in der Konsole :-)</p>
+
+<script>
+    function identity(x) {
+        return x;
+    }
+
+    console.log(identity(42));
+
+
+    function identity_function(x) {
+        return function () {
+            return x;
+        }
+    }
+
+    idf = identity_function(42);
+    console.log(idf());
+
+
+    function add(addend1, addend2) {
+        return addend1 + addend2;
+    }
+
+    console.log(add(40, 2));
+
+
+    function mul(factor1, factor2) {
+        return factor1 * factor2;
+    }
+
+    console.log(mul(21, 2));
+
+
+    function addf(addend1) {
+        return function (addend2) {
+            return addend1 + addend2;
+        }
+    }
+
+    console.log(addf(40)(2));
+
+    function applyf(func) {
+        return function (operand1) {
+            return function (operand2) {
+                return func(operand1, operand2);
+            }
+        }
+    }
+
+    console.log(applyf(add)(40)(2));
+    console.log(applyf(mul)(21)(2));
+</script>
+
+</body>
+</html>
