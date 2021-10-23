@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ü 4.4</title>
+</head>
+<body>
+<script>
+
+    function Graph() {
+        return {
+            neighborList: {},
+
+            addVertex: function (vertex) {
+                if (!this.neighborList[vertex]) {
+                    this.neighborList[vertex] = [];
+                }
+            },
+
+            addEdge: function (vertexA, vertexB) {
+                this.neighborList[vertexA].push(vertexB);
+            }
+        }
+    }
+
+    function topsort(graph) {
+        var vertices = Object.keys(graph.neighborList);
+        var visited = {};
+        var sorted = {};
+        var position = vertices.length - 1;
+
+        for (var vertexIndex = 0; vertexIndex < vertices.length; vertexIndex++) {
+            if (!visited[vertices[vertexIndex]]) {
+                position = helperFunction(vertices[vertexIndex], position, visited, sorted)
+            }
+        }
+
+        // map internal presentation to correctly sorted list
+
+        var objectEntries = Object.entries(sorted);
+        var sortedList = [];
+
+        for (var entryIndex = 0; entryIndex < objectEntries.length; entryIndex++) {
+            var key = objectEntries[entryIndex][0];
+            var value = objectEntries[entryIndex][1];
+
+            sortedList[key] = value;
+        }
+
+        return sortedList;
+    }
+
+    function helperFunction(vertex, position, visited, sorted) {
+        visited[vertex] = true;
+        const neighbors = graph.neighborList[vertex];
+
+        for (var neighborIndex = 0; neighborIndex < neighbors.length; neighborIndex++) {
+            if (!visited[neighbors[neighborIndex]]) {
+                position = helperFunction(neighbors[neighborIndex], position, visited, sorted);
+            }
+        }
+
+        sorted[position] = vertex;
+        return position - 1;
+    }
+
+    graph = Graph();
+
+    graph.addVertex("schlafen");
+    graph.addVertex("studieren");
+    graph.addVertex("essen");
+    graph.addVertex("prüfen");
+    graph.addEdge("schlafen", "studieren");
+    graph.addEdge("essen", "studieren");
+    graph.addEdge("studieren", "prüfen");
+
+    sortedList = topsort(graph);
+
+    console.log("Input: graph", graph);
+    console.log("Output: sorted List", sortedList);
+
+    console.assert(sortedList.length === 4, 'sorted list must have four entries', sortedList);
+    console.assert(sortedList[0] === "essen", '"essen" must be 1st list entry', sortedList);
+    console.assert(sortedList[1] === "schlafen", '"schlafen" must be 2nd list entry', sortedList);
+    console.assert(sortedList[2] === "studieren", '"studieren" must be 3d list entry', sortedList);
+    console.assert(sortedList[3] === "prüfen", '"prüfen" mjust be 4th list entry', sortedList);
+</script>
+</body>
+</html>
