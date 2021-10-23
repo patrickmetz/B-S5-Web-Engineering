@@ -12,94 +12,92 @@
     // prototype chains -------------------------------------------------------
 
     var Auto = {
-        marke : "",
-        getMarke: function () {
-            return this.marke;
+        brand : "",
+        getBrand: function () {
+            return this.brand;
         }
     }
 
     var Person = {
         name : "",
-        autos: [],
+        cars: [],
 
         getName: function () {
             return this.name;
         },
 
-        addAuto: function (auto) {
-            this.autos.push(auto);
+        addCar: function (auto) {
+            this.cars.push(auto);
         },
 
-        getAutos: function () {
-            return this.autos;
+        getCars: function () {
+            return this.cars;
         },
     }
 
     var tesla = {
         __proto__: Auto,
-        marke: "Tesla"
+        brand: "Tesla"
     }
 
     var volkswagen = {
         __proto__: Auto,
-        marke: "Volkswagen"
+        brand: "Volkswagen"
     }
 
     var arthur = {
         __proto__: Person,
-        autos: [], // prevents "car-sharing" (haha...) with prototype
+        cars: [], // prevents "car-sharing" (haha...) with prototype
         name: "Arthur Dent"
     }
 
     var zaphod = {
         __proto__: Person,
-        autos: [],
+        cars: [],
         name: "Zaphod Beeblebrox"
     }
 
     // conflict test ----------------------------------------------------------
 
-    function conflict(personen, auto) {
-        var foundAutoOnce = false;
+    function conflict(persons, car) {
+        var foundCarAlready = false;
 
-        for (var i = 0; i < personen.length; i++) {
-            var autos = personen[i].getAutos();
+        for (var i = 0; i < persons.length; i++) {
+            var cars = persons[i].getCars();
 
-            for (var j = 0; j < autos.length; j++) {
-                if (autos[j] === auto) {
-                    if (foundAutoOnce === false) {
-                        foundAutoOnce = true;
+            for (var j = 0; j < cars.length; j++) {
+                if (cars[j] === car) {
+                    if (foundCarAlready === false) {
+                        foundCarAlready = true;
                     } else {
-                        console.log(`Auto "${auto.getMarke()}" wird von mehreren Personen besessen.`);
+                        console.log(`Car "${car.getBrand()}" is used by multiple persons.`);
                         return true;
                     }
                 }
             }
         }
 
-        console.log(`Auto "${auto.getMarke()}" hat nur einen Besitzer.`);
+        console.log(`Car "${car.getBrand()}" only has one owner.`);
         return false;
     }
 
     // persons ----------------------------------------------------------------
 
-    var personen = [];
-    personen.push(arthur);
-    personen.push(zaphod)
+    var persons = [];
+    persons.push(arthur);
+    persons.push(zaphod)
 
-    // cars -------------------------------------------------------------------
-
-    arthur.addAuto(volkswagen);
-    zaphod.addAuto(volkswagen);
-    zaphod.addAuto(tesla);
+    arthur.addCar(volkswagen);
+    zaphod.addCar(volkswagen);
+    zaphod.addCar(tesla);
 
     // execute conflict test --------------------------------------------------
 
-    console.log(zaphod.getName(), zaphod.getAutos())
-    console.log(arthur.getName(), arthur.getAutos())
+    console.log(zaphod.getName(), zaphod.getCars())
+    console.log(arthur.getName(), arthur.getCars())
 
-    console.log(conflict(personen, tesla));
-    console.log(conflict(personen, volkswagen));
+    console.log(conflict(persons, tesla));
+    console.log(conflict(persons, volkswagen));
 </script>
 
 
