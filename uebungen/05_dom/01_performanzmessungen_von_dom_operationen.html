@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ü 5.1</title>
+</head>
+<body>
+
+<h1>Performance-Messungen von DOM-Operationen</h1>
+
+<script>
+    var testIterations = 100000;
+
+    var testAreaOuterHtml = '<div id="testArea"><div id="testTarget"></div></div>';
+    var testTargetContent = "<span>42</span>";
+
+    var testFunctions = [
+        ["innerHTML", function (target) {target.innerHTML = testTargetContent;}],
+        ["innerText", function (target) {target.innerText = testTargetContent;}],
+        ["textContent", function (target) {target.textContent = testTargetContent;}],
+        ["outerHTML", function (target) {target.outerHTML = testTargetContent;}],
+    ];
+
+    document.write(
+        '<h2>' + testIterations + ' Iterationen</h2>'
+        + '<table id="testResults"></table>'
+        + testAreaOuterHtml
+    );
+
+    for (var testFunction of testFunctions) {
+        var timeStart = performance.now();
+
+        for (var iteration = 0; iteration < testIterations; iteration++) {
+            testFunction[1](document.getElementById("testTarget"));
+            document.getElementById("testArea").outerHTML = testAreaOuterHtml; // reset for next test
+        }
+
+        var timeDuration = Math.round(performance.now() - timeStart);
+
+        document.getElementById("testResults").innerHTML
+            += ("<tr><td>" + testFunction[0] + "</td><td>" + timeDuration + " ms</td></tr>");
+    }
+</script>
+
+
+</body>
+</html>
