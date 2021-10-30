@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ü 5.3</title>
+
+    <script src="03_topsort_als_webapp.js"></script>
+</head>
+
+<body>
+
+<h1>TopSort als Web-App</h1>
+
+<form onsubmit="addVertex(this.nodeName);return false;">
+    Neuer Knoten: <input name="nodeName" type="text" placeholder="Name des Knotens">
+    <br><button>Hinzufügen</button>
+</form>
+
+<br>
+
+<form onsubmit="addEdge(this.nodeName1, this.nodeName2);return false;">
+    Neue Kante:
+    <input name="nodeName1" type="text" placeholder="Name des 1. Knotens">
+    <input name="nodeName2" type="text" placeholder="Name des 2. Knotens">
+    <br><button>Hinzufügen</button>
+</form>
+
+<h2>Nachbarschaftsliste</h2>
+<ul id="neighborList"></ul>
+
+<h2>Topologische Sortierung</h2>
+<button onclick="showTopSortList();">topologisch sortieren</button>
+<ul id="topSortList"></ul>
+</body>
+</html>
