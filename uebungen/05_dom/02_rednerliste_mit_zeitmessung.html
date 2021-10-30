@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ü 5.2</title>
+
+    <style>
+        button.isTalking {
+            background: lightpink;
+        }
+
+        button.isTalking::before {
+            content: "Stopp!";
+        }
+
+        button.isNotTalking{
+            background: lightgreen;
+        }
+
+        button.isNotTalking::before {
+            content: "Start!";
+        }
+    </style>
+
+    <script src="./02_rednerliste_mit_zeitmessung.js"></script>
+</head>
+<body>
+
+<h1>Rednerliste</h1>
+
+<form onsubmit="createTalker(this.talkerName.value);this.talkerName.value='';return false;">
+    Neuer Redner: <input name="talkerName" type="text" placeholder="Name des Redners">
+    <button>Hinzufügen</button>
+</form>
+
+<ul id="talkerList"></ul>
+
+</body>
+</html>
