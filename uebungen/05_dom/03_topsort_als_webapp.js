@@ -8,13 +8,13 @@ function addVertex(inputField) {
     if (isEmpty(vertex)) {
         addErrorClass(inputField);
         showError("Das Eingabefeld ist leer.")
-        return false;
+        return;
     }
 
     if (graph.hasVertex(vertex)) {
         addErrorClass(inputField);
         showError("Der Knoten existiert bereits");
-        return false;
+        return;
     }
 
     graph.addVertex(vertex);
@@ -24,7 +24,7 @@ function addVertex(inputField) {
     clearInputField(inputField);
     clearErrorClasses();
     clearErrorDisplay();
-    return false;
+    return;
 }
 
 function addEdge(inputField1, inputField2) {
@@ -47,7 +47,7 @@ function addEdge(inputField1, inputField2) {
         hasError = true;
     }
 
-    if(hasError === true) return false;
+    if(hasError === true) return;
 
     if (!graph.hasVertex(vertex1)) {
         addErrorClass(inputField1);
@@ -61,20 +61,20 @@ function addEdge(inputField1, inputField2) {
         hasError = true;
     }
 
-    if(hasError === true) return false;
+    if(hasError === true) return;
 
     if (vertex1 == vertex2) {
         addErrorClass(inputField1);
         addErrorClass(inputField2);
         showError("Kanten können nicht reflexiv sein.")
-        return false;
+        return;
     }
 
     if (graph.hasEdge(vertex1, vertex2)) {
         addErrorClass(inputField1);
         addErrorClass(inputField2);
         showError("Die Knoten sind bereits verbunden.")
-        return false;
+        return;
     }
 
     graph.addEdge(vertex1, vertex2);
@@ -83,7 +83,7 @@ function addEdge(inputField1, inputField2) {
     clearInputField(inputField1);
     clearInputField(inputField2);
 
-    return false;
+    return;
 }
 
 function showNeighborList() {
@@ -99,7 +99,7 @@ function showNeighborList() {
         display.appendChild(li);
     }
 
-    return false;
+    return;
 }
 
 function showTopSortList() {
