@@ -1,68 +1,89 @@
 graph = createGraph();
-graph.addVertex("schlafen");
-graph.addVertex("studieren");
-graph.addVertex("essen");
-graph.addVertex("prüfen");
-graph.addEdge("schlafen", "studieren");
-graph.addEdge("essen", "studieren");
-graph.addEdge("studieren", "prüfen");
 
-function addVertex(input) {
-    var vertex = input.value;
+function addVertex(inputField) {
+    var vertex = inputField.value;
+    clearErrorClasses();
+    clearErrorDisplay();
 
     if (isEmpty(vertex)) {
-        console.log("the input is empty")
+        addErrorClass(inputField);
+        showError("Das Eingabefeld ist leer.")
         return false;
     }
 
     if (graph.hasVertex(vertex)) {
-        console.log("the vertex already exists")
+        addErrorClass(inputField);
+        showError("Der Knoten existiert bereits");
         return false;
     }
 
     graph.addVertex(vertex);
+
     showNeighborList();
-    emptyTopSortList();
+    clearTopSortList();
+    clearInputField(inputField);
+    clearErrorClasses();
+    clearErrorDisplay();
     return false;
 }
 
-function emptyTopSortList() {
-    document.getElementById("topSortList").innerHTML = "";
-}
+function addEdge(inputField1, inputField2) {
+    let vertex1 = inputField1.value;
+    let vertex2 = inputField2.value;
 
-function addEdge(input1, input2) {
-    let vertex1 = input1.value;
-    let vertex2 = input2.value;
+    clearErrorClasses();
+    clearErrorDisplay();
 
-    if (isEmpty(vertex1) || isEmpty(vertex2)) {
-        console.log("one of the inputs is empty")
-        return false;
+    var hasError = false;
+
+    if (isEmpty(vertex1)) {
+        addErrorClass(inputField1);
+        showError("Mindestens ein Eingabefeld ist leer.")
+        hasError = true;
+    }
+    if (isEmpty(vertex2)) {
+        addErrorClass(inputField2);
+        showError("Mindestens ein Eingabefeld ist leer.")
+        hasError = true;
     }
 
-    if (!graph.hasVertex(vertex1) || !graph.hasVertex(vertex2)) {
-        console.log("one of the vertices doesn't exist")
-        return false;
+    if(hasError === true) return false;
+
+    if (!graph.hasVertex(vertex1)) {
+        addErrorClass(inputField1);
+        showError("Mindestens ein Knoten existiert nicht.")
+        hasError = true;
     }
+
+    if (!graph.hasVertex(vertex2)) {
+        addErrorClass(inputField2);
+        showError("Mindestens ein Knoten existiert nicht.")
+        hasError = true;
+    }
+
+    if(hasError === true) return false;
 
     if (vertex1 == vertex2) {
-        console.log("edges can't be reflexive")
+        addErrorClass(inputField1);
+        addErrorClass(inputField2);
+        showError("Kanten können nicht reflexiv sein.")
         return false;
     }
 
     if (graph.hasEdge(vertex1, vertex2)) {
-        console.log("the vertices are already connected")
+        addErrorClass(inputField1);
+        addErrorClass(inputField2);
+        showError("Die Knoten sind bereits verbunden.")
         return false;
     }
 
     graph.addEdge(vertex1, vertex2);
     showNeighborList();
-    emptyTopSortList();
+    clearTopSortList();
+    clearInputField(inputField1);
+    clearInputField(inputField2);
 
     return false;
-}
-
-function isEmpty(value) {
-    return value.trim() === "";
 }
 
 function showNeighborList() {
@@ -81,7 +102,7 @@ function showNeighborList() {
     return false;
 }
 
-function showTopSortList(){
+function showTopSortList() {
     var display = document.getElementById("topSortList");
     display.innerHTML = "";
 
@@ -93,6 +114,48 @@ function showTopSortList(){
         display.appendChild(li);
     }
 }
+
+function showError(message) {
+    var display = document.getElementById("errorDisplay");
+
+    display.innerText = message;
+    addErrorClass(display);
+}
+
+
+function clearErrorDisplay() {
+    var display = document.getElementById("errorDisplay");
+
+    clearErrorClasses(display);
+    display.innerText = "";
+}
+
+
+function clearTopSortList() {
+    document.getElementById("topSortList").innerHTML = "";
+}
+
+function isEmpty(value) {
+    return value.trim() === "";
+}
+
+function addErrorClass(element) {
+    element.className = "error";
+}
+
+function clearErrorClasses() {
+    /* multiple elements can be in error state */
+    var elementsInErrorState = document.getElementsByClassName("error");
+
+    for (var element of elementsInErrorState) {
+        element.className = "noError";
+    }
+}
+
+function clearInputField(inputField) {
+    inputField.value = "";
+}
+
 
 // topsort: graph and algorithm ###############################################
 

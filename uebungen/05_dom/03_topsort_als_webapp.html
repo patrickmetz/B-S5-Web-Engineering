@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <title>Ü 5.3</title>
 
+    <style>
+        .error{
+            background-color: lightpink;
+        }
+
+        .noError{
+            background-color: white;
+        }
+    </style>
+
     <script src="03_topsort_als_webapp.js"></script>
 </head>
 
@@ -25,11 +35,16 @@
     <br><button>Hinzufügen</button>
 </form>
 
-<h2>Nachbarschaftsliste</h2>
+<br>
+
+<span id="errorDisplay">&nbsp;</span>
+
+<h2>Nachbarschaftslisten</h2>
 <ul id="neighborList"></ul>
 
 <h2>Topologische Sortierung</h2>
 <button onclick="showTopSortList();">topologisch sortieren</button>
 <ul id="topSortList"></ul>
+
 </body>
 </html>
