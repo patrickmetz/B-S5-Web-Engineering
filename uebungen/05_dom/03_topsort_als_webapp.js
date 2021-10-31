@@ -28,8 +28,8 @@ function addVertex(inputField) {
 }
 
 function addEdge(inputField1, inputField2) {
-    let vertex1 = inputField1.value;
-    let vertex2 = inputField2.value;
+    var vertex1 = inputField1.value;
+    var vertex2 = inputField2.value;
 
     clearErrorClasses();
     clearErrorDisplay();
