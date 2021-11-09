@@ -28,7 +28,7 @@ body {
 
 header {
     grid-area: header;
-    padding: 0.1em;
+    padding: 0.25em;
 }
 
 header h1, header h2 {
@@ -60,12 +60,12 @@ footer div {
 /* sections -----------------------------------------------------------------*/
 
 section {
-    min-height: 75vh;
+    min-height: 75vh; /* as tall as article area of main grid */
 }
 
 section h3 {
-    min-height: 5vh; /* expands when wrapping when using very small screens */
-    padding: 0.25em;
+    min-height: 5vh;
+    padding:0.25em;
 }
 
 section h4 {
@@ -84,23 +84,25 @@ section .task {
     padding: 0.25em 0.25em 0.25em 2em;
 }
 
-.taskInfo > li:not(:first-child) {
-    display: none;
-}
-
 .task .taskDetails {
     height: 55vh;
-    text-align: center;
 }
 
 .taskDetails .template {
+    height:50vh;
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
 
-.taskDetails .template img {
-    width: auto;
-    height: auto;
-    max-width: 100vw;
-    max-height: 50vh;
+.taskDetails .template > * {
+    max-width:90%;
+    max-height:100%;
+}
+
+.taskDetails .template > img {
+    /* source: https://stackoverflow.com/a/30794589 */
+    object-fit: cover;
 }
 
 .taskDetails .links {
@@ -119,14 +121,9 @@ section .task {
         display: block;
     }
 
-    .taskInfo > li:not(:first-child) {
-        display: initial;
-        list-style-position: initial;
-    }
-
     .taskDetails {
         display: grid;
-        grid-template-columns: 20vw 60vw;
+        grid-template-columns: 20vw 79vw;
         grid-template-areas:
                 "links template";
     }
@@ -139,11 +136,6 @@ section .task {
 
     .taskDetails .template {
         grid-area: template;
-        align-self: center;
-    }
-
-    .taskDetails .template img {
-        max-height: 55vh;
     }
 }
 
@@ -156,9 +148,8 @@ section .task {
     }
 
     article > section {
-        width: 50%;
+        width: 49vw; /* 50 doesn't work */
     }
-
 
     /* source: https://www.stphnsn.com/blog/alternating-boxes/*/
     section:nth-child(1n) {
@@ -170,13 +161,16 @@ section .task {
         background-color: var(--alternate-color);
     }
 
+    .taskDetails {
+        grid-template-columns: 10vw 39vw;
+    }
 }
 
 /* breakpoint: 1200px width --------------------------------------------------*/
 
 @media screen and (min-width: 1200px) {
     article > section {
-        width: 33%;
+        width: 32vw;
     }
 
     section:nth-child(odd) {
@@ -186,8 +180,11 @@ section .task {
     section:nth-child(even) {
         background: white;
     }
-}
 
+    .taskDetails {
+        grid-template-columns: 7vw 25vw;
+    }
+}
 
 /* fixes vor very narrow screens --------------------------------------------*/
 
