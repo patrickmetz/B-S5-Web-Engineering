@@ -10,7 +10,7 @@
 :root {
     font-size: clamp(12px, calc(0.75rem + ((1vw - 3px) * 0.3704)), 18px);
     min-height: 0vw; /* safari fix */
-    --alternate-color: #7FDBFF;
+    --alternate-color: skyblue;
 }
 
 /* main grid ----------------------------------------------------------------*/
@@ -41,6 +41,8 @@ article {
 
 section:nth-child(odd) {
     background: var(--alternate-color);
+    border:2px solid lightgray;
+    border-radius: 5px;
 }
 
 footer {
@@ -98,14 +100,18 @@ section .task {
 .taskDetails .template > * {
     max-width:90%;
     max-height:100%;
+    border:2px solid lightgray;
+    border-radius: 5px;
 }
 
 .taskDetails .template > img {
     /* source: https://stackoverflow.com/a/30794589 */
     object-fit: cover;
+
 }
 
 .taskDetails .links {
+    font-weight: bold;
     min-height: 5vh;
     display: flex;
     flex-direction: row;
