@@ -2,15 +2,15 @@
 * {
     box-sizing: border-box;
     font-family: Verdana, sans-serif;
+    color:#0f4257;
     margin: 0;
     padding: 0;
 }
 
-
 :root {
     font-size: clamp(12px, calc(0.75rem + ((1vw - 3px) * 0.3704)), 18px);
     min-height: 0vw; /* safari fix */
-    --alternate-color: skyblue;
+    --alternate-color: #d6eef8;
 }
 
 /* main grid ----------------------------------------------------------------*/
@@ -42,7 +42,7 @@ article {
 section:nth-child(odd) {
     background: var(--alternate-color);
     border:2px solid lightgray;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 footer {
@@ -107,7 +107,6 @@ section .task {
 .taskDetails .template > img {
     /* source: https://stackoverflow.com/a/30794589 */
     object-fit: cover;
-
 }
 
 .taskDetails .links {
@@ -157,6 +156,10 @@ section .task {
         width: 49vw; /* 50 doesn't work */
     }
 
+    section:nth-child(odd) {
+        border:none;
+    }
+
     /* source: https://www.stphnsn.com/blog/alternating-boxes/*/
     section:nth-child(1n) {
         background-color: white;
@@ -165,6 +168,8 @@ section .task {
     section:nth-child(4n+1),
     section:nth-child(4n+4) {
         background-color: var(--alternate-color);
+        border:2px solid lightgray;
+        border-radius: 10px;
     }
 
     .taskDetails {
@@ -181,10 +186,13 @@ section .task {
 
     section:nth-child(odd) {
         background: var(--alternate-color);
+        border:2px solid lightgray;
+        border-radius: 10px;
     }
 
     section:nth-child(even) {
         background: white;
+        border:none;
     }
 
     .taskDetails {
