@@ -90,6 +90,16 @@ section .task {
     height: 55vh;
 }
 
+.taskDetails .links {
+    font-weight: bold;
+    min-height: 5vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-content: center;
+}
+
 .taskDetails .template {
     height:50vh;
     display: flex;
@@ -109,16 +119,6 @@ section .task {
     object-fit: cover;
 }
 
-.taskDetails .links {
-    font-weight: bold;
-    min-height: 5vh;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-content: center;
-}
-
 /* breakpoint: 400px width --------------------------------------------------*/
 
 @media screen and (min-width: 400px) {
@@ -136,7 +136,7 @@ section .task {
     .taskDetails .links {
         grid-area: links;
         flex-direction: column;
-        max-height: 55vh;
+        min-height: 55vh;
     }
 
     .taskDetails .template {
@@ -144,9 +144,9 @@ section .task {
     }
 }
 
-/* breakpoint: 800px width --------------------------------------------------*/
+/* breakpoint: 600px width --------------------------------------------------*/
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 600px) {
     article {
         display: flex;
         flex-wrap: wrap;
@@ -173,7 +173,7 @@ section .task {
     }
 
     .taskDetails {
-        grid-template-columns: 10vw 39vw;
+        grid-template-columns: 15vw 34vw;
     }
 }
 
