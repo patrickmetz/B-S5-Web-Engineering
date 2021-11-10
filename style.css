@@ -119,6 +119,30 @@ section .task {
     object-fit: cover;
 }
 
+@media screen and (min-width: 300px){
+    .taskDetails .links a {
+        font-weight: bold;
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        padding:0.25em;
+        border: 2px solid lightgray;
+    }
+
+    .taskDetails .links a:hover {
+        border-color: #0f4257;
+    }
+
+    .taskDetails .links a:after {
+        content: " ↗";
+    }
+
+    .task:hover a{
+        color: #0f4257;
+    }
+}
+
 /* breakpoint: 400px width --------------------------------------------------*/
 
 @media screen and (min-width: 400px) {
@@ -128,9 +152,9 @@ section .task {
 
     .taskDetails {
         display: grid;
-        grid-template-columns: 20vw 79vw;
+        grid-template-columns: 50vw 45vw;
         grid-template-areas:
-                "links template";
+                "template links";
     }
 
     .taskDetails .links {
@@ -139,14 +163,19 @@ section .task {
         min-height: 55vh;
     }
 
+    .taskDetails .links a {
+        width: 90%;
+    }
+
     .taskDetails .template {
         grid-area: template;
+        justify-content: center;
     }
 }
 
 /* breakpoint: 600px width --------------------------------------------------*/
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 800px) {
     article {
         display: flex;
         flex-wrap: wrap;
@@ -173,11 +202,33 @@ section .task {
     }
 
     .taskDetails {
-        grid-template-columns: 15vw 34vw;
+        grid-template-columns: 34vw 15vw;
     }
 
-    .taskDetails .links{
-        align-content: flex-end;
+    .taskDetails .links a {
+        color: lightgray;
+        border-color: transparent;
+    }
+
+    .taskDetails .links a:after {
+        content: " ";
+    }
+
+    .taskDetails .links a:hover {
+        border-color: #0f4257;
+    }
+
+    .task:hover a  {
+        color: #0f4257;
+        border: 2px solid lightgray;
+    }
+
+    .task:hover a:hover {
+        border-color: #0f4257;
+    }
+
+    .task:hover a:after {
+        content: " ↗";
     }
 }
 
@@ -200,7 +251,7 @@ section .task {
     }
 
     .taskDetails {
-        grid-template-columns: 7vw 25vw;
+        grid-template-columns: 22vw 10vw;
     }
 }
 
