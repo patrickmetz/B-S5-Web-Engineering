@@ -2,7 +2,7 @@
 * {
     box-sizing: border-box;
     font-family: Verdana, sans-serif;
-    color:#0f4257;
+    color: #0f4257;
     margin: 0;
     padding: 0;
 }
@@ -41,7 +41,7 @@ article {
 
 section:nth-child(odd) {
     background: var(--alternate-color);
-    border:2px solid lightgray;
+    border: 2px solid lightgray;
     border-radius: 10px;
 }
 
@@ -67,7 +67,7 @@ section {
 
 section h3 {
     min-height: 5vh;
-    padding:0.25em;
+    padding: 0.25em;
 }
 
 section h4 {
@@ -101,16 +101,16 @@ section .task {
 }
 
 .taskDetails .template {
-    height:50vh;
+    height: 50vh;
     display: flex;
     justify-content: center;
     align-content: center;
 }
 
 .taskDetails .template > * {
-    max-width:90%;
-    max-height:100%;
-    border:2px solid lightgray;
+    max-width: 90%;
+    max-height: 100%;
+    border: 2px solid lightgray;
     border-radius: 5px;
 }
 
@@ -157,7 +157,7 @@ section .task {
     }
 
     section:nth-child(odd) {
-        border:none;
+        border: none;
     }
 
     /* source: https://www.stphnsn.com/blog/alternating-boxes/*/
@@ -168,12 +168,16 @@ section .task {
     section:nth-child(4n+1),
     section:nth-child(4n+4) {
         background-color: var(--alternate-color);
-        border:2px solid lightgray;
+        border: 2px solid lightgray;
         border-radius: 10px;
     }
 
     .taskDetails {
         grid-template-columns: 15vw 34vw;
+    }
+
+    .taskDetails .links{
+        align-content: flex-end;
     }
 }
 
@@ -186,13 +190,13 @@ section .task {
 
     section:nth-child(odd) {
         background: var(--alternate-color);
-        border:2px solid lightgray;
+        border: 2px solid lightgray;
         border-radius: 10px;
     }
 
     section:nth-child(even) {
         background: white;
-        border:none;
+        border: none;
     }
 
     .taskDetails {
