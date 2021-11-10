@@ -143,6 +143,45 @@ section .task {
     }
 }
 
+/* table of contents --------------------------------------------------------*/
+#toc{
+    position:fixed;
+    top:15vh;
+    right:0px;
+    background: white;
+    padding:1em;
+    font-weight: bold;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+    box-shadow: 1px 1px 1px lightgray;
+    opacity: 0.8;
+}
+
+#toc a{
+    color:gray;
+    text-decoration: none;
+    border:2px solid transparent;
+    border-radius: 5px;
+    padding:0.5em;
+}
+
+#toc a:after{
+    content: "Inh.";
+}
+
+#toc:hover{
+    opacity: 1;
+}
+
+#toc:hover a{
+    border-color:lightgray;
+    color:#0f4257;
+}
+#toc a:hover{
+    border-color: #0f4257;
+    color:#0f4257;
+}
+
 /* breakpoint: 400px width --------------------------------------------------*/
 
 @media screen and (min-width: 400px) {
@@ -171,9 +210,21 @@ section .task {
         grid-area: template;
         justify-content: center;
     }
+
+    #toc a:after{
+        content: "Inhalt";
+    }
 }
 
-/* breakpoint: 600px width --------------------------------------------------*/
+/* breakpoint: 800px width --------------------------------------------------*/
+
+@media screen and (min-width: 600px) {
+    #toc{
+        top:0px;
+    }
+}
+
+/* breakpoint: 800px width --------------------------------------------------*/
 
 @media screen and (min-width: 800px) {
     article {
@@ -229,6 +280,14 @@ section .task {
 
     .task:hover a:after {
         content: " ↗";
+    }
+
+    #toc{
+        top:0px;
+    }
+
+    #toc a:after{
+        content: "Inhaltsverzeichnis";
     }
 }
 
