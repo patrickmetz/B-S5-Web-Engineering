@@ -140,7 +140,7 @@ section:nth-child(odd) {
 }
 
 /* table of contents --------------------------------------------------------*/
-#toc {
+#tocToggle {
     position: fixed;
     top: 15vh;
     right: 0px;
@@ -149,34 +149,116 @@ section:nth-child(odd) {
     font-weight: bold;
     border-bottom-left-radius: 20px;
     border-top-left-radius: 20px;
-    box-shadow: 1px 1px 1px lightgray;
+    box-shadow: 5px 5px rgba(100,100,100,0.125);
     opacity: 0.8;
 }
 
-#toc a {
+#tocToggle > a {
     color: gray;
     text-decoration: none;
     border: 2px solid transparent;
     border-radius: 5px;
     padding: 0.5em;
+    cursor: pointer;
 }
 
-#toc a:after {
+#tocToggle > a:after {
     content: "Inh.";
 }
 
-#toc:hover {
+#tocToggle:hover {
     opacity: 1;
 }
 
-#toc:hover a {
+#tocToggle:hover > a {
     border-color: lightgray;
     color: #0f4257;
 }
 
-#toc a:hover {
+#tocToggle > a:hover {
     border-color: #0f4257;
     color: #0f4257;
+}
+
+#tocDisplay {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 10px 10px rgba(100,100,100,0.125);
+    width: 50vw;
+    height: 50vh;
+    position: fixed;
+    top: 25vh;
+    left: 25vw;
+    border:2px solid lightgray;
+}
+
+/* close button */
+#tocDisplay > a {
+    color: gray;
+    text-decoration: none;
+    padding: 0.25em;
+    cursor: pointer;
+    font-weight: bold;
+    position: absolute;
+    font-size: 2em;
+    height:2em;
+    width: 2em;
+    display: block;
+    text-align: center;
+    vertical-align: center;
+    top:0;
+    right: 0;
+}
+
+#tocDisplay:hover {
+    opacity: 1;
+}
+
+#tocDisplay.hidden {
+    display: none;
+}
+
+#tocDisplay.shown {
+    display: block;
+}
+
+#tocDisplay ul {
+    padding-left: 1em;
+    list-style-position: inside;
+}
+
+#tocDisplay > ul  > li {
+    padding-top: 1em;
+}
+
+#tocDisplay > ul > li > ul {
+    padding-left: 2em;
+}
+
+#tocDisplay ul a {
+    font-weight: normal;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#tocDisplay a:hover {
+    color: darkorange;
+}
+
+/* animated highlight https://stackoverflow.com/a/41391835 */
+.tocHighlight {
+    animation-duration: 0.25s;
+    animation-iteration-count: 3;
+    animation-name: fadingHighlight;
+}
+
+@keyframes fadingHighlight {
+    0% {
+        background-color: initial
+    }
+    100% {
+        background-color: rgba(255, 255, 0, 0.5)
+    }
 }
 
 /* breakpoint: 400px width --------------------------------------------------*/
@@ -208,7 +290,7 @@ section:nth-child(odd) {
         justify-content: center;
     }
 
-    #toc a:after {
+    #tocToggle > a:after {
         content: "Inhalt";
     }
 }
@@ -216,7 +298,7 @@ section:nth-child(odd) {
 /* breakpoint: 600px width --------------------------------------------------*/
 
 @media screen and (min-width: 600px) {
-    #toc {
+    #tocToggle {
         top: 0px;
     }
 }
@@ -281,11 +363,11 @@ section:nth-child(odd) {
         content: " ↗";
     }
 
-    #toc {
+    #tocToggle {
         top: 0px;
     }
 
-    #toc a:after {
+    #tocToggle a:after {
         content: "Inhaltsverzeichnis";
     }
 }

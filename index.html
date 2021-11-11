@@ -8,12 +8,16 @@
     <title>Web Engineering - Semesterprojekt</title>
 
     <link rel="stylesheet" href="./style.css">
+    <script src="script.js"></script>
 </head>
 
-<body>
+<body onload="createTocDisplay('section', 'h3', 'h4');">
 
-<div id="toc">
-    <a href="#"></a>
+<div id="tocToggle">
+    <a onclick="toggleTocDisplay();" title="Inhaltsverzeichnis"></a>
+</div>
+<div id="tocDisplay" class="hidden">
+    <a onclick="toggleTocDisplay();" title="schließen">x</a>
 </div>
 
 <header>
