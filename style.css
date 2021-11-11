@@ -56,7 +56,7 @@ footer div {
 /* sections -----------------------------------------------------------------*/
 
 section {
-    min-height: 75vh; /* as least as tall as article area of main grid */
+    min-height: 75vh; /* 100 - header - footer */
 }
 
 section h3 {
@@ -77,16 +77,16 @@ section:nth-child(odd) {
 
 /* tasks --------------------------------------------------------------------*/
 
-.task .taskInfo {
+.taskInfo {
     min-height: 10vh;
     padding: 0.25em 0.25em 0.25em 2em;
 }
 
-.task .taskDetails {
+.taskDetails {
     height: 55vh;
 }
 
-.taskDetails .links {
+.taskLinks {
     font-weight: bold;
     min-height: 5vh;
     display: flex;
@@ -96,27 +96,27 @@ section:nth-child(odd) {
     align-content: center;
 }
 
-.taskDetails .template {
+.taskTemplate {
     height: 50vh;
     display: flex;
     justify-content: center;
     align-content: center;
 }
 
-.taskDetails .template > * {
+.taskTemplate > * {
     max-width: 90%;
     max-height: 100%;
     border: 2px solid lightgray;
     border-radius: 5px;
 }
 
-.taskDetails .template > img {
+.taskTemplate > img {
     /* source: https://stackoverflow.com/a/30794589 */
     object-fit: cover;
 }
 
 @media screen and (min-width: 300px) {
-    .taskDetails .links a {
+    .taskLinks a {
         font-weight: bold;
         display: inline-block;
         text-align: center;
@@ -126,15 +126,15 @@ section:nth-child(odd) {
         border: 2px solid lightgray;
     }
 
-    .taskDetails .links a:hover {
+    .taskLinks a:hover {
         border-color: #0f4257;
     }
 
-    .taskDetails .links a:after {
+    .taskLinks a:after {
         content: " ↗";
     }
 
-    .task:hover a {
+    section:hover .taskLinks a {
         color: #0f4257;
     }
 }
@@ -193,17 +193,17 @@ section:nth-child(odd) {
                 "template links";
     }
 
-    .taskDetails .links {
+    .taskLinks {
         grid-area: links;
         flex-direction: column;
         min-height: 55vh;
     }
 
-    .taskDetails .links a {
+    .taskLinks a {
         width: 90%;
     }
 
-    .taskDetails .template {
+    .taskTemplate {
         grid-area: template;
         justify-content: center;
     }
@@ -255,29 +255,29 @@ section:nth-child(odd) {
         grid-template-columns: 34vw 15vw; /* = section width */
     }
 
-    .taskDetails .links a {
+    .taskLinks a {
         color: lightgray;
         border-color: transparent;
     }
 
-    .taskDetails .links a:after {
+    .taskLinks a:after {
         content: " ";
     }
 
-    .taskDetails .links a:hover {
+    .taskLinks a:hover {
         border-color: #0f4257;
     }
 
-    .task:hover a {
+    section:hover .taskLinks a {
         color: #0f4257;
         border: 2px solid lightgray;
     }
 
-    .task:hover a:hover {
+    section:hover .taskLinks a:hover {
         border-color: #0f4257;
     }
 
-    .task:hover a:after {
+    section:hover .taskLinks a:after {
         content: " ↗";
     }
 
@@ -357,22 +357,22 @@ body.development section h4 {
     background: cadetblue;
 }
 
-body.development section .task {
+body.development section {
     background: yellow;
 }
 
-body.development .task .taskInfo {
+body.development .taskInfo {
     background: purple;
 }
 
-body.development .task .taskDetails {
+body.development .taskDetails {
     background: skyblue;
 }
 
-body.development .taskDetails .template {
+body.development .taskDetails .taskTemplate {
     background: forestgreen;
 }
 
-body.development .taskDetails .links {
+body.development .taskDetails .taskLinks {
     background: orange;
 }
