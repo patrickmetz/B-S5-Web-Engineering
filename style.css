@@ -39,12 +39,6 @@ article {
     grid-area: article;
 }
 
-section:nth-child(odd) {
-    background: var(--alternate-color);
-    border: 2px solid lightgray;
-    border-radius: 10px;
-}
-
 footer {
     grid-area: footer;
     display: flex;
@@ -62,7 +56,7 @@ footer div {
 /* sections -----------------------------------------------------------------*/
 
 section {
-    min-height: 75vh; /* as tall as article area of main grid */
+    min-height: 75vh; /* as least as tall as article area of main grid */
 }
 
 section h3 {
@@ -75,8 +69,10 @@ section h4 {
     padding: 0.25em;
 }
 
-section .task {
-    min-height: 65vh;
+section:nth-child(odd) {
+    background: var(--alternate-color);
+    border: 2px solid lightgray;
+    border-radius: 10px;
 }
 
 /* tasks --------------------------------------------------------------------*/
@@ -119,14 +115,14 @@ section .task {
     object-fit: cover;
 }
 
-@media screen and (min-width: 300px){
+@media screen and (min-width: 300px) {
     .taskDetails .links a {
         font-weight: bold;
         display: inline-block;
         text-align: center;
         text-decoration: none;
         border-radius: 5px;
-        padding:0.25em;
+        padding: 0.25em;
         border: 2px solid lightgray;
     }
 
@@ -138,18 +134,18 @@ section .task {
         content: " ↗";
     }
 
-    .task:hover a{
+    .task:hover a {
         color: #0f4257;
     }
 }
 
 /* table of contents --------------------------------------------------------*/
-#toc{
-    position:fixed;
-    top:15vh;
-    right:0px;
+#toc {
+    position: fixed;
+    top: 15vh;
+    right: 0px;
     background: white;
-    padding:1em;
+    padding: 1em;
     font-weight: bold;
     border-bottom-left-radius: 20px;
     border-top-left-radius: 20px;
@@ -157,29 +153,30 @@ section .task {
     opacity: 0.8;
 }
 
-#toc a{
-    color:gray;
+#toc a {
+    color: gray;
     text-decoration: none;
-    border:2px solid transparent;
+    border: 2px solid transparent;
     border-radius: 5px;
-    padding:0.5em;
+    padding: 0.5em;
 }
 
-#toc a:after{
+#toc a:after {
     content: "Inh.";
 }
 
-#toc:hover{
+#toc:hover {
     opacity: 1;
 }
 
-#toc:hover a{
-    border-color:lightgray;
-    color:#0f4257;
+#toc:hover a {
+    border-color: lightgray;
+    color: #0f4257;
 }
-#toc a:hover{
+
+#toc a:hover {
     border-color: #0f4257;
-    color:#0f4257;
+    color: #0f4257;
 }
 
 /* breakpoint: 400px width --------------------------------------------------*/
@@ -211,36 +208,38 @@ section .task {
         justify-content: center;
     }
 
-    #toc a:after{
+    #toc a:after {
         content: "Inhalt";
     }
 }
 
-/* breakpoint: 800px width --------------------------------------------------*/
+/* breakpoint: 600px width --------------------------------------------------*/
 
 @media screen and (min-width: 600px) {
-    #toc{
-        top:0px;
+    #toc {
+        top: 0px;
     }
 }
 
 /* breakpoint: 800px width --------------------------------------------------*/
 
+/* two column layout */
 @media screen and (min-width: 800px) {
     article {
         display: flex;
         flex-wrap: wrap;
     }
 
-    article > section {
-        width: 49vw; /* 50 doesn't work */
+    section {
+        width: 49vw; /* 50 doesn't work because of scroll bar width */
     }
 
     section:nth-child(odd) {
         border: none;
     }
 
-    /* source: https://www.stphnsn.com/blog/alternating-boxes/*/
+    /* checkerboard layout
+        source: https://www.stphnsn.com/blog/alternating-boxes/ */
     section:nth-child(1n) {
         background-color: white;
     }
@@ -253,7 +252,7 @@ section .task {
     }
 
     .taskDetails {
-        grid-template-columns: 34vw 15vw;
+        grid-template-columns: 34vw 15vw; /* = section width */
     }
 
     .taskDetails .links a {
@@ -269,7 +268,7 @@ section .task {
         border-color: #0f4257;
     }
 
-    .task:hover a  {
+    .task:hover a {
         color: #0f4257;
         border: 2px solid lightgray;
     }
@@ -282,22 +281,24 @@ section .task {
         content: " ↗";
     }
 
-    #toc{
-        top:0px;
+    #toc {
+        top: 0px;
     }
 
-    #toc a:after{
+    #toc a:after {
         content: "Inhaltsverzeichnis";
     }
 }
 
 /* breakpoint: 1200px width --------------------------------------------------*/
 
+/* three column lyaout */
 @media screen and (min-width: 1200px) {
-    article > section {
+    section {
         width: 32vw;
     }
 
+    /* checkerboard layout */
     section:nth-child(odd) {
         background: var(--alternate-color);
         border: 2px solid lightgray;
@@ -310,7 +311,7 @@ section .task {
     }
 
     .taskDetails {
-        grid-template-columns: 22vw 10vw;
+        grid-template-columns: 22vw 10vw; /* = section width */
     }
 }
 
