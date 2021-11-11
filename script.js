@@ -15,7 +15,7 @@ var tocHighlightDelay = 250;
  * @param {string} lectureTag name of html element, that contains a task's corresponding lecture
  * @param {string} taskTag name of html element, that contains a task's name
  */
-function createTocDisplay(parentTag, lectureTag, taskTag) {
+function createTableOfContents(parentTag, lectureTag, taskTag) {
     var tocDisplay = document.getElementById(tocDisplayId);
     var parentTags = document.getElementsByTagName(parentTag);
 

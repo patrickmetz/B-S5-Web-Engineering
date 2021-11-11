@@ -8,6 +8,7 @@
 }
 
 :root {
+    /* responsive font size: https://websemantics.uk/tools/responsive-font-calculator/ */
     font-size: clamp(12px, calc(0.75rem + ((1vw - 3px) * 0.3704)), 18px);
     min-height: 0vw; /* safari fix */
     --alternate-color: #d6eef8;
@@ -208,6 +209,14 @@ section:nth-child(odd) {
     vertical-align: center;
     top:0;
     right: 0;
+    background: white;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    opacity: 0.8;
+}
+
+#tocDisplay > a:hover{
+  opacity: 1;
 }
 
 #tocDisplay:hover {
@@ -222,17 +231,28 @@ section:nth-child(odd) {
     display: block;
 }
 
-#tocDisplay ul {
-    padding-left: 1em;
-    list-style-position: inside;
+#tocDisplay ul, #tocDisplay li{
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#tocDisplay > ul {
+    margin-top: 2em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    height:available;
+    overflow-y: auto;
 }
 
 #tocDisplay > ul  > li {
     padding-top: 1em;
+    font-weight: bold;
 }
 
 #tocDisplay > ul > li > ul {
-    padding-left: 2em;
+    padding-left: 1em;
 }
 
 #tocDisplay ul a {
