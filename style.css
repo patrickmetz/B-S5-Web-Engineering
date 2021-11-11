@@ -191,6 +191,7 @@ section:nth-child(odd) {
     top: 25vh;
     left: 25vw;
     border:2px solid lightgray;
+    overflow-y: auto;
 }
 
 /* close button */
@@ -239,9 +240,9 @@ section:nth-child(odd) {
 }
 
 #tocDisplay > ul {
-    margin-top: 2em;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
+    padding-top: 2em;
+    padding-left: 1em;
+    padding-right: 1em;
     height:available;
     overflow-y: auto;
 }
