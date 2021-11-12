@@ -442,8 +442,8 @@ section:nth-child(odd) {
 
     #tocDisplay {
         width: 40vw;
-        height: 40vh;
-        top: 30vh;
+        height: 50vh;
+        top: 25vh;
         left: 30vw;
     }
 }
