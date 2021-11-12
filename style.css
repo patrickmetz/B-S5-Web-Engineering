@@ -191,9 +191,9 @@ section:nth-child(odd) {
     border-radius: 20px;
     box-shadow: 10px 10px rgba(100,100,100,0.125);
     width: 90vw;
-    height: 90vh;
+    height: 80vh;
     position: fixed;
-    top: 5vh;
+    top: 10vh;
     left: 5vw;
     border:2px solid lightgray;
     overflow-y: auto;
@@ -438,6 +438,13 @@ section:nth-child(odd) {
 
     .taskDetails {
         grid-template-columns: 22vw 10vw; /* = section width */
+    }
+
+    #tocDisplay {
+        width: 40vw;
+        height: 40vh;
+        top: 30vh;
+        left: 30vw;
     }
 }
 
