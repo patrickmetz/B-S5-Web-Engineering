@@ -138,9 +138,13 @@ section:nth-child(odd) {
     section:hover .taskLinks a {
         color: #0f4257;
     }
+    section:hover .taskLinks a:hover {
+        color: darkorange;
+    }
 }
 
-/* table of contents --------------------------------------------------------*/
+/* table of contents - toggle -----------------------------------------------*/
+
 #tocToggle {
     position: fixed;
     top: 15vh;
@@ -155,7 +159,6 @@ section:nth-child(odd) {
 }
 
 #tocToggle > a {
-    color: gray;
     text-decoration: none;
     border: 2px solid transparent;
     border-radius: 5px;
@@ -178,8 +181,10 @@ section:nth-child(odd) {
 
 #tocToggle > a:hover {
     border-color: #0f4257;
-    color: #0f4257;
+    color:darkorange;
 }
+
+/* table of contents - display ----------------------------------------------*/
 
 #tocDisplay {
     background: white;
@@ -196,7 +201,7 @@ section:nth-child(odd) {
 
 /* close button */
 #tocDisplay > a {
-    color: gray;
+    color: #0f4257;
     text-decoration: none;
     padding: 0.25em;
     cursor: pointer;
@@ -214,10 +219,14 @@ section:nth-child(odd) {
     border-bottom-left-radius: 20px;
     border-top-right-radius: 20px;
     opacity: 0.8;
+    border:2px solid lightgray;
+    border-top:none;
+    border-right: none;
 }
 
 #tocDisplay > a:hover{
   opacity: 1;
+    border-color:#0f4257;
 }
 
 #tocDisplay:hover {
