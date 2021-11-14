@@ -23,12 +23,12 @@
 
             addVertex(vertex) {
                 if (this._neighborLists.get(vertex) === undefined) {
-                    this._neighborLists.set(vertex, []);
+                    this._neighborLists.set(vertex, new Set());
                 }
             }
 
             addEdge(vertexNameA, vertexNameB) {
-                this._neighborLists.get(vertexNameA).push(vertexNameB);
+                this._neighborLists.get(vertexNameA).add(vertexNameB);
             }
 
             topsort() {
