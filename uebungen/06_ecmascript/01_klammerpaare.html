@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ü 6.1</title>
+
+    <style>
+        input.error {
+            background-color: red;
+            color: white;
+        }
+    </style>
+
+    <script>
+        let opening = new Set()
+            .add('(').add('[').add('{');
+
+        let closing = new Set()
+            .add(')').add(']').add('}');
+
+        let matching = new Map()
+            .set(')', '(')
+            .set(']', '[')
+            .set('}', '{');
+
+        function checkInputField(inputField){
+            if (areBracketsBalanced(inputField.value) !== true) {
+                inputField.classList.add("error");
+            } else {
+                inputField.classList.remove("error");
+            }
+        }
+
+        function areBracketsBalanced(string) {
+            let stack = [];
+            let areBalanced = true;
+
+            for (const character of string) {
+                if (opening.has(character)) {
+                    stack.push(character);
+                } else if (closing.has(character)) {
+                    const onTopOfStack = stack[stack.length - 1];
+
+                    if (matching.get(character) === onTopOfStack) {
+                        stack.pop();
+                    } else {
+                        areBalanced = false;
+                        break;
+                    }
+                }
+            }
+
+            if (stack.length > 0) {
+                areBalanced = false;
+            }
+
+            return areBalanced;
+        }
+
+        // da nur klammern beachtet werden,
+        // müssen andere zeichen nicht getestet werden
+        // und eigentlich müsste man den zu untersuchenden
+        // raum von möglichkeiten automatisiert aufbauen.
+        // dies sind also nur so viele exemplarische tests,
+        // wie ich ausgehalten habe zu schreiben :D
+        console.assert(areBracketsBalanced("(") === false);
+        console.assert(areBracketsBalanced("[") === false);
+        console.assert(areBracketsBalanced("{") === false);
+
+        console.assert(areBracketsBalanced(")") === false);
+        console.assert(areBracketsBalanced("]") === false);
+        console.assert(areBracketsBalanced("}") === false);
+
+        console.assert(areBracketsBalanced(")(") === false);
+        console.assert(areBracketsBalanced("][") === false);
+        console.assert(areBracketsBalanced("}{") === false);
+
+        console.assert(areBracketsBalanced("([)]") === false);
+        console.assert(areBracketsBalanced("({)}") === false);
+        console.assert(areBracketsBalanced("[(])") === false);
+        console.assert(areBracketsBalanced("[{]}") === false);
+        console.assert(areBracketsBalanced("{(})") === false);
+        console.assert(areBracketsBalanced("{[}]") === false);
+
+        console.assert(areBracketsBalanced("") === true);
+
+        console.assert(areBracketsBalanced("()") === true);
+        console.assert(areBracketsBalanced("[]") === true);
+        console.assert(areBracketsBalanced("{}") === true);
+
+        console.assert(areBracketsBalanced("([])") === true);
+        console.assert(areBracketsBalanced("({})") === true);
+        console.assert(areBracketsBalanced("[()]") === true);
+        console.assert(areBracketsBalanced("[{}]") === true);
+        console.assert(areBracketsBalanced("{()}") === true);
+        console.assert(areBracketsBalanced("{[]}") === true);
+
+        console.assert(areBracketsBalanced("([{}])") === true);
+        console.assert(areBracketsBalanced("({[]})") === true);
+        console.assert(areBracketsBalanced("[({})]") === true);
+        console.assert(areBracketsBalanced("[{()}]") === true);
+        console.assert(areBracketsBalanced("{([])}") === true);
+        console.assert(areBracketsBalanced("{[()]}") === true);
+
+        console.assert(areBracketsBalanced("()[]{}") === true);
+        console.assert(areBracketsBalanced("(){}[]") === true);
+        console.assert(areBracketsBalanced("[](){}") === true);
+        console.assert(areBracketsBalanced("[]{}()") === true);
+        console.assert(areBracketsBalanced("{}()[]") === true);
+        console.assert(areBracketsBalanced("{}[]()") === true);
+    </script>
+</head>
+<body>
+
+<h1>Klammerpaare</h1>
+
+
+<input type="text" onkeyup="checkInputField(this);">
+
+
+</body>
+</html>

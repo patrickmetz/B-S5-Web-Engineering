@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ü 6.1</title>
+
+    <style>
+        input.error {
+            background-color: red;
+            color: white;
+        }
+    </style>
+
+    <script>
+        function createCharacterPair(opening, closing) {
+            if (opening == null || closing == null) {
+                return null;
+            } else if (opening.length !== 1 || closing.length !== 1) {
+                return null;
+            } else {
+                return new class CharacterPair {
+                    _opening;
+                    _closing;
+
+                    constructor(opening, closing) {
+                        this._opening = opening;
+                        this._closing = closing;
+                    }
+
+                    get opening() {
+                        return this._opening;
+                    }
+
+                    get closing() {
+                        return this._closing;
+                    }
+                }(opening, closing)
+            }
+        }
+
+        class BalanceCheck {
+            _opening = new Set();
+            _closing = new Set();
+            _matching = new Map();
+
+            constructor(...pairs) {
+                for (const pair of pairs) {
+                    this._opening.add(pair.opening);
+                    this._closing.add(pair.closing);
+                    this._matching.set(pair.closing, pair.opening);
+                }
+            }
+
+            isBalanced(string) {
+                let stack = [];
+                let isBalanced = true;
+
+                for (const character of string) {
+                    if (this._opening.has(character)) {
+                        stack.push(character);
+                    } else if (this._closing.has(character)) {
+                        const onTopOfStack = stack[stack.length - 1];
+
+                        if (this._matching.get(character) === onTopOfStack) {
+                            stack.pop();
+                        } else {
+                            isBalanced = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (stack.length > 0) {
+                    isBalanced = false;
+                }
+
+                return isBalanced;
+            }
+        }
+
+        const check = new BalanceCheck(
+            createCharacterPair("<", ">"), createCharacterPair("+", "-")
+        );
+
+        function checkInputField(inputField) {
+            if (check.isBalanced(inputField.value) !== true) {
+                inputField.classList.add("error");
+            } else {
+                inputField.classList.remove("error");
+            }
+        }
+
+        console.assert(check.isBalanced("<") === false);
+        console.assert(check.isBalanced(">") === false);
+        console.assert(check.isBalanced("+") === false);
+        console.assert(check.isBalanced("-") === false);
+
+        console.assert(check.isBalanced("<>") === true);
+        console.assert(check.isBalanced("+-") === true);
+        console.assert(check.isBalanced("<+->") === true);
+        console.assert(check.isBalanced("+<>-") === true);
+
+        console.assert(check.isBalanced("><") === false);
+        console.assert(check.isBalanced("-+") === false);
+        console.assert(check.isBalanced("+<->") === false);
+        console.assert(check.isBalanced("<+>-") === false);
+    </script>
+</head>
+<body>
+
+<h1>Klammerpaare</h1>
+
+
+<input type="text" onkeyup="checkInputField(this);">
+<p>Dieses Mal mit <, >, + und -</p>
+
+
+</body>
+</html>
