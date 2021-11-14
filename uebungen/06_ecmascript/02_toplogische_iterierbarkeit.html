@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ü 6.2</title>
+
+    <script>
+        class Graph {
+            _neighborLists = new Map();
+
+            addVertex(vertex) {
+                this._neighborLists.set(vertex, []);
+            }
+
+            addEdge(vertexNameA, vertexNameB) {
+                this._neighborLists.get(vertexNameA).push(vertexNameB);
+            }
+
+            topsort() {
+                let vertexNames = this._neighborLists.keys();
+
+                let visited = new Map();
+                let sorted = new Map();
+                let position = this._neighborLists.size - 1;
+
+                for (const vertexName of vertexNames) {
+                    if (!visited.get(vertexName)) {
+                        position = this.helperFunction(vertexName, position, visited, sorted);
+                    }
+                }
+
+                // map internal presentation to correctly sorted list
+
+                let sortedList = [];
+
+                for (const [key, value] of sorted.entries()) {
+                    sortedList[key] = value;
+                }
+
+                return sortedList;
+            }
+
+            helperFunction(vertexName, position, visited, sorted) {
+                visited.set(vertexName, true);
+                const neighborNames = this._neighborLists.get(vertexName);
+
+                for (const vertexName of neighborNames) {
+                    if (!visited.get(vertexName)) {
+                        position = this.helperFunction(vertexName, position, visited, sorted);
+                    }
+                }
+
+                sorted.set(position, vertexName);
+                return position - 1;
+            }
+        }
+
+        graph = new Graph();
+
+        graph.addVertex("a");
+        graph.addVertex("b");
+        graph.addVertex("c");
+        graph.addVertex("d");
+        graph.addEdge("d", "c");
+        graph.addEdge("c", "b");
+        graph.addEdge("b", "a");
+
+        sortedList = graph.topsort();
+
+        console.log("Input: graph", graph);
+        console.log("Output: sorted List", sortedList);
+
+        console.assert(sortedList.length === 4, 'Es müssen 4 Einträge sein.', sortedList);
+        console.assert(sortedList[0] === "d", 'd muss der 1. sein.', sortedList);
+        console.assert(sortedList[1] === "c", 'c muss der 2. sein.', sortedList);
+        console.assert(sortedList[2] === "b", 'b muss der 3. sein.', sortedList);
+        console.assert(sortedList[3] === "a", 'c muss der 4. sein.', sortedList);
+    </script>
+</head>
+<body>
+
+<h1>6.2 Topologische Iterierbarkeit</h1>
+</body>
+</html>
