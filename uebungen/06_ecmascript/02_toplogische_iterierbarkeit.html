@@ -8,8 +8,23 @@
         class Graph {
             _neighborLists = new Map();
 
+            constructor(...edges) {
+                for (const edge of edges) {
+                    for (const vertexName of edge) {
+                        this.addVertex(vertexName);
+                    }
+                }
+
+                for (const edge of edges) {
+                    const [vertexNameA, vertexNameB] = edge;
+                    this.addEdge(vertexNameA, vertexNameB);
+                }
+            }
+
             addVertex(vertex) {
-                this._neighborLists.set(vertex, []);
+                if (this._neighborLists.get(vertex) === undefined) {
+                    this._neighborLists.set(vertex, []);
+                }
             }
 
             addEdge(vertexNameA, vertexNameB) {
@@ -55,15 +70,7 @@
             }
         }
 
-        graph = new Graph();
-
-        graph.addVertex("a");
-        graph.addVertex("b");
-        graph.addVertex("c");
-        graph.addVertex("d");
-        graph.addEdge("d", "c");
-        graph.addEdge("c", "b");
-        graph.addEdge("b", "a");
+        graph = new Graph(["d", "c"], ["c", "b"], ["b", "a"]);
 
         sortedList = graph.topsort();
 
