@@ -6,7 +6,7 @@
 
     <script>
         class Graph {
-            _neighborLists = new Map();
+            _neighborSetsMap = new Map();
 
             constructor(...edges) {
                 for (const edge of edges) {
@@ -22,66 +22,61 @@
             }
 
             addVertex(vertex) {
-                if (this._neighborLists.get(vertex) === undefined) {
-                    this._neighborLists.set(vertex, new Set());
+                if (this._neighborSetsMap.get(vertex) === undefined) {
+                    this._neighborSetsMap.set(vertex, new Set());
                 }
             }
 
             addEdge(vertexNameA, vertexNameB) {
-                this._neighborLists.get(vertexNameA).add(vertexNameB);
+                // swap A with B, to revert the relation, to get iterating right
+                this._neighborSetsMap.get(vertexNameB).add(vertexNameA);
             }
 
             topsort() {
-                let vertexNames = this._neighborLists.keys();
+                let stack = [];
+                let visitedMap = new Map();
 
-                let visited = new Map();
-                let sorted = new Map();
-                let position = this._neighborLists.size - 1;
+                const verticeSet = this._neighborSetsMap.keys();
 
-                for (const vertexName of vertexNames) {
-                    if (!visited.get(vertexName)) {
-                        position = this.helperFunction(vertexName, position, visited, sorted);
+                // visit all vertices, one after the other
+                for (const vertexName of verticeSet) {
+                    if (visitedMap.get(vertexName) === undefined) {
+                        this.helperFunction(vertexName, visitedMap, stack);
                     }
                 }
 
-                // map internal presentation to correctly sorted list
-
-                let sortedList = [];
-
-                for (const [key, value] of sorted.entries()) {
-                    sortedList[key] = value;
-                }
-
-                return sortedList;
+                return stack;
             }
 
-            helperFunction(vertexName, position, visited, sorted) {
-                visited.set(vertexName, true);
-                const neighborNames = this._neighborLists.get(vertexName);
+            helperFunction(vertexName, visitedMap, stack) {
+                visitedMap.set(vertexName, true);
 
-                for (const vertexName of neighborNames) {
-                    if (!visited.get(vertexName)) {
-                        position = this.helperFunction(vertexName, position, visited, sorted);
+                const neighborNames = this._neighborSetsMap.get(vertexName);
+
+                // first recursively visit all neighbors (children) ...
+                for (const neighborName of neighborNames) {
+                    if (!visitedMap.get(neighborName)) {
+                        this.helperFunction(neighborName, visitedMap, stack);
                     }
                 }
 
-                sorted.set(position, vertexName);
-                return position - 1;
+                // ...then this is the deepest child, and therefore sorted
+                stack.push(vertexName);
             }
         }
 
         graph = new Graph(["d", "c"], ["c", "b"], ["b", "a"]);
 
-        sortedList = graph.topsort();
+        stack = graph.topsort();
 
         console.log("Input: graph", graph);
-        console.log("Output: sorted List", sortedList);
+        console.log("Output: sorted List 1", stack);
 
-        console.assert(sortedList.length === 4, 'Es müssen 4 Einträge sein.', sortedList);
-        console.assert(sortedList[0] === "d", 'd muss der 1. sein.', sortedList);
-        console.assert(sortedList[1] === "c", 'c muss der 2. sein.', sortedList);
-        console.assert(sortedList[2] === "b", 'b muss der 3. sein.', sortedList);
-        console.assert(sortedList[3] === "a", 'c muss der 4. sein.', sortedList);
+        console.assert(stack.length === 4, 'Es müssen 4 Einträge sein.', stack);
+        console.assert(stack[0] === "d", 'd muss der 1. sein.', stack);
+        console.assert(stack[1] === "c", 'c muss der 2. sein.', stack);
+        console.assert(stack[2] === "b", 'b muss der 3. sein.', stack);
+        console.assert(stack[3] === "a", 'c muss der 4. sein.', stack);
     </script>
 </head>
 <body>
