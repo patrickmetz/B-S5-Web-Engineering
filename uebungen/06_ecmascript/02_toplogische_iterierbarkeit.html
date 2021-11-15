@@ -37,19 +37,19 @@
                 let visitedMap = new Map();
                 const verticeSet = this._neighborSetsMap.keys();
 
-                // visit all vertices, one after the other
+                // visit all vertices recursively, one after the other
                 for (const vertexName of verticeSet) {
                     if (visitedMap.get(vertexName) === undefined) {
-                        this.helperFunction(vertexName, visitedMap, stack);
+                        this.depthFirstSearch(vertexName, visitedMap, stack);
                     }
-                    // stack grows by one sorted vertex, at each iteration
+                    // at each iteration the stack grows by one sorted vertex
                     // console.log("stack", iterationCount, stack[iterationCount++], stack);
                 }
 
                 return stack;
             }
 
-            helperFunction(vertexName, visitedMap, stack) {
+            depthFirstSearch(vertexName, visitedMap, stack) {
                 visitedMap.set(vertexName, true);
 
                 const neighborNames = this._neighborSetsMap.get(vertexName);
@@ -57,7 +57,7 @@
                 // first recursively visit all neighbors (children) ...
                 for (const neighborName of neighborNames) {
                     if (!visitedMap.get(neighborName)) {
-                        this.helperFunction(neighborName, visitedMap, stack);
+                        this.depthFirstSearch(neighborName, visitedMap, stack);
                     }
                 }
 
@@ -82,7 +82,7 @@
                         // ..., but with "if"-condition instead of "for"-loop
                         if (vertexName) {
                             if (visitedMap.get(vertexName) === undefined) {
-                                that.helperFunction(vertexName, visitedMap, stack);
+                                that.depthFirstSearch(vertexName, visitedMap, stack);
                             }
                         }
 
