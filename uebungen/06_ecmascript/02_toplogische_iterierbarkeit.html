@@ -35,7 +35,6 @@
             topsort() {
                 let stack = [];
                 let visitedMap = new Map();
-
                 const verticeSet = this._neighborSetsMap.keys();
 
                 // visit all vertices, one after the other
@@ -43,6 +42,8 @@
                     if (visitedMap.get(vertexName) === undefined) {
                         this.helperFunction(vertexName, visitedMap, stack);
                     }
+                    // stack grows by one sorted vertex, at each iteration
+                    // console.log("stack", iterationCount, stack[iterationCount++], stack);
                 }
 
                 return stack;
@@ -63,20 +64,58 @@
                 // ...then this is the deepest child, and therefore sorted
                 stack.push(vertexName);
             }
+
+            [Symbol.iterator]() {
+                let stack = [];
+                let visitedMap = new Map();
+                const verticeSet = this._neighborSetsMap.keys();
+                const that = this;
+
+                let iterationCount = 0;
+
+                // almost the same as topsort(), ...
+                return {
+                    next() {
+                        // ..., but just getting one vertex at a time
+                        let vertexName = verticeSet.next().value;
+
+                        // ..., but with "if"-condition instead of "for"-loop
+                        if (vertexName) {
+                            if (visitedMap.get(vertexName) === undefined) {
+                                that.helperFunction(vertexName, visitedMap, stack);
+                            }
+                        }
+
+                        // ..., but with returning current sorted vertex
+                        return {
+                            value: stack[iterationCount++],
+                            done: vertexName === undefined
+                        }
+                    }
+                }
+            }
         }
 
-        graph = new Graph(["d", "c"], ["c", "b"], ["b", "a"]);
+        graph = new Graph(["schlafen", "studieren"], ["essen", "studieren"], ["studieren", "prüfen"]);
 
-        stack = graph.topsort();
+        topSort = graph.topsort();
+        topSortByIteration = [];
 
-        console.log("Input: graph", graph);
-        console.log("Output: sorted List 1", stack);
+        for (const sortedVertex of graph) {
+            topSortByIteration.push(sortedVertex);
+        }
 
-        console.assert(stack.length === 4, 'Es müssen 4 Einträge sein.', stack);
-        console.assert(stack[0] === "d", 'd muss der 1. sein.', stack);
-        console.assert(stack[1] === "c", 'c muss der 2. sein.', stack);
-        console.assert(stack[2] === "b", 'b muss der 3. sein.', stack);
-        console.assert(stack[3] === "a", 'c muss der 4. sein.', stack);
+        console.log("input: graph", graph);
+        console.log("output: topsort", topSort);
+        console.log("output: topsort by iteration", topSortByIteration);
+
+        for (const sort of [topSort, topSortByIteration]) {
+            console.assert(sort.length === 4, 'Es müssen 4 Elemente sein.', sort.length);
+            console.assert(sort[0] === "schlafen", '"schlafen" muss das 1. Element sein.', sort[0]);
+            console.assert(sort[1] === "essen", '"essen" muss das 2. Element sein.', sort[1]);
+            console.assert(sort[2] === "studieren", '"studieren" muss das 3. Element sein.', sort[2]);
+            console.assert(sort[3] === "prüfen", '"prüfen" muss das 4. Element sein.', sort[3]);
+        }
     </script>
 </head>
 <body>
