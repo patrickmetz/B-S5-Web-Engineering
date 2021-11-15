@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ü 6.3</title>
+    <title>Ü 6.4</title>
 
     <script>
         class Vorrang {
@@ -140,7 +140,7 @@
             }
         }
 
-        /* tests -------------------------------------------------------------*/
+        /* iteration ---------------------------------------------------------*/
 
         graph = new Vorrang(["schlafen", "studieren"], ["essen", "studieren"], ["studieren", "prüfen"]);
 
@@ -156,23 +156,84 @@
             topSortByGenerator.push(sortedVertex);
         }
 
-        console.log("input: graph", graph);
-        console.log("output: topsort", topSort);
-        console.log("output: topsort by iterator", topSortByIterator);
-        console.log("output: topsort by generator", topSortByGenerator);
+        /* proxy -------------------------------------------------------------*/
 
-        for (const sort of [topSort, topSortByIterator, topSortByGenerator]) {
+        let iterationProxyHandler = {
+            _iterationCount: 0,
+            _relationCount: 0,
+            _countedRelations: false,
+
+            get: function (target, property) {
+                if (property === "depthFirstSearch") {
+                    if (this._countedRelations === false) {
+                        this._relationCount = target._neighborSetsMap.size;
+                        this._countedRelations = true;
+                    }
+
+                    this._iterationCount++;
+                    console.log(
+                        `${this._relationCount - this._iterationCount} Relationen verbleiben.`
+                    );
+                }
+
+                return target[property];
+            },
+
+            get iterationCount() {
+                return this._iterationCount;
+            },
+
+            get relationCount() {
+                return this._relationCount;
+            },
+
+            get hasCountedRelations() {
+                return this._countedRelations;
+            }
+        };
+
+        const proxy = new Proxy(graph, iterationProxyHandler);
+
+        let topSortByIteratorProxy = [];
+
+        for (const sortedVertex of proxy) {
+            topSortByIteratorProxy.push(sortedVertex);
+        }
+
+        /* tests -------------------------------------------------------------*/
+
+        let relationCount = graph.getNeighborSetsMap().size;
+
+        console.assert(
+            iterationProxyHandler.relationCount === relationCount,
+            `Der Proxy hätte ${relationCount} Relationen zählen müssen.`,
+        );
+
+        console.assert(
+            iterationProxyHandler.iterationCount === relationCount,
+            `Der Proxy hätte ${relationCount} Iterationen zählen müssen.`,
+        );
+
+        console.assert(
+            iterationProxyHandler.iterationCount === iterationProxyHandler.relationCount,
+            `Der Proxy hätte genau so viele Iterationen wie Relationen zählen müssen.`,
+        );
+
+
+        for (const sort of [topSort, topSortByIterator, topSortByGenerator, topSortByIteratorProxy]) {
             console.assert(sort.length === 4, 'Es müssen 4 Elemente sein.', sort.length);
             console.assert(sort[0] === "schlafen", '"schlafen" muss das 1. Element sein.', sort[0]);
             console.assert(sort[1] === "essen", '"essen" muss das 2. Element sein.', sort[1]);
             console.assert(sort[2] === "studieren", '"studieren" muss das 3. Element sein.', sort[2]);
             console.assert(sort[3] === "prüfen", '"prüfen" muss das 4. Element sein.', sort[3]);
         }
+
+
     </script>
 </head>
 <body>
 
-<h1>6.3 Topologischer Generator</h1>
+<h1>6.4 Proxy</h1>
 
 </body>
 </html>

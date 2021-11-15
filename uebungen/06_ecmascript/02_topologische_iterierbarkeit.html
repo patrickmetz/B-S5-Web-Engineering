@@ -83,7 +83,7 @@
 
                 // first recursively visit all neighbors (children) ...
                 for (const neighborName of neighborNames) {
-                    if (!visitedMap.get(neighborName)) {
+                    if (visitedMap.get(neighborName) === undefined) {
                         this.depthFirstSearch(neighborName, visitedMap, stack);
                     }
                 }
