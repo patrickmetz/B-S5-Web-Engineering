@@ -5,7 +5,10 @@
     <title>Ü 6.2</title>
 
     <script>
-        class Graph {
+
+        /* topologically sortable graph --------------------------------------*/
+
+        class Vorrang {
             _neighborSetsMap = new Map();
 
             constructor(...edges) {
@@ -30,6 +33,30 @@
             addEdge(vertexNameA, vertexNameB) {
                 // swap A with B, to revert the relation, to get iterating right
                 this._neighborSetsMap.get(vertexNameB).add(vertexNameA);
+            }
+
+            hasVertex(vertex) {
+                return this._neighborSetsMap.get(vertex) !== undefined;
+            }
+
+            hasEdge(vertexA, vertexB) {
+                // A connected to B ?
+                if (this._neighborSetsMap.get(vertexA) !== undefined) {
+                    if (this._neighborSetsMap.get(vertexA).has(vertexB)) {
+                        return true;
+                    }
+                }
+
+                // B connected to A ?
+                if (this._neighborSetsMap.get(vertexB) !== undefined) {
+                    if (this._neighborSetsMap.get(vertexB).has(vertexA)) {
+                        return true;
+                    }
+                }
+            }
+
+            getNeighborSetsMap() {
+                return this._neighborSetsMap;
             }
 
             topsort() {
@@ -96,7 +123,179 @@
             }
         }
 
-        graph = new Graph(["schlafen", "studieren"], ["essen", "studieren"], ["studieren", "prüfen"]);
+        /* gui logic ---------------------------------------------------------*/
+
+        class TopSortGui {
+            _topSortGraph;
+            _neighborDisplayId = "neighborDisplay";
+            _iterationDisplayId = "iterationDisplay";
+            _errorDisplayId = "errorDisplay";
+            _errorCLass = "error";
+            _noErrorClass = "noError";
+
+            constructor(topSortGraph) {
+                this._topSortGraph = topSortGraph;
+
+            }
+
+            addVertex(inputField) {
+                const vertex = inputField.value;
+
+                this._clearErrorClasses();
+                this._clearErrorDisplay();
+
+                if (this._isEmpty(vertex)) {
+                    this._addErrorClass(inputField);
+                    this._showError("Das Eingabefeld ist leer.")
+                    return;
+                }
+
+                if (this._topSortGraph.hasVertex(vertex)) {
+                    this._addErrorClass(inputField);
+                    this._showError("Der Knoten existiert bereits");
+                    return;
+                }
+
+                this._topSortGraph.addVertex(vertex);
+                this._displayNeighborLists();
+                this._clearTopSortList();
+                this._clearInputField(inputField);
+                this._clearErrorClasses();
+                this._clearErrorDisplay();
+            }
+
+            addEdge(inputFieldA, inputFieldB) {
+                const vertexA = inputFieldA.value;
+                const vertexB = inputFieldB.value;
+
+                this._clearErrorClasses();
+                this._clearErrorDisplay();
+
+                let hasError = false;
+
+                if (this._isEmpty(vertexA)) {
+                    this._addErrorClass(inputFieldA);
+                    this._showError("Mindestens ein Eingabefeld ist leer.")
+                    hasError = true;
+                }
+                if (this._isEmpty(vertexB)) {
+                    this._addErrorClass(inputFieldB);
+                    this._showError("Mindestens ein Eingabefeld ist leer.")
+                    hasError = true;
+                }
+
+                if (hasError === true) return;
+
+                if (!this._topSortGraph.hasVertex(vertexA)) {
+                    this._addErrorClass(inputFieldA);
+                    this._showError("Mindestens ein Knoten existiert nicht.")
+                    hasError = true;
+                }
+
+                if (!this._topSortGraph.hasVertex(vertexB)) {
+                    this._addErrorClass(inputFieldB);
+                    this._showError("Mindestens ein Knoten existiert nicht.")
+                    hasError = true;
+                }
+
+                if (hasError === true) return;
+
+                if (vertexA === vertexB) {
+                    this._addErrorClass(inputFieldA);
+                    this._addErrorClass(inputFieldB);
+                    this._showError("Kanten können nicht reflexiv sein.")
+                    return;
+                }
+
+                if (this._topSortGraph.hasEdge(vertexA, vertexB)) {
+                    this._addErrorClass(inputFieldA);
+                    this._addErrorClass(inputFieldB);
+                    this._showError("Die Knoten sind bereits verbunden.")
+                    return;
+                }
+
+                this._topSortGraph.addEdge(inputFieldA.value, inputFieldB.value);
+
+                this._displayNeighborLists();
+                this._clearTopSortList();
+                this._clearInputField(inputFieldA);
+                this._clearInputField(inputFieldB);
+                this._clearErrorClasses();
+                this._clearErrorDisplay();
+            }
+
+            _isEmpty(value) {
+                return value.trim() === "";
+            }
+
+            _displayNeighborLists() {
+                let display = document.getElementById(this._neighborDisplayId);
+                display.innerHTML = "";
+
+                const neighborSetsMap = this._topSortGraph.getNeighborSetsMap();
+
+                for (const [vertexName, neighborSet] of neighborSetsMap.entries()) {
+                    let li = document.createElement("li");
+
+                    const neighborNames = Array.from(neighborSet).join(", ");
+                    li.textContent = `${vertexName} : {${neighborNames}}`;
+
+                    display.appendChild(li);
+                }
+            }
+
+            _displayTopSortIteration() {
+                let display = document.getElementById(this._iterationDisplayId);
+                display.innerHTML = "";
+
+                for (const sortedVertexName of this._topSortGraph) {
+                    let li = document.createElement("li");
+                    li.textContent = sortedVertexName;
+                    display.appendChild(li);
+                }
+            }
+
+            _clearTopSortList() {
+                document.getElementById(this._iterationDisplayId).innerHTML = "";
+            }
+
+            _clearInputField(inputField) {
+                inputField.value = "";
+            }
+
+            _addErrorClass(element) {
+                element.className = "error";
+            }
+
+            _clearErrorClasses() {
+                /* multiple elements can be in error state */
+                let elementsInErrorState = document.getElementsByClassName(this._errorCLass);
+
+                for (let element of elementsInErrorState) {
+                    element.className = this._noErrorClass;
+                }
+            }
+
+            _showError(message) {
+                let display = document.getElementById(this._errorDisplayId);
+
+                display.innerText = message;
+                this._addErrorClass(display);
+            }
+
+            _clearErrorDisplay() {
+                let display = document.getElementById(this._errorDisplayId);
+
+                this._clearErrorClasses(display);
+                display.innerText = "";
+            }
+        }
+
+        let topSortGui = new TopSortGui(new Vorrang());
+
+        /* tests -------------------------------------------------------------*/
+
+        graph = new Vorrang(["schlafen", "studieren"], ["essen", "studieren"], ["studieren", "prüfen"]);
 
         topSort = graph.topsort();
         topSortByIteration = [];
@@ -105,9 +304,9 @@
             topSortByIteration.push(sortedVertex);
         }
 
-        console.log("input: graph", graph);
-        console.log("output: topsort", topSort);
-        console.log("output: topsort by iteration", topSortByIteration);
+        // console.log("input: graph", graph);
+        // console.log("output: topsort", topSort);
+        // console.log("output: topsort by iteration", topSortByIteration);
 
         for (const sort of [topSort, topSortByIteration]) {
             console.assert(sort.length === 4, 'Es müssen 4 Elemente sein.', sort.length);
@@ -117,9 +316,54 @@
             console.assert(sort[3] === "prüfen", '"prüfen" muss das 4. Element sein.', sort[3]);
         }
     </script>
+
+    <style>
+        .error {
+            background-color: lightpink;
+        }
+
+        .noError {
+            background-color: white;
+        }
+
+        .info {
+            color: gray;
+        }
+    </style>
 </head>
 <body>
 
 <h1>6.2 Topologische Iterierbarkeit</h1>
+
+<form onsubmit="topSortGui.addVertex(this.nodeName);return false;">
+    Neuer Knoten: <input name="nodeName" type="text"
+                         placeholder="Name des Knotens">
+    <br>
+    <button>Hinzufügen</button>
+</form>
+
+<br>
+
+<form onsubmit="topSortGui.addEdge(this.nodeName1, this.nodeName2);return false;">
+    Neue Kante:
+    <input name="nodeName1" type="text" placeholder="Name des 1. Knotens">
+    <input name="nodeName2" type="text" placeholder="Name des 2. Knotens">
+    <br>
+    <button>Hinzufügen</button>
+</form>
+
+<br>
+
+<span id="errorDisplay">&nbsp;</span>
+
+<h2>Nachbarschaftslisten</h2>
+<span class="info">Invertiert, wegen der Korrektheit der topologischen Iteration.</span>
+<ul id="neighborDisplay"></ul>
+
+<h2>Topologische Iteration</h2>
+<button onclick="topSortGui._displayTopSortIteration();">topologisch iterieren
+</button>
+<ul id="iterationDisplay"></ul>
+
 </body>
 </html>
