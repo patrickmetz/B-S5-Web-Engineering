@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ü 6.5</title>
+
+    <script>
+        /* Quelle (für Objekt-Klonen mit fromEntries):
+          https://stackoverflow.com/q/55700810
+          */
+
+        function deepCopy(struct) {
+            return Array.isArray(struct)
+                /* ARRAYS  */ ? struct.map(item => deepCopy(item))
+                /* OBJECTS */ : typeof struct === 'object'
+                    // fromEntries transforms key/value-pairs into objects
+                    ? Object.fromEntries(
+                        // entries are objects' enumerable key/value-properties
+                        Object.entries(struct)
+                        // which need to be mapped to deep key/value-pairs here
+                        .map(([key, value]) => [key, deepCopy(value)])
+                    )
+                /* PRIMITIVES */ : struct;
+        }
+
+        let test = {
+            a: 1,
+            b: "2",
+            c: true,
+            d: [{antwort_auf_alles: 42}],
+            e: {z: [false]}
+        }
+
+        console.log(test, deepCopy(test));
+    </script>
+</head>
+<body>
+
+<h1>Deep Copy</h1>
+</body>
+</html>
