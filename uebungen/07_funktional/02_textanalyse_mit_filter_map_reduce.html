@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ü 7.2</title>
+
+    <script>
+        /* local urls to work around CORS-restrictions.
+           also: this solution needs http-protocol-context.
+           viewing the solution via file-protocol does not work! */
+
+        /* https://kaul.inf.h-brs.de/we/assets/html/plagiatsresolution.html */
+        const urlPlagiarism = "./02_plagiatsresolution.html";
+
+        /*  https://github.com/solariz/german_stopwords/raw/master/german_stopwords_plain.txt */
+        const urlStopWords = "./02_german_stopwords_plain.txt";
+
+        const urlToText = (url) => {
+            let request = new XMLHttpRequest();
+            request.open('GET', url, false); // false := synchronous
+            request.send();
+            return request.responseText;
+        }
+
+        let stopWords =
+            urlToText(urlStopWords)
+                .split("\n")                                    // split by line breaks
+                .filter((x) => x.charAt(0) !== ";");            // ignore comments
+
+        let textPlagiarism =
+            urlToText(urlPlagiarism)
+                .split("\n")                                    // split by line breaks
+                .map((x) => x.replaceAll(/<.+?>/g, ""))         // remove html tags
+                .map((x) => x.replaceAll(
+                    /(?:[\wäöüÄÖÜß]{2,})/g,                     // for all words in a line...
+                        word =>
+                            stopWords.filter((x) => x === word)
+                                .length === 1                   // ... if it is in the stop word list
+                            ? ""                                // ... replace it with an empty string
+                            : word                              // ... otherweise keep it intact
+                ))
+                .filter((x) => x.match(/^\s*$/) === null)       // remove empty lines
+                .map((x) => x.replaceAll(/^\s+/g, ""))          // remove leeding white space
+                .map((x) => x.replaceAll(/\s{2,}/g, " "))       // consolidate multiple white spaces
+                .join("\n");                                    // put lines stogether again
+
+        console.log(textPlagiarism)
+    </script>
+</head>
+<body>
+
+<h1>Textanalyse mit filter-map-reduce</h1>
+
+</body>
+</html>
