@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ü 7.1</title>
+
+    <script>
+        // 1.
+        const identity_function = (x) => () => x;
+
+        console.log("identity_function", identity_function(42)());
+
+        // 2.
+        const addf = (x) => (y) => x + y;
+
+        console.log("addf(40)(2)", addf(40)(2));
+
+        // 3.
+        const add = (x, y) => x + y;
+        const mul = (x, y) => x * y;
+        const applyf = (func) => (x) => (y) => func(x, y);
+
+        console.log("applyf(add)(40)(2)", applyf(add)(40)(2));
+        console.log("applyf(mul)(21)(2)", applyf(mul)(21)(2));
+
+        // 4.
+        const curry = (func, x) => (y) => func(x, y);
+
+        console.log("curry(add, 40)(2), add", curry(add, 40)(2));
+        console.log("curry(mul, 21)(2)", curry(mul, 21)(2));
+
+        // 5.
+        const incAddF = (x) => addf(x)(1);
+        const incApplyF = (x) => applyf(add)(x)(1);
+        const incCurry = (x) => curry(add, x)(1);
+
+        console.log(" incAddF(41)", incAddF(41));
+        console.log("incApplyF(41)", incApplyF(41));
+        console.log("incCurry(41)", incCurry(41));
+
+        // 6.
+        const methodize = () => function (x) {
+            return this.valueOf() + x;
+        };
+
+        Number.prototype.add = methodize(add);
+        console.log("(40).add(2)", (40).add(2));
+
+        // 7.
+        const demethodize = (numberFunc) => (x, y) =>
+            numberFunc.bind(Number(x))(y)
+
+        console.log(
+            "demethodize(Number.prototype.add)(40,2)",
+            demethodize(Number.prototype.add)(40, 2)
+        );
+
+        // 8.
+        const twice = (func) => (x) => func(x, x);
+
+        const double = twice(add);
+        console.log("twice(add)(21)", double(21));
+
+        // 9.
+        const square = twice(mul);
+        const composeu = (funcA, funcB) => (x) => funcB(funcA(x));
+
+        console.log(
+            "composeu(double, square)(3.241)",
+            composeu(double, square)(3.241) // about 42 :-)
+        );
+
+        // 10.
+        const composeb = (funcA, funcB) => (x, y, z) => funcB(funcA(x, y), z);
+
+        console.log("composeb(add, mul)(4, 3, 6)", composeb(add, mul)(4, 3, 6));
+
+        // 11.
+        const once = (func) => {
+            let _runned = false;
+
+            return (x, y) => {
+                if (_runned === false) {
+                    _runned = true;
+                    return func(x, y);
+                }
+                console.error("can only run function once");
+                return null;
+            }
+        }
+
+        const add_once = once(add);
+
+        console.log("add_once(40, 2)", add_once(40, 2))
+        console.log("add_once(40, 2)", add_once(40, 2));
+
+
+        // 12.
+        const counterf = (x) => {
+            let _counter = x;
+
+            return {
+                inc: () => (++_counter),
+                dec: () => (--_counter)
+            }
+        }
+
+        const counter = counterf(41);
+
+        console.log("counter.inc()", counter.inc());
+        console.log("counter.dec()", counter.dec());
+
+        // 13.
+        const revocable = (func) => {
+            let _revoked = false;
+
+            return {
+                invoke: (x) => {
+                    if (_revoked === false) {
+                        return (func(x));
+                    }
+                    console.error("function was revoked");
+                    return null;
+                },
+                revoke: () => {
+                    _revoked = true;
+                }
+            }
+        }
+
+        const temp = revocable(x => {
+            console.log("revocable alert", x)
+        });
+
+        console.log("temp.invoke(42)");
+        temp.invoke(42)
+
+        console.log("temp.revoke()");
+        temp.revoke();
+
+        console.log("temp.invoke(42)");
+        temp.invoke(42);
+
+        // 14.
+
+        const vector = () => {
+            let _array = [];
+
+            return {
+                append: (x) => {
+                    _array.push(x);
+                },
+
+                store: (index, x) => {
+                    _array[index] = x;
+                },
+
+                get: (index) => _array[index]
+            }
+        }
+
+        let my_vector = vector();
+        my_vector.append(41);
+        my_vector.store(1, 42);
+
+        console.log("my_vector.get(0)", my_vector.get(0));
+        console.log("my_vector.get(1)", my_vector.get(1));
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
