@@ -33,17 +33,16 @@
                 .map((x) => x.replaceAll(/<.+?>/g, ""))         // remove html tags
                 .map((x) => x.replaceAll(
                     /(?:[\wäöüÄÖÜß]{2,})/g,                     // for all words in a line...
-                        word =>
-                            stopWords.filter((x) => x === word)
-                                .length === 1                   // ... if it is in the stop word list
+                    word =>
+                        stopWords.filter((x) => x === word)
+                            .length === 1                        // ... if it is in the stop word list
                             ? ""                                // ... replace it with an empty string
-                            : word                              // ... otherweise keep it intact
+                            : word                              // ... otherwise keep it intact
                 ))
                 .filter((x) => x.match(/^\s*$/) === null)       // remove empty lines
                 .map((x) => x.replaceAll(/^\s+/g, ""))          // remove leeding white space
                 .map((x) => x.replaceAll(/\s{2,}/g, " "))       // consolidate multiple white spaces
-                .join("\n");                                    // put lines stogether again
-
+                .reduce((x, y) => x + "\n" + y);                // put lines together. same as ...join("\n");
         console.log(textPlagiarism)
     </script>
 </head>
