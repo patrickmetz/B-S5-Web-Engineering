@@ -39,6 +39,7 @@ class WwwNavigator {
         for (const topic in this._jsonContent) {
             let a = this.createLink(
                 () => {
+                    this.clearContent();
                     this.createSubNavigation(topic)
                 },
                 topic
@@ -56,6 +57,8 @@ class WwwNavigator {
         for (const subTopic in this._jsonContent[topic]) {
             let a = this.createLink(
                 () => {
+                    this.clearContent();
+                    this.clearReferences();
                     this.loadContent(topic, subTopic);
                     this.loadReferences(topic, subTopic);
                 },
@@ -72,6 +75,10 @@ class WwwNavigator {
     loadContent(topic, subTopic) {
         this._content.textContent =
             this._jsonContent[topic][subTopic]["content"];
+    }
+
+    clearContent() {
+        this._content.textContent = "";
     }
 
     loadReferences(topic, subTopic) {
@@ -93,8 +100,12 @@ class WwwNavigator {
             ul.appendChild(this.createListElement(a));
         }
 
-        this._references.innerHTML = "";
+        this.clearReferences();
         this._references.appendChild(ul);
+    }
+
+    clearReferences() {
+        this._references.innerHTML = "";
     }
 
     createLink(clickHandler, textContent, href = "#") {
