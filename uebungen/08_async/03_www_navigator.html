@@ -5,9 +5,26 @@
     <title>Ü 8.3 </title>
 
     <style>
+        * {
+            box-sizing: border-box;
+            font-family: Verdana, sans-serif;
+            color: darkblue;
+            padding: 0;
+            margin: 0;
+        }
+
+        :root {
+            /* responsive font size: https://websemantics.uk/tools/responsive-font-calculator/ */
+            font-size: clamp(12px, calc(0.75rem + ((1vw - 3px) * 0.3704)), 18px);
+            min-height: 0vw; /* safari fix */
+            --background-color-1: cornflowerblue;
+            --background-color-2: skyblue;
+            --padding: 1em;
+        }
+
         body {
             display: grid;
-            grid-template-rows: 20% 20% 200% 20% 20%;
+            grid-template-rows: 10vh 10vh 60vh 10vh 10vh;
             grid-template-areas:
                 "header"
                 "aside_left"
@@ -22,39 +39,36 @@
             list-style-type: none;
             text-transform: capitalize;
             display: flex;
+            justify-content: space-evenly;
+            align-content: center;
+            padding-top: var(--padding);
         }
 
         #header {
             grid-area: header;
-            background-color: rgb(234, 67, 34);
-        }
-
-        #header ul {
-            justify-content: space-evenly;
+            background-color: var(--background-color-1);
         }
 
         #aside_left {
             grid-area: aside_left;
-            background-color: rgb(115, 234, 80);
-        }
-
-        #aside_left ul {
-            flex-direction: column;
+            background-color: var(--background-color-2);
+            padding-left: var(--padding);
         }
 
         #aside_right {
             grid-area: aside_right;
-            background-color: rgb(217, 77, 246);
+            background-color: var(--background-color-2);
+            padding-left: var(--padding);
         }
 
         #article {
             grid-area: article;
-            background-color: rgb(22, 50, 245);
+            padding:var(--padding);
         }
 
         #footer {
             grid-area: footer;
-            background-color: rgb(115, 80, 234);
+            background-color: var(--background-color-1)
         }
 
         @media screen and (min-width: 400px) {
@@ -67,6 +81,14 @@
                     "aside_right aside_right"
                     "footer footer"
             }
+
+            #aside_left ul {
+                flex-direction: column;
+            }
+
+            #aside_left li {
+                padding-bottom: var(--padding);
+            }
         }
 
         @media screen and (min-width: 600px) {
@@ -77,6 +99,14 @@
                     "header header header"
                     "aside_left article aside_right"
                     "footer footer footer"
+            }
+
+            #aside_right ul {
+                flex-direction: column;
+            }
+
+            #aside_right li {
+                padding-bottom: var(--padding);
             }
         }
     </style>
@@ -115,23 +145,6 @@
 
                 const response = await fetch(url);
                 this._jsonContent = await response.json();
-            }
-
-            createLink(clickHandler, textContent, href = "#") {
-                let a = document.createElement("a");
-
-                a.setAttribute("href", href);
-                a.onclick = clickHandler
-                a.textContent = textContent;
-
-                return a;
-            }
-
-            createListElement(childElement) {
-                let li = document.createElement("li");
-                li.appendChild(childElement);
-
-                return li;
             }
 
             createMainNavigation() {
@@ -197,6 +210,23 @@
 
                 this._references.innerHTML = "";
                 this._references.appendChild(ul);
+            }
+
+            createLink(clickHandler, textContent, href = "#") {
+                let a = document.createElement("a");
+
+                a.setAttribute("href", href);
+                a.onclick = clickHandler
+                a.textContent = textContent;
+
+                return a;
+            }
+
+            createListElement(childElement) {
+                let li = document.createElement("li");
+                li.appendChild(childElement);
+
+                return li;
             }
         }
     </script>
