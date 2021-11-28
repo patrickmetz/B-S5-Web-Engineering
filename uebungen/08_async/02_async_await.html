@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ü 8.2</title>
+
+    <script>
+        const baseUrl = "./";
+        const A = "A";
+        const B = "B";
+        const TYPE = ".txt";
+
+        let lines = new Map();
+        let mergedLines = [];
+
+        const fetchFileAsLines = async (fileName) => {
+            // every chain-step returns a promise
+            return fetch(baseUrl + fileName)
+                .then(response => response.text())
+                .then(text => text.split("\n"));
+        }
+
+        const printMergedLines = () => {
+            let body = document.getElementsByTagName("body")[0];
+
+            for (const line of mergedLines) {
+                let p = document.createElement("p")
+                p.textContent = line;
+
+                body.appendChild(p)
+            }
+        }
+
+        const mergeLines = async () => {
+            let lengthA = lines.get(A).length;
+            let lengthB = lines.get(B).length;
+
+            const bigger = (lengthA >= lengthB) ? A : B;
+            const smaller = (bigger === A) ? B : A;
+
+            const biggerSize = (bigger === A) ? lengthA : lengthB;
+            const smallerSize = (bigger === A) ? lengthB : lengthA;
+
+            let mergePromises = [];
+
+            // possibily merge lines of bigger (or equal) sized file
+            // with lines of smaller (or equal) sized file
+            for (let lineIndex = 0; lineIndex < biggerSize; lineIndex++) {
+                mergePromises[lineIndex] = new Promise(function (resolve) {
+                    mergedLines[lineIndex] = (lineIndex < smallerSize)
+                        ? lines.get(bigger)[lineIndex] + lines.get(smaller)[lineIndex]
+                        : lines.get(bigger)[lineIndex];
+
+                    resolve();
+                });
+            }
+
+            return Promise.all(mergePromises);
+        }
+
+        (async () => {
+            await Promise.all([
+                (async () => {
+                    lines.set(A, await fetchFileAsLines(A + TYPE));
+                })(),
+                (async () => {
+                    lines.set(B, await fetchFileAsLines(B + TYPE));
+                })()
+            ])
+
+             await mergeLines();
+
+            printMergedLines();
+        })();
+    </script>
+</head>
+<body>
+
+</body>
+</html>
