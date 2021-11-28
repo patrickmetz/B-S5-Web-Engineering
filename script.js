@@ -9,8 +9,8 @@ var tocHighlightDuration = 750;
 var tocHighlightDelay = 250;
 
 /**
- * Builds a table of contents, whose entries scroll the corresponding tasks into
- * view when clicked.
+ * Builds a table of contents, whose click-sensitive entries scroll the
+ * corresponding tasks into view, and highlight them.
  * @param {string} parentTag name of html element, that acts as task container
  * @param {string} lectureTag name of html element, that contains a task's corresponding lecture
  * @param {string} taskTag name of html element, that contains a task's name
