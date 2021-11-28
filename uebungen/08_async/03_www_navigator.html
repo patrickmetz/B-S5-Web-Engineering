@@ -38,7 +38,7 @@
             background-color: rgb(115, 234, 80);
         }
 
-        #aside_left ul{
+        #aside_left ul {
             flex-direction: column;
         }
 
@@ -117,21 +117,35 @@
                 this._jsonContent = await response.json();
             }
 
+            createLink(clickHandler, textContent, href = "#") {
+                let a = document.createElement("a");
+
+                a.setAttribute("href", href);
+                a.onclick = clickHandler
+                a.textContent = textContent;
+
+                return a;
+            }
+
+            createListElement(childElement) {
+                let li = document.createElement("li");
+                li.appendChild(childElement);
+
+                return li;
+            }
+
             createMainNavigation() {
                 let ul = document.createElement("ul");
 
                 for (const topic in this._jsonContent) {
-                    let li = document.createElement("li");
+                    let a = this.createLink(
+                        () => {
+                            this.createSubNavigation(topic)
+                        },
+                        topic
+                    );
 
-                    let a = document.createElement("a");
-                    a.setAttribute("href", "#");
-                    a.onclick = () => {
-                        this.createSubNavigation(topic)
-                    };
-                    a.textContent = topic;
-
-                    li.appendChild(a);
-                    ul.appendChild(li);
+                    ul.appendChild(this.createListElement(a));
                 }
 
                 this._mainNavi.appendChild(ul);
@@ -141,50 +155,44 @@
                 let ul = document.createElement("ul");
 
                 for (const subTopic in this._jsonContent[topic]) {
-                    let li = document.createElement("li");
+                    let a = this.createLink(
+                        () => {
+                            this.loadContent(topic, subTopic);
+                            this.loadReferences(topic, subTopic);
+                        },
+                        subTopic
+                    );
 
-                    let a = document.createElement("a");
-                    a.setAttribute("href", "#");
-                    a.onclick = () => {
-                        this.loadContent(topic, subTopic),
-                        this.loadReferences(topic, subTopic)
-                    };
-                    a.textContent = subTopic;
-
-                    li.appendChild(a);
-                    ul.appendChild(li);
+                    ul.appendChild(this.createListElement(a));
                 }
 
                 this._subNavi.innerHTML = "";
                 this._subNavi.appendChild(ul);
             }
 
-            loadContent(topic, subTopic){
+            loadContent(topic, subTopic) {
                 this._content.textContent =
                     this._jsonContent[topic][subTopic]["content"];
             }
 
-            loadReferences(topic, subTopic){
+            loadReferences(topic, subTopic) {
                 let ul = document.createElement("ul");
 
+                let references = this._jsonContent[topic][subTopic]["references"];
                 let referenceCount = 0;
 
-                let references = this._jsonContent[topic][subTopic]["references"];
-
                 for (const reference of references) {
-                    let li = document.createElement("li");
 
-                    let a = document.createElement("a");
-                    a.setAttribute("target", "_blank");
+                    let a = this.createLink(
+                        () => {
+                        },
+                        (references.length > 1)
+                            ? `Quelle ${++referenceCount}`
+                            : "Quelle",
+                        reference
+                    );
 
-                    a.textContent = (references.length > 1)
-                        ? `Quelle ${++referenceCount}`
-                        : "Quelle";
-
-                    a.setAttribute("href", reference);
-
-                    li.appendChild(a);
-                    ul.appendChild(li);
+                    ul.appendChild(this.createListElement(a));
                 }
 
                 this._references.innerHTML = "";
