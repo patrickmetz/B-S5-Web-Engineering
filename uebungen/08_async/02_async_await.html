@@ -13,7 +13,7 @@
         let lines = new Map();
         let mergedLines = [];
 
-        const fetchFileAsLines = async (fileName) => {
+        const fetchFileAsLines = (fileName) => {
             // every chain-step returns a promise
             return fetch(baseUrl + fileName)
                 .then(response => response.text())
@@ -31,7 +31,7 @@
             }
         }
 
-        const mergeLines = async () => {
+        const mergeLines = () => {
             let lengthA = lines.get(A).length;
             let lengthB = lines.get(B).length;
 
@@ -68,8 +68,7 @@
                 })()
             ])
 
-             await mergeLines();
-
+            await mergeLines();
             printMergedLines();
         })();
     </script>
