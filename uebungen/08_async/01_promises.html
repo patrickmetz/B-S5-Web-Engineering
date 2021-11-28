@@ -32,7 +32,9 @@
             let body = document.getElementsByTagName("body")[0];
             let line = "";
 
+            // print lines of bigger (or equal) sized file
             for (let lineIndex = 0; lineIndex < biggerSize; lineIndex++) {
+                // while possibly concatenating lines of smaller (or equal) sized file
                 line = (lineIndex < smallerSize)
                     ? lines.get(bigger)[lineIndex] + lines.get(smaller)[lineIndex]
                     : lines.get(bigger)[lineIndex];
@@ -44,6 +46,7 @@
             }
         }
 
+        // fetch files in parallel
         Promise.all([ // returns a promise, too
             fetchFileAsLines(A + TYPE).then(_ => {lines.set(A, _)}),
             fetchFileAsLines(B + TYPE).then(_ => {lines.set(B, _)}),
