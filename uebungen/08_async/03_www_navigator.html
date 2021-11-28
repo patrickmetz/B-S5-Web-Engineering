@@ -18,14 +18,28 @@
             margin: 0;
         }
 
+        ul {
+            list-style-type: none;
+            text-transform: capitalize;
+            display: flex;
+        }
+
         #header {
             grid-area: header;
             background-color: rgb(234, 67, 34);
         }
 
+        #header ul {
+            justify-content: space-evenly;
+        }
+
         #aside_left {
             grid-area: aside_left;
             background-color: rgb(115, 234, 80);
+        }
+
+        #aside_left ul{
+            flex-direction: column;
         }
 
         #aside_right {
@@ -43,8 +57,8 @@
             background-color: rgb(115, 80, 234);
         }
 
-        @media screen and (min-width: 400px){
-            body{
+        @media screen and (min-width: 400px) {
+            body {
                 grid-template-columns: 30% 70%;
                 grid-template-rows: 20% 100% 20% 20%;
                 grid-template-areas:
@@ -55,8 +69,8 @@
             }
         }
 
-        @media screen and (min-width: 600px){
-            body{
+        @media screen and (min-width: 600px) {
+            body {
                 grid-template-columns: 20% 60% 20%;
                 grid-template-rows: 20% 70% 10%;
                 grid-template-areas:
@@ -66,8 +80,124 @@
             }
         }
     </style>
+
+    <script>
+        class WwwNavigator {
+            _mainNavi;
+            _subNavi;
+            _content;
+            _references;
+
+            _jsonContent;
+
+            constructor(idMainNavi, idSubNavi, idContent, idReferences, contentUrl) {
+                this._mainNavi = idToElement(idMainNavi);
+                this._subNavi = idToElement(idSubNavi);
+                this._content = idToElement(idContent);
+                this._references = idToElement(idReferences);
+
+                function idToElement(id) {
+                    return document.getElementById(id);
+                }
+
+                (async () => {
+                    try {
+                        await this.loadJsonContent(contentUrl);
+                        this.createMainNavigation();
+                    } catch (e) {
+                        console.error(e);
+                    }
+                })();
+            }
+
+            async loadJsonContent(url) {
+                if (typeof this._jsonContent === "object") return;
+
+                const response = await fetch(url);
+                this._jsonContent = await response.json();
+            }
+
+            createMainNavigation() {
+                let ul = document.createElement("ul");
+
+                for (const topic in this._jsonContent) {
+                    let li = document.createElement("li");
+
+                    let a = document.createElement("a");
+                    a.setAttribute("href", "#");
+                    a.onclick = () => {
+                        this.createSubNavigation(topic)
+                    };
+                    a.textContent = topic;
+
+                    li.appendChild(a);
+                    ul.appendChild(li);
+                }
+
+                this._mainNavi.appendChild(ul);
+            }
+
+            createSubNavigation(topic) {
+                let ul = document.createElement("ul");
+
+                for (const subTopic in this._jsonContent[topic]) {
+                    let li = document.createElement("li");
+
+                    let a = document.createElement("a");
+                    a.setAttribute("href", "#");
+                    a.onclick = () => {
+                        this.loadContent(topic, subTopic),
+                        this.loadReferences(topic, subTopic)
+                    };
+                    a.textContent = subTopic;
+
+                    li.appendChild(a);
+                    ul.appendChild(li);
+                }
+
+                this._subNavi.innerHTML = "";
+                this._subNavi.appendChild(ul);
+            }
+
+            loadContent(topic, subTopic){
+                this._content.textContent =
+                    this._jsonContent[topic][subTopic]["content"];
+            }
+
+            loadReferences(topic, subTopic){
+                let ul = document.createElement("ul");
+
+                let referenceCount = 0;
+
+                let references = this._jsonContent[topic][subTopic]["references"];
+
+                for (const reference of references) {
+                    let li = document.createElement("li");
+
+                    let a = document.createElement("a");
+                    a.setAttribute("target", "_blank");
+
+                    a.textContent = (references.length > 1)
+                        ? `Quelle ${++referenceCount}`
+                        : "Quelle";
+
+                    a.setAttribute("href", reference);
+
+                    li.appendChild(a);
+                    ul.appendChild(li);
+                }
+
+                this._references.innerHTML = "";
+                this._references.appendChild(ul);
+            }
+        }
+    </script>
 </head>
-<body>
+
+<body onload='new WwwNavigator(
+    "header", "aside_left", "article", "aside_right",
+    "./navigator_contents.json"
+);'>
 
 <header id="header"></header>
 <aside id="aside_left"></aside>
