@@ -46,16 +46,10 @@
             // possibily merge lines of bigger (or equal) sized file
             // with lines of smaller (or equal) sized file
             for (let lineIndex = 0; lineIndex < biggerSize; lineIndex++) {
-                mergePromises[lineIndex] = new Promise(function (resolve) {
-                    mergedLines[lineIndex] = (lineIndex < smallerSize)
-                        ? lines.get(bigger)[lineIndex] + lines.get(smaller)[lineIndex]
-                        : lines.get(bigger)[lineIndex];
-
-                    resolve();
-                });
+                mergedLines[lineIndex] = (lineIndex < smallerSize)
+                    ? lines.get(bigger)[lineIndex] + lines.get(smaller)[lineIndex]
+                    : lines.get(bigger)[lineIndex];
             }
-
-            return Promise.all(mergePromises);
         }
 
         (async () => {
@@ -68,7 +62,7 @@
                 })()
             ])
 
-            await mergeLines();
+            mergeLines();
             printMergedLines();
         })();
     </script>

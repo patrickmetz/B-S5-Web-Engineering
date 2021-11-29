@@ -41,21 +41,13 @@
             const biggerSize = (bigger === A) ? lengthA : lengthB;
             const smallerSize = (bigger === A) ? lengthB : lengthA;
 
-            let mergePromises = [];
-
             // possibily merge lines of bigger (or equal) sized file
             // with lines of smaller (or equal) sized file
             for (let lineIndex = 0; lineIndex < biggerSize; lineIndex++) {
-                mergePromises[lineIndex] = new Promise(function(resolve){
                     mergedLines[lineIndex] = (lineIndex < smallerSize)
                         ? lines.get(bigger)[lineIndex] + lines.get(smaller)[lineIndex]
                         : lines.get(bigger)[lineIndex];
-
-                    resolve();
-                });
             }
-
-            return Promise.all(mergePromises);
         }
 
         // fetch files in parallel
@@ -63,9 +55,7 @@
             fetchFileAsLines(A + TYPE).then(_ => {lines.set(A, _)}),
             fetchFileAsLines(B + TYPE).then(_ => {lines.set(B, _)}),
         ])
-        .then(() => mergeLines())
-        .then(() => printMergedLines());
-
+        .then(() => {mergeLines(); printMergedLines()});
     </script>
 </head>
 <body>
