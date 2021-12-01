@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ü 9.1</title>
+</head>
+
+<body>
+
+<!-- separate coordinate system and separate viewport -->
+<svg
+        viewBox="0 0 100 100"
+        xmlns="http://www.w3.org/2000/svg"
+>
+    <style>
+        rect {
+            fill: rgb(202, 121, 141);
+        }
+
+        text {
+            font-family: Verdana, sans-serif;
+            fill: white;
+            font-size: 10px;
+        }
+
+        line {
+            stroke: white;
+            stroke-width: 1;
+        }
+
+        #graphic:hover{
+            animation: grow forwards;
+        }
+
+        @keyframes grow {
+            0%{
+                transform: scale(1);
+            }
+            100%{
+                transform: scale(2);
+            }
+        }
+    </style>
+
+    <g id="graphic" >
+        <rect width="50" height="50" />
+
+        <text x="3" y="10">Use</text>
+        <line x1="3" y1="13" x2="47" y2="13"/>
+
+        <text x="3" y="25">The</text>
+        <line x1="3" y1="28" x2="47" y2="28"/>
+
+        <text x="3" y="40">Platform</text>
+        <line x1="3" y1="43" x2="47" y2="43"/>
+    </g>
+</svg>
+
+</body>
+</html>
