@@ -24,7 +24,7 @@
 
         constructor(chartId, jsonUrl, jsonDescriptionField, jsonValueField,
                     offsetX, textOffsetY, lineOffsetY,
-                    incrementY, lineMaxWidth) {
+                    incrementY, lineMaxLength) {
 
             this.chartElement = document.getElementById(chartId);
 
@@ -37,7 +37,7 @@
 
             this.incrementY = incrementY;
 
-            this.lineMaxLength = lineMaxWidth;
+            this.lineMaxLength = lineMaxLength;
 
             (async () => {
                 try {
