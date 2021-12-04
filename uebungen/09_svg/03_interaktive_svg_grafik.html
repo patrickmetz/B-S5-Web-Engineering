@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ü 9.3</title>
+</head>
+
+<script>
+    class SvgComponent {
+        _element;
+        _x;
+        _y;
+        _width;
+        _height;
+
+        constructor(svgElement, x, y, width, height) {
+            this._element = svgElement;
+            this._x = x;
+            this._y = y;
+            this._width = width;
+            this._height = height;
+        }
+
+        get element() {
+            return this._element;
+        }
+
+        get x() {
+            return this._x;
+        }
+
+        get y() {
+            return this._y;
+        }
+
+        get width() {
+            return this._width;
+        }
+
+        get height() {
+            return this._height;
+        }
+    }
+
+    class BoardState {
+        _boardSize;
+
+        _rows = [];
+        _columns = [];
+        _diagonal;
+        _antiDiagonal;
+
+        constructor(boardSize) {
+            // source: https://stackoverflow.com/a/23326623
+            this._rows = new Array(boardSize).fill(0);
+            this._columns = new Array(boardSize).fill(0)
+
+            this._diagonal = 0;
+            this._antiDiagonal = 0;
+
+            this._boardSize = boardSize;
+
+            console.log(this);
+        }
+
+        /* source: https://jayeshkawli.ghost.io/tic-tac-toe/ */
+        update(rowIndex, columnIndex) {
+            this._rows[rowIndex]++;
+            this._columns[columnIndex]++;
+
+            if (rowIndex === columnIndex) {
+                this._diagonal++;
+            }
+
+            if ((rowIndex + columnIndex) === (this._boardSize - 1)) {
+                this._antiDiagonal++;
+            }
+
+            console.log(this);
+        }
+
+        isWinningState() {
+            if (this._diagonal === this._boardSize) {
+                return true;
+            } else if (this._antiDiagonal === this._boardSize) {
+                return true;
+            } else if (this._rows.includes(this._boardSize)) {
+                return true;
+            } else if (this._columns.includes(this._boardSize)) {
+                return true;
+            }
+
+            return false;
+        }
+    }
+
+    class TicTacToe {
+        _display;
+        _board;
+
+        _boardSize;
+        _boardStates = [];
+        _markedTiles = [];
+
+        _boardBackgroundClass = "background";
+        _boardDisabledClass = "disabled";
+        _tileClass = "tile";
+
+        _playerClasses = ["player1", "player2"];
+        _playerCount = 2;
+        _currentRound = -1;
+        _currentPlayer;
+
+        _gameIsOver = false;
+
+        constructor(displayComponent, boardComponent, boardSize = 3) {
+            this._display = displayComponent;
+            this._board = boardComponent;
+            this._boardSize = boardSize;
+
+            this._createBoardStates();
+            this._createBoardBackground();
+            this._createTiles();
+
+            this.setUpNextRound();
+        }
+
+        setUpNextRound() {
+            this._incrementRound();
+            this._incrementPlayer();
+            this._updateStatus();
+
+            this._setPlayerClass(this._board.element);
+            this._setPlayerClass(this._display.element);
+        }
+
+        _updateStatus(showWinner = false) {
+            let className = null;
+            let message = `Zug ${this._currentRound + 1}, Spieler ${this._currentPlayer + 1}`;
+
+            if (showWinner === true) {
+                className = "winner";
+                message = `Spieler ${this._currentPlayer + 1} hat gewonnen!`;
+            }
+
+            this._replaceTextOfElement(
+                this._display.element, className,
+                this._display.x, (this._display.y + this._display.height - 1),
+                message
+            );
+        }
+
+        _createBoardStates() {
+            for (let playerIndex = 0; playerIndex < this._playerCount; playerIndex++) {
+                this._boardStates[playerIndex] = new BoardState(this._boardSize);
+            }
+        }
+
+        _createBoardBackground() {
+            this._addRectToElement(
+                this._board.element, this._boardBackgroundClass,
+                this._board.x, this._board.y, this._board.width, this._board.height
+            );
+        }
+
+        _addRectToElement(parentElement, rectClass, rectX, rectY, rectWidth, rectHeight) {
+            // innerHTML would destroy event handlers of sibling elements
+            parentElement.insertAdjacentHTML(
+                "beforeend",
+                `<rect x="${rectX}" y="${rectY}" class="${rectClass}" width="${rectWidth}" height="${rectHeight}" />`
+            );
+
+            // created rect is last child element of parent
+            return parentElement.lastElementChild;
+        }
+
+        _replaceTextOfElement(parentElement, textClass, textX, textY, text) {
+            parentElement.innerHTML =
+                `<text class="${textClass}" x="${textX}" y="${textY}">${text}</text>`
+            ;
+        }
+
+        _createTiles() {
+            let tileIndex = 0;
+
+            let tileWidth = this._board.width / this._boardSize;
+            let tileHeight = this._board.height / this._boardSize;
+
+            for (let rowIndex = 0; rowIndex < this._boardSize; rowIndex++) {
+                let tileY = (tileWidth * rowIndex) + this._board.y;
+
+                for (let columnIndex = 0; columnIndex < this._boardSize; columnIndex++) {
+                    let tileX = (tileWidth * columnIndex) + this._board.x;
+
+                    const tile = this._addRectToElement(
+                        this._board.element, this._tileClass,
+                        tileX, tileY, tileWidth, tileHeight
+                    );
+
+                    this._addClickHandlerToTile(tile, tileIndex, rowIndex, columnIndex);
+
+                    tileIndex++;
+                }
+            }
+        }
+
+        _addClickHandlerToTile(tileElement, tileIndex, rowIndex, columnIndex) {
+            tileElement.onclick = () => {
+                this._makePlayerMove(tileIndex, rowIndex, columnIndex);
+            };
+        }
+
+        _makePlayerMove(tileIndex, rowIndex, columnIndex) {
+            if(this._gameIsOver === true) return;
+            if (this._isTileMarked(tileIndex) === true) return;
+
+            this._markTile(tileIndex);
+            this._updateBoardState(rowIndex, columnIndex);
+
+            if (this._isWinningBoardState()) {
+                this._gameIsOver = true;
+                this._updateStatus(true);
+                this._markBoardAsDisabled();
+                return;
+            }
+
+            this.setUpNextRound();
+        }
+
+        _incrementRound() {
+            this._currentRound++;
+        }
+
+        _incrementPlayer() {
+            // alternate between 1 and 2
+            this._currentPlayer = (this._currentRound % this._playerCount);
+        }
+
+        _setPlayerClass(element) {
+            element.setAttribute(
+                "class",
+                this._playerClasses[this._currentPlayer]
+            );
+        }
+
+        _markTile(tileIndex) {
+            this._markedTiles[tileIndex] = true;
+
+            this._board.element
+                .getElementsByClassName(this._tileClass)[tileIndex]
+                .classList.add(this._playerClasses[this._currentPlayer]);
+        }
+
+        _isTileMarked(tileIndex){
+            return (this._markedTiles[tileIndex] !== undefined)
+                && (this._markedTiles[tileIndex] === true);
+        }
+
+        _updateBoardState(rowIndex, columnIndex) {
+            this._boardStates[this._currentPlayer].update(rowIndex, columnIndex);
+        }
+
+        _isWinningBoardState() {
+            return this._boardStates[this._currentPlayer].isWinningState();
+        }
+
+        _markBoardAsDisabled(){
+            this._board.element.classList.add(this._boardDisabledClass)
+        }
+    }
+</script>
+
+<body onload="new TicTacToe(new SvgComponent(document.querySelector('#display'), 0, 0, 50 , 10),new SvgComponent(document.querySelector('#board'), 0, 10, 50 , 50));">
+
+<svg viewBox="0 0 100 100">
+    <style>
+        :root {
+            --player1Color: dodgerblue;
+            --player2Color: orangered;
+        }
+
+        #board rect.background {
+            fill: black;
+        }
+
+        /* status display */
+
+        #display rect {
+            fill: white;
+        }
+
+        #display text {
+            font-family: Verdana, sans-serif;
+            font-size: 4px;
+        }
+
+        #display.player1 text {
+            fill: var(--player1Color);
+        }
+
+        #display.player2 text {
+            fill: var(--player2Color);
+        }
+
+        /* announce winner */
+
+        #display text.winner {
+            animation-name: showWinner;
+            animation-duration: 0.5s;
+            animation-fill-mode: forwards;
+            animation-iteration-count: 2;
+        }
+
+        @keyframes showWinner {
+            from {
+                font-size: 0px;
+            }
+            to {
+                font-size: 4px;
+            }
+        }
+
+        /* tiles */
+
+        #board rect.tile {
+            fill: white;
+            cursor: pointer;
+        }
+
+        #board.player1 rect.tile:hover {
+            fill: var(--player1Color);
+        }
+
+        #board.player2 rect.tile:hover {
+            fill: var(--player2Color);
+        }
+
+        /* marked tiles */
+
+        #board rect.tile.player1 {
+            fill: var(--player1Color);
+            cursor: not-allowed;
+        }
+
+        #board rect.tile.player2 {
+            fill: var(--player2Color);
+            cursor: not-allowed;
+        }
+
+        #board rect.tile.player1:hover {
+            fill: var(--player1Color);
+        }
+
+        #board rect.tile.player2:hover {
+            fill: var(--player2Color);
+        }
+
+        /* unused tiles on disabled board */
+
+        #board.disabled rect.tile:not(.player1):not(.player2):hover{
+            cursor: not-allowed;
+            fill: white;
+        }
+    </style>
+
+    <g id="display"/>
+    <g id="board"/>
+</svg>
+
+</body>
+</html>
