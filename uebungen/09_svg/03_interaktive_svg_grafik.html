@@ -102,15 +102,15 @@
         _boardStates = [];
         _markedTiles = [];
 
-        _boardBackgroundClass = "background";
         _boardDisabledClass = "disabled";
         _tileClass = "tile";
+        _symbolClass = "symbol";
         _gameOverClass = "gameOver";
 
         _playerClasses = ["player1", "player2"];
         _playerCount = 2;
-        _currentRound = -1;
         _currentPlayer;
+        _currentRound = -1;
 
         _gameIsOver = false;
 
@@ -122,7 +122,6 @@
             this._boardSize = boardSize;
 
             this._createBoardStates();
-            this._createBoardBackground();
             this._createTiles();
 
             this._setUpNextRound();
@@ -148,13 +147,6 @@
             for (let playerIndex = 0; playerIndex < this._playerCount; playerIndex++) {
                 this._boardStates[playerIndex] = new BoardState(this._boardSize);
             }
-        }
-
-        _createBoardBackground() {
-            this._addRectToElement(
-                this._board.element, this._boardBackgroundClass,
-                this._board.x, this._board.y, this._board.width, this._board.height
-            );
         }
 
         _addRectToElement(parentElement, className, x, y, width, height) {
@@ -238,19 +230,13 @@
                     `Spieler ${this._currentPlayer + 1} gewinnt! 🥳`,
                     this._gameOverClass
                 );
-
                 return;
             }
 
-            if (this._boardIsFull()) {
+            if (this._IsBoardFull()) {
                 this._gameIsOver = true;
                 this._markBoardAsDisabled();
-
-                this._updateDisplay(
-                    `Unentschieden. 🙂`,
-                    this._gameOverClass
-                );
-
+                this._updateDisplay(`Unentschieden. 🙂`, this._gameOverClass);
                 return;
             }
 
@@ -302,12 +288,12 @@
             const C = this._symbolOffset; // to center the cross better
 
             this._addLineToElement(
-                this._board.element, "symbol",
+                this._board.element, this._symbolClass,
                 x + C, y + C, x + width - C, y + height - C
             )
 
             this._addLineToElement(
-                this._board.element, "symbol",
+                this._board.element, this._symbolClass,
                 x + width - C, y + C, x + C, y + height - C
             )
         }
@@ -347,7 +333,7 @@
             return this._boardStates[this._currentPlayer].isWinningState();
         }
 
-        _boardIsFull() {
+        _IsBoardFull() {
             return this._currentRound === (this._boardSize * this._boardSize) - 1;
         }
     }
@@ -411,6 +397,8 @@
         #board rect.tile {
             fill: white;
             cursor: pointer;
+            stroke: lightgrey;
+            stroke-width: 0.1;
         }
 
         #board.player1 rect.tile:hover {
