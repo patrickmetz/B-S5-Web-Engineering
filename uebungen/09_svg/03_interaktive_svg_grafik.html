@@ -7,12 +7,6 @@
 
 <script>
     class SvgComponent {
-        _element;
-        _x;
-        _y;
-        _width;
-        _height;
-
         constructor(svgElement, x, y, width, height) {
             this._element = svgElement;
             this._x = x;
@@ -21,21 +15,31 @@
             this._height = height;
         }
 
+        _element;
+
         get element() {
             return this._element;
         }
+
+        _x;
 
         get x() {
             return this._x;
         }
 
+        _y;
+
         get y() {
             return this._y;
         }
 
+        _width;
+
         get width() {
             return this._width;
         }
+
+        _height;
 
         get height() {
             return this._height;
@@ -59,8 +63,6 @@
             this._antiDiagonal = 0;
 
             this._boardSize = boardSize;
-
-            console.log(this);
         }
 
         /* source: https://jayeshkawli.ghost.io/tic-tac-toe/ */
@@ -75,8 +77,6 @@
             if ((rowIndex + columnIndex) === (this._boardSize - 1)) {
                 this._antiDiagonal++;
             }
-
-            console.log(this);
         }
 
         isWinningState() {
@@ -105,6 +105,7 @@
         _boardBackgroundClass = "background";
         _boardDisabledClass = "disabled";
         _tileClass = "tile";
+        _gameOverClass = "gameOver";
 
         _playerClasses = ["player1", "player2"];
         _playerCount = 2;
@@ -112,6 +113,8 @@
         _currentPlayer;
 
         _gameIsOver = false;
+
+        _symbolOffset = 3;
 
         constructor(displayComponent, boardComponent, boardSize = 3) {
             this._display = displayComponent;
@@ -122,27 +125,18 @@
             this._createBoardBackground();
             this._createTiles();
 
-            this.setUpNextRound();
+            this._setUpNextRound();
+            this._updateDisplay(this._getRoundMessage());
         }
 
-        setUpNextRound() {
+        _setUpNextRound() {
             this._incrementRound();
             this._incrementPlayer();
-            this._updateStatus();
-
             this._setPlayerClass(this._board.element);
             this._setPlayerClass(this._display.element);
         }
 
-        _updateStatus(showWinner = false) {
-            let className = null;
-            let message = `Zug ${this._currentRound + 1}, Spieler ${this._currentPlayer + 1}`;
-
-            if (showWinner === true) {
-                className = "winner";
-                message = `Spieler ${this._currentPlayer + 1} hat gewonnen!`;
-            }
-
+        _updateDisplay(message, className = null) {
             this._replaceTextOfElement(
                 this._display.element, className,
                 this._display.x, (this._display.y + this._display.height - 1),
@@ -163,20 +157,38 @@
             );
         }
 
-        _addRectToElement(parentElement, rectClass, rectX, rectY, rectWidth, rectHeight) {
+        _addRectToElement(parentElement, className, x, y, width, height) {
             // innerHTML would destroy event handlers of sibling elements
             parentElement.insertAdjacentHTML(
                 "beforeend",
-                `<rect x="${rectX}" y="${rectY}" class="${rectClass}" width="${rectWidth}" height="${rectHeight}" />`
+                `<rect class="${className}" x="${x}" y="${y}" width="${width}" height="${height}" />`
             );
 
             // created rect is last child element of parent
             return parentElement.lastElementChild;
         }
 
-        _replaceTextOfElement(parentElement, textClass, textX, textY, text) {
+        _addLineToElement(parentElement, className, x1, y1, x2, y2) {
+            parentElement.insertAdjacentHTML(
+                "beforeend",
+                `<line class="${className}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" />`
+            );
+
+            return parentElement.lastElementChild;
+        }
+
+        _addCircleToElement(parentElement, className, cx, cy, r) {
+            parentElement.insertAdjacentHTML(
+                "beforeend",
+                `<circle class="${className}" cx="${cx}" cy="${cy}" r="${r}" />`
+            );
+
+            return parentElement.lastElementChild;
+        }
+
+        _replaceTextOfElement(parentElement, className, x, y, text) {
             parentElement.innerHTML =
-                `<text class="${textClass}" x="${textX}" y="${textY}">${text}</text>`
+                `<text class="${className}" x="${x}" y="${y}">${text}</text>`
             ;
         }
 
@@ -206,25 +218,44 @@
 
         _addClickHandlerToTile(tileElement, tileIndex, rowIndex, columnIndex) {
             tileElement.onclick = () => {
-                this._makePlayerMove(tileIndex, rowIndex, columnIndex);
+                this._executePlayerMove(tileIndex, rowIndex, columnIndex);
             };
         }
 
-        _makePlayerMove(tileIndex, rowIndex, columnIndex) {
-            if(this._gameIsOver === true) return;
+        _executePlayerMove(tileIndex, rowIndex, columnIndex) {
+            if (this._gameIsOver === true) return;
             if (this._isTileMarked(tileIndex) === true) return;
 
             this._markTile(tileIndex);
+            this._drawSymbolOverTile(tileIndex);
+
             this._updateBoardState(rowIndex, columnIndex);
 
-            if (this._isWinningBoardState()) {
+            if (this._hasPlayerWon()) {
                 this._gameIsOver = true;
-                this._updateStatus(true);
                 this._markBoardAsDisabled();
+                this._updateDisplay(
+                    `Spieler ${this._currentPlayer + 1} gewinnt! 🥳`,
+                    this._gameOverClass
+                );
+
                 return;
             }
 
-            this.setUpNextRound();
+            if (this._boardIsFull()) {
+                this._gameIsOver = true;
+                this._markBoardAsDisabled();
+
+                this._updateDisplay(
+                    `Unentschieden. 🙂`,
+                    this._gameOverClass
+                );
+
+                return;
+            }
+
+            this._setUpNextRound();
+            this._updateDisplay(this._getRoundMessage());
         }
 
         _incrementRound() {
@@ -251,7 +282,59 @@
                 .classList.add(this._playerClasses[this._currentPlayer]);
         }
 
-        _isTileMarked(tileIndex){
+        _drawSymbolOverTile(tileIndex) {
+            const tile = this._board.element
+                .getElementsByClassName(this._tileClass)[tileIndex];
+
+            if (this._currentPlayer % this._playerCount === 0) {
+                this._drawCrossOverTile(tile);
+            } else {
+                this._drawCircleOverTile(tile);
+            }
+        }
+
+        _drawCrossOverTile(tile) {
+            const x = parseFloat(tile.getAttribute("x"));
+            const y = parseFloat(tile.getAttribute("y"));
+            const width = parseFloat(tile.getAttribute("width"));
+            const height = parseFloat(tile.getAttribute("height"));
+
+            const C = this._symbolOffset; // to center the cross better
+
+            this._addLineToElement(
+                this._board.element, "symbol",
+                x + C, y + C, x + width - C, y + height - C
+            )
+
+            this._addLineToElement(
+                this._board.element, "symbol",
+                x + width - C, y + C, x + C, y + height - C
+            )
+        }
+
+        _drawCircleOverTile(tile) {
+            const x = parseFloat(tile.getAttribute("x"));
+            const y = parseFloat(tile.getAttribute("y"));
+            const width = parseFloat(tile.getAttribute("width"));
+            const height = parseFloat(tile.getAttribute("height"));
+
+            const C = this._symbolOffset; // to center the circle better
+
+            this._addCircleToElement(
+                this._board.element, "symbol",
+                x + (width / 2), y + (height / 2), (width / 2) - C
+            )
+        }
+
+        _getRoundMessage() {
+            return `Zug ${this._currentRound + 1}, Spieler ${this._currentPlayer + 1}`;
+        }
+
+        _markBoardAsDisabled() {
+            this._board.element.classList.add(this._boardDisabledClass)
+        }
+
+        _isTileMarked(tileIndex) {
             return (this._markedTiles[tileIndex] !== undefined)
                 && (this._markedTiles[tileIndex] === true);
         }
@@ -260,17 +343,20 @@
             this._boardStates[this._currentPlayer].update(rowIndex, columnIndex);
         }
 
-        _isWinningBoardState() {
+        _hasPlayerWon() {
             return this._boardStates[this._currentPlayer].isWinningState();
         }
 
-        _markBoardAsDisabled(){
-            this._board.element.classList.add(this._boardDisabledClass)
+        _boardIsFull() {
+            return this._currentRound === (this._boardSize * this._boardSize) - 1;
         }
     }
 </script>
 
-<body onload="new TicTacToe(new SvgComponent(document.querySelector('#display'), 0, 0, 50 , 10),new SvgComponent(document.querySelector('#board'), 0, 10, 50 , 50));">
+<body onload="new TicTacToe(
+    new SvgComponent(document.querySelector('#display'), 0, 0, 50 ,10),
+    new SvgComponent(document.querySelector('#board'), 0, 10, 50 ,50));
+">
 
 <svg viewBox="0 0 100 100">
     <style>
@@ -283,7 +369,7 @@
             fill: black;
         }
 
-        /* status display */
+        /* display round and player */
 
         #display rect {
             fill: white;
@@ -302,16 +388,16 @@
             fill: var(--player2Color);
         }
 
-        /* announce winner */
+        /* display match result */
 
-        #display text.winner {
-            animation-name: showWinner;
+        #display text.gameOver {
+            animation-name: gameOver;
             animation-duration: 0.5s;
             animation-fill-mode: forwards;
             animation-iteration-count: 2;
         }
 
-        @keyframes showWinner {
+        @keyframes gameOver {
             from {
                 font-size: 0px;
             }
@@ -357,9 +443,26 @@
 
         /* unused tiles on disabled board */
 
-        #board.disabled rect.tile:not(.player1):not(.player2):hover{
+        #board.disabled rect.tile:not(.player1):not(.player2):hover {
             cursor: not-allowed;
             fill: white;
+        }
+
+        /* symbols */
+
+        .symbol {
+            stroke: white;
+            stroke-width: 1px;
+            stroke-opacity: 0.75;
+            cursor: not-allowed;
+        }
+
+        line.symbol {
+
+        }
+
+        circle.symbol {
+            fill: transparent;
         }
     </style>
 
