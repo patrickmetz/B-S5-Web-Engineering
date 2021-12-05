@@ -443,6 +443,21 @@
             stroke-width: 1px;
             stroke-opacity: 0.75;
             cursor: not-allowed;
+            animation-name: symbol;
+            animation-duration: 0.5s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes symbol {
+            from {
+                stroke: gray;
+                transform: scale(0);
+            }
+            to {
+                stroke: white;
+                transform: scale(1);
+
+            }
         }
 
         line.symbol {
