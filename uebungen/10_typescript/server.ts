@@ -1,25 +1,44 @@
-// Server code source: https://deno.land/manual@v1.16.4/examples/http_server
+class Covid19StatisticsServer {
+    private readonly _httpServer: Deno.Listener;
 
-const server: Deno.Listener = Deno.listen({port: 8080});
-console.log(`HTTP webserver running.  Access it at:  http://localhost:8080/`);
+    constructor(serverPort: number) {
+        this._httpServer = this.createServer(serverPort);
+        this.serveAllHttpConnections();
+    }
 
-for await (const connection: AsyncIterable<Deno.Conn> of server) {
-    serveHttp(connection); // not using await => non blocking
-}
+    private createServer(port: number) {
+        console.log(`Covid 19 statistics server is listening at: http://localhost:${port}/`);
+        return Deno.listen({port: port});
+    }
 
-async function serveHttp(connection: Deno.Conn) {
-    const httpConnection: Deno.HttpConn = Deno.serveHttp(connection);
+    private async serveAllHttpConnections(): Promise<void> {
+        let connection : Deno.Conn; // can't declare type in for/of-loop
 
-    for await (const requestEvent of httpConnection) {
-        const body = `Your user-agent is:\n\n${
-            requestEvent.request.headers.get(
-                "user-agent",
-            ) ?? "Unknown"
-        }`;
-        requestEvent.respondWith(
-            new Response(body, {
-                status: 200,
-            }),
-        );
+        for await (connection of this._httpServer) {
+            this.serveOneHttpConnection(connection); // not using await => non blocking
+        }
+    }
+
+    private async serveOneHttpConnection(connection: Deno.Conn): Promise<void> {
+        const httpConnection: Deno.HttpConn = Deno.serveHttp(connection);
+
+        for await (const requestEvent of httpConnection) {
+            const body = `Your user-agent is:\n\n${
+                requestEvent.request.headers.get(
+                    "user-agent",
+                ) ?? "Unknown"
+            }`;
+            requestEvent.respondWith(
+                new Response(body, {
+                    status: 200,
+                }),
+            );
+        }
     }
 }
+
+
+const server = new Covid19StatisticsServer(
+    8080
+);
+
