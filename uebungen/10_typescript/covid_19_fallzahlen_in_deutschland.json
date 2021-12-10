@@ -1,0 +1,138 @@
+[
+  {
+    "Bundesland": "Baden-Württemberg",
+    "Anzahl": 847047,
+    "Differenz zum Vortag": 11705,
+    "Faelle in den letzten 7 Tagen": 57680,
+    "7-Tage-Inzidenz": 519.5,
+    "Todesfaelle": 11843
+  },
+  {
+    "Bundesland": "Bayern",
+    "Anzahl": 1153632,
+    "Differenz zum Vortag": 14919,
+    "Faelle in den letzten 7 Tagen": 75109,
+    "7-Tage-Inzidenz": 571.6,
+    "Todesfaelle": 17739
+  },
+  {
+    "Bundesland": "Berlin",
+    "Anzahl": 279530,
+    "Differenz zum Vortag": 2546,
+    "Faelle in den letzten 7 Tagen": 13244,
+    "7-Tage-Inzidenz": 361.5,
+    "Todesfaelle": 3844
+  },
+  {
+    "Bundesland": "Brandenburg",
+    "Anzahl": 182587,
+    "Differenz zum Vortag": 2275,
+    "Faelle in den letzten 7 Tagen": 16579,
+    "7-Tage-Inzidenz": 655,
+    "Todesfaelle": 4162
+  },
+  {
+    "Bundesland": "Bremen",
+    "Anzahl": 40104,
+    "Differenz zum Vortag": 280,
+    "Faelle in den letzten 7 Tagen": 1551,
+    "7-Tage-Inzidenz": 228,
+    "Todesfaelle": 554
+  },
+  {
+    "Bundesland": "Hamburg",
+    "Anzahl": 115250,
+    "Differenz zum Vortag": 741,
+    "Faelle in den letzten 7 Tagen": 3626,
+    "7-Tage-Inzidenz": 195.7,
+    "Todesfaelle": 1897
+  },
+  {
+    "Bundesland": "Hessen",
+    "Anzahl": 419559,
+    "Differenz zum Vortag": 3784,
+    "Faelle in den letzten 7 Tagen": 17569,
+    "7-Tage-Inzidenz": 279.2,
+    "Todesfaelle": 8173
+  },
+  {
+    "Bundesland": "Mecklenburg-\nVorpommern",
+    "Anzahl": 73688,
+    "Differenz zum Vortag": 1537,
+    "Faelle in den letzten 7 Tagen": 6729,
+    "7-Tage-Inzidenz": 417.7,
+    "Todesfaelle": 1337
+  },
+  {
+    "Bundesland": "Niedersachsen",
+    "Anzahl": 381715,
+    "Differenz zum Vortag": 3481,
+    "Faelle in den letzten 7 Tagen": 16549,
+    "7-Tage-Inzidenz": 206.8,
+    "Todesfaelle": 6389
+  },
+  {
+    "Bundesland": "Nordrhein-Westfalen",
+    "Anzahl": 1191138,
+    "Differenz zum Vortag": 9084,
+    "Faelle in den letzten 7 Tagen": 50668,
+    "7-Tage-Inzidenz": 282.7,
+    "Todesfaelle": 19075
+  },
+  {
+    "Bundesland": "Rheinland-Pfalz",
+    "Anzahl": 237282,
+    "Differenz zum Vortag": 2613,
+    "Faelle in den letzten 7 Tagen": 12690,
+    "7-Tage-Inzidenz": 309.6,
+    "Todesfaelle": 4294
+  },
+  {
+    "Bundesland": "Saarland",
+    "Anzahl": 62542,
+    "Differenz zum Vortag": 903,
+    "Faelle in den letzten 7 Tagen": 4060,
+    "7-Tage-Inzidenz": 412.6,
+    "Todesfaelle": 1116
+  },
+  {
+    "Bundesland": "Sachsen",
+    "Anzahl": 513069,
+    "Differenz zum Vortag": 10327,
+    "Faelle in den letzten 7 Tagen": 47877,
+    "7-Tage-Inzidenz": 1180.1,
+    "Todesfaelle": 11079
+  },
+  {
+    "Bundesland": "Sachsen-Anhalt",
+    "Anzahl": 162416,
+    "Differenz zum Vortag": 3707,
+    "Faelle in den letzten 7 Tagen": 15787,
+    "7-Tage-Inzidenz": 723.9,
+    "Todesfaelle": 3820
+  },
+  {
+    "Bundesland": "Schleswig-Holstein",
+    "Anzahl": 98142,
+    "Differenz zum Vortag": 848,
+    "Faelle in den letzten 7 Tagen": 4434,
+    "7-Tage-Inzidenz": 152.3,
+    "Todesfaelle": 1803
+  },
+  {
+    "Bundesland": "Thüringen",
+    "Anzahl": 219507,
+    "Differenz zum Vortag": 4459,
+    "Faelle in den letzten 7 Tagen": 21070,
+    "7-Tage-Inzidenz": 993.8,
+    "Todesfaelle": 5053
+  },
+  {
+    "Bundesland": "Gesamt",
+    "Anzahl": 5977208,
+    "Differenz zum Vortag": 73209,
+    "Faelle in den letzten 7 Tagen": 365222,
+    "7-Tage-Inzidenz": 439.2,
+    "Todesfaelle": 102178
+  }
+]
