@@ -8,17 +8,12 @@
     <title>Web Engineering - Semesterprojekt</title>
 
     <link rel="stylesheet" href="./style.css">
-    <script defer src="script.js"></script>
+    <script defer src="upgrade_to_javascript_and_dom.js"></script>
 </head>
 
-<body onload="createTableOfContents('section', 'h3', 'h4');">
+<body>
 
-<div id="tocToggle">
-    <a onclick="toggleTocDisplay();" title="Inhaltsverzeichnis"></a>
-</div>
-<div id="tocDisplay" class="hidden">
-    <a onclick="toggleTocDisplay();" title="schließen">x</a>
-</div>
+<div id="menu"></div>
 
 <header>
     <h1><span>Ein&shy;führ&shy;ung in </span>Web En&shy;gi&shy;nee&shy;ring</h1>
@@ -186,7 +181,7 @@
         </div>
     </section>
 
-    <section>
+    <section class="highlight">
         <h3>Vorlesung 3: CSS 2.Teil</h3>
         <h4>Responsiv mit Grid</h4>
 
