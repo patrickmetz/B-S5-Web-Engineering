@@ -1,3 +1,4 @@
+// start via "deno run --allow-net --allow-read"
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -41,75 +42,158 @@ var __asyncValues = (this && this.__asyncValues) || function (o) {
     function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
     function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
 };
-var e_1, _a;
-// Start listening on port 8080 of localhost.
-var server = Deno.listen({ port: 8080 });
-console.log("HTTP webserver running.  Access it at:  http://localhost:8080/");
-try {
-    // Connections to the server will be yielded up as an async iterable.
-    for (var server_1 = __asyncValues(server), server_1_1; server_1_1 = await server_1.next(), !server_1_1.done;) {
-        var conn = server_1_1.value;
-        // In order to not be blocking, we need to handle each connection individually
-        // without awaiting the function
-        serveHttp(conn);
+var Covid19StatisticsServer = /** @class */ (function () {
+    function Covid19StatisticsServer(serverPort, textFilePath) {
+        var _this = this;
+        // null type stops deno from complaining about fields initialized in IIFE
+        this._covidData = null;
+        this._httpServer = null;
+        (function () { return __awaiter(_this, void 0, void 0, function () {
+            var _a, e_1;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 2, , 3]);
+                        _a = this;
+                        return [4 /*yield*/, this._readTextFileAsCovidData(textFilePath)];
+                    case 1:
+                        _a._covidData = _b.sent();
+                        this._httpServer = this._createServer(serverPort);
+                        this._serveAllHttpConnections();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        e_1 = _b.sent();
+                        console.error(e_1);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); })();
     }
-}
-catch (e_1_1) { e_1 = { error: e_1_1 }; }
-finally {
-    try {
-        if (server_1_1 && !server_1_1.done && (_a = server_1.return)) await _a.call(server_1);
-    }
-    finally { if (e_1) throw e_1.error; }
-}
-function serveHttp(conn) {
-    var e_2, _a;
-    var _b;
-    return __awaiter(this, void 0, void 0, function () {
-        var httpConn, httpConn_1, httpConn_1_1, requestEvent, body_1, e_2_1;
-        return __generator(this, function (_c) {
-            switch (_c.label) {
-                case 0:
-                    httpConn = Deno.serveHttp(conn);
-                    _c.label = 1;
-                case 1:
-                    _c.trys.push([1, 6, 7, 12]);
-                    httpConn_1 = __asyncValues(httpConn);
-                    _c.label = 2;
-                case 2: return [4 /*yield*/, httpConn_1.next()];
-                case 3:
-                    if (!(httpConn_1_1 = _c.sent(), !httpConn_1_1.done)) return [3 /*break*/, 5];
-                    requestEvent = httpConn_1_1.value;
-                    body_1 = "Your user-agent is:\n\n" + ((_b = requestEvent.request.headers.get("user-agent")) !== null && _b !== void 0 ? _b : "Unknown");
-                    // The requestEvent's `.respondWith()` method is how we send the response
-                    // back to the client.
-                    requestEvent.respondWith(new Response(body_1, {
-                        status: 200,
-                    }));
-                    _c.label = 4;
-                case 4: return [3 /*break*/, 2];
-                case 5: return [3 /*break*/, 12];
-                case 6:
-                    e_2_1 = _c.sent();
-                    e_2 = { error: e_2_1 };
-                    return [3 /*break*/, 12];
-                case 7:
-                    _c.trys.push([7, , 10, 11]);
-                    if (!(httpConn_1_1 && !httpConn_1_1.done && (_a = httpConn_1.return))) return [3 /*break*/, 9];
-                    return [4 /*yield*/, _a.call(httpConn_1)];
-                case 8:
-                    _c.sent();
-                    _c.label = 9;
-                case 9: return [3 /*break*/, 11];
-                case 10:
-                    if (e_2) throw e_2.error;
-                    return [7 /*endfinally*/];
-                case 11: return [7 /*endfinally*/];
-                case 12: return [2 /*return*/];
-            }
+    Covid19StatisticsServer.prototype._readTextFileAsCovidData = function (jsonFilePath) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _b = (_a = JSON).parse;
+                        return [4 /*yield*/, Deno.readTextFile(jsonFilePath)];
+                    case 1: return [2 /*return*/, _b.apply(_a, [_c.sent()])];
+                }
+            });
         });
-    });
-}
-res = await fetch(url);
-var body = new Uint8Array(await res.arrayBuffer());
-await Deno.stdout.write(body);
+    };
+    Covid19StatisticsServer.prototype._createServer = function (port) {
+        console.log("Covid 19 statistics server is listening at: http://localhost:" + port + "/");
+        return Deno.listen({ port: port });
+    };
+    Covid19StatisticsServer.prototype._serveAllHttpConnections = function () {
+        var e_2, _a;
+        return __awaiter(this, void 0, void 0, function () {
+            var connection, _b, _c, e_2_1;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
+                    case 0:
+                        if (!(this._httpServer !== null)) return [3 /*break*/, 12];
+                        connection = void 0;
+                        _d.label = 1;
+                    case 1:
+                        _d.trys.push([1, 6, 7, 12]);
+                        _b = __asyncValues(this._httpServer);
+                        _d.label = 2;
+                    case 2: return [4 /*yield*/, _b.next()];
+                    case 3:
+                        if (!(_c = _d.sent(), !_c.done)) return [3 /*break*/, 5];
+                        connection = _c.value;
+                        this._serveOneHttpConnection(connection); // not using await => non blocking
+                        _d.label = 4;
+                    case 4: return [3 /*break*/, 2];
+                    case 5: return [3 /*break*/, 12];
+                    case 6:
+                        e_2_1 = _d.sent();
+                        e_2 = { error: e_2_1 };
+                        return [3 /*break*/, 12];
+                    case 7:
+                        _d.trys.push([7, , 10, 11]);
+                        if (!(_c && !_c.done && (_a = _b.return))) return [3 /*break*/, 9];
+                        return [4 /*yield*/, _a.call(_b)];
+                    case 8:
+                        _d.sent();
+                        _d.label = 9;
+                    case 9: return [3 /*break*/, 11];
+                    case 10:
+                        if (e_2) throw e_2.error;
+                        return [7 /*endfinally*/];
+                    case 11: return [7 /*endfinally*/];
+                    case 12: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Covid19StatisticsServer.prototype._serveOneHttpConnection = function (connection) {
+        var e_3, _a;
+        return __awaiter(this, void 0, void 0, function () {
+            var httpConnection, httpConnection_1, httpConnection_1_1, requestEvent, e_3_1;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        httpConnection = Deno.serveHttp(connection);
+                        _b.label = 1;
+                    case 1:
+                        _b.trys.push([1, 6, 7, 12]);
+                        httpConnection_1 = __asyncValues(httpConnection);
+                        _b.label = 2;
+                    case 2: return [4 /*yield*/, httpConnection_1.next()];
+                    case 3:
+                        if (!(httpConnection_1_1 = _b.sent(), !httpConnection_1_1.done)) return [3 /*break*/, 5];
+                        requestEvent = httpConnection_1_1.value;
+                        requestEvent.respondWith(new Response(this._htmlCode(), {
+                            status: 200,
+                            headers: {
+                                'content-type': 'text/html; charset=UTF-8'
+                            }
+                        }));
+                        _b.label = 4;
+                    case 4: return [3 /*break*/, 2];
+                    case 5: return [3 /*break*/, 12];
+                    case 6:
+                        e_3_1 = _b.sent();
+                        e_3 = { error: e_3_1 };
+                        return [3 /*break*/, 12];
+                    case 7:
+                        _b.trys.push([7, , 10, 11]);
+                        if (!(httpConnection_1_1 && !httpConnection_1_1.done && (_a = httpConnection_1.return))) return [3 /*break*/, 9];
+                        return [4 /*yield*/, _a.call(httpConnection_1)];
+                    case 8:
+                        _b.sent();
+                        _b.label = 9;
+                    case 9: return [3 /*break*/, 11];
+                    case 10:
+                        if (e_3) throw e_3.error;
+                        return [7 /*endfinally*/];
+                    case 11: return [7 /*endfinally*/];
+                    case 12: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Covid19StatisticsServer.prototype._htmlCode = function () {
+        if (this._covidData !== null) {
+            var statistics = this._numbersToSimpleStatistics(this._covidData.map(function (x) { return x.Anzahl; }));
+            return "<!DOCTYPE html>\n                <html lang=\"en\">\n                <head>\n                    <meta charset=\"UTF-8\">\n                    <title>Covid19-Statistik</title>\n                    \n                    <style>\n                        td:first-child{font-weight: bold};\n                    </style>\n                </head>\n                <body>\n                \n                <h1>Covid19-F\u00E4lle in deutschen Bundesl\u00E4ndern</h1>\n                <table>\n                    <tr><td>Minimale Anzahl</td><td>" + statistics.min + "</td></tr>\n                    <tr><td>Maximale Anzahl</td><td>" + statistics.max + "</td></tr>\n                    <tr><td>Durchschnitt</td><td>" + statistics.mean + "</td></tr>\n                    <tr><td>Summe</td><td>" + statistics.sum + "</td></tr>\n                </table>\n                \n                </body>\n                </html>";
+        }
+        return "";
+    };
+    Covid19StatisticsServer.prototype._numbersToSimpleStatistics = function (numbers) {
+        // source: https://stackoverflow.com/a/1669222
+        var min = Math.min.apply(Math, numbers);
+        var max = Math.max.apply(Math, numbers);
+        // source: https://stackoverflow.com/a/10624256
+        var sum = numbers.reduce(function (a, b) { return a + b; }, 0);
+        var mean = Math.round(sum / numbers.length);
+        return { min: min, max: max, mean: mean, sum: sum };
+    };
+    return Covid19StatisticsServer;
+}());
+new Covid19StatisticsServer(8080, './covid_19_fallzahlen_in_deutschland.json');
 //# sourceMappingURL=server.js.map

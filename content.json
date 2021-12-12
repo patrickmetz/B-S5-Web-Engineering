@@ -1,0 +1,79 @@
+[
+  {
+    "lectureName": "1. Einführung",
+    "taskName": "1.4. HTML Wireframe",
+    "taskInfo": "Mit welchem HTML-Code (ohne CSS, nur mit HTML-Tags) kann man diesen Wireframe exakt nachbilden?",
+    "taskLinks": {
+      "template": "./uebungen/01_einfuehrung/04_wireframe_vorlage.jpg",
+      "result": "./uebungen/01_einfuehrung/04_wireframe.html",
+      "sourceCode": "./uebungen/01_einfuehrung/04_wireframe_quellcode.txt",
+      "source": "https://kaul.inf.h-brs.de/we/#app-2-3"
+    }
+  },
+  {
+    "lectureName": "2. CSS 1. Teil",
+    "taskName": "2.2. CSS Positionierung",
+    "taskInfo": "Schauen Sie sich folgendes Video an und bauen Sie das dynamische Verhalten exakt nach (nur mit HTML und CSS, ohne JavaScript)",
+    "taskLinks": {
+      "template": "https://www.youtube.com/embed/PE3POxjDspo",
+      "result": "./uebungen/02_css_teil_eins/02_01_css_positionierung.html",
+      "sourceCode": "./uebungen/02_css_teil_eins/02_01_css_positionierung.txt",
+      "source": "https://kaul.inf.h-brs.de/we/#app-3-3"
+    }
+  },
+  {
+    "lectureName": "2. CSS 1. Teil",
+    "taskName": "2.2. CSS Positionierung",
+    "taskInfo": "Schauen Sie sich folgendes Video an und bauen Sie das dynamische Verhalten exakt nach (nur mit HTML und CSS, ohne JavaScript)",
+    "taskLinks": {
+      "template": "https://www.youtube.com/embed/HVmnv3k4__E",
+      "result": "./uebungen/02_css_teil_eins/02_02_css_positionierung.html",
+      "sourceCode": "./uebungen/02_css_teil_eins/02_02_css_positionierung.txt",
+      "source": "https://kaul.inf.h-brs.de/we/#app-3-3"
+    }
+  },
+  {
+    "lectureName": "2. CSS 1. Teil",
+    "taskName": "2.3. Wireframe with HTML and CSS",
+    "taskInfo": "Frage: Mit welchem HTML- und CSS-Code kann man diesen Wireframe exakt nachbilden? Schreiben Sie Ihren CSS-Code direkt in die HTML-Datei. ",
+    "taskLinks": {
+      "template": "./uebungen/02_css_teil_eins/03_wireframe.png",
+      "result": "./uebungen/02_css_teil_eins/03_wireframe.html",
+      "sourceCode": "./uebungen/02_css_teil_eins/03_wireframe.txt",
+      "source": "https://kaul.inf.h-brs.de/we/#app-3-3"
+    }
+  },
+  {
+    "lectureName": "3. CSS 2. Teil",
+    "taskName": "3.1. Responsiv mit Flexbox Desktop-First",
+    "taskInfo": "Spielen Sie zunächst das Flexbox Froggy-Spiel, um Flexbox zu lernen. Implementieren Sie dann ausschließlich mit HTML und CSS Flexbox folgendes responsive Webdesign nach der Desktop-First-Strategie!",
+    "taskLinks": {
+      "template": "./uebungen/03_css_teil_zwei/03_01_responsiv.png",
+      "result": "./uebungen/03_css_teil_zwei/03_01_responsiv_mit_flexbox_desktop_first.html",
+      "sourceCode": "./uebungen/03_css_teil_zwei/03_01_responsiv_mit_flexbox_desktop_first.txt",
+      "source": "https://kaul.inf.h-brs.de/we/#app-4-3"
+    }
+  },
+  {
+    "lectureName": "3. CSS 2. Teil",
+    "taskName": "3.2. Responsiv mit Grid Mobile-First",
+    "taskInfo": "Spielen Sie zunächst das Grid Garden-Spiel, um Grid Layout zu lernen. Implementieren Sie dann das gleiche responsive Webdesign wie in Aufgabe 3.1 allerdings mit Grid und der Mobile-First-Strategie! Vermeiden Sie diesmal außerdem das Erscheinen von Scrollbars.",
+    "taskLinks": {
+      "template": "./uebungen/03_css_teil_zwei/03_01_responsiv.png",
+      "result": "./uebungen/03_css_teil_zwei/03_02_responsiv_mit_grid_mobile_first.html",
+      "sourceCode": "./uebungen/03_css_teil_zwei/03_02_responsiv_mit_grid_mobile_first.txt",
+      "source": "https://kaul.inf.h-brs.de/we/#app-4-3"
+    }
+  },
+  {
+    "lectureName": "3. CSS 2. Teil",
+    "taskName": "3.3. Responsiv mit Grid",
+    "taskInfo": "Implementieren Sie folgende Landing Page responsiv mit Grid Layout. Vermeiden Sie außerdem das Erscheinen von Scrollbars so weit wie möglich.",
+    "taskLinks": {
+      "template": "uebungen/03_css_teil_zwei/03_03_responsiv_mit_grid.png",
+      "result": "./uebungen/03_css_teil_zwei/03_03_responsiv_mit_grid.html",
+      "sourceCode": "./uebungen/03_css_teil_zwei/03_03_responsiv_mit_grid.txt",
+      "source": "https://kaul.inf.h-brs.de/we/#app-4-3"
+    }
+  }
+]
