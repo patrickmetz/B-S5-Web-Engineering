@@ -4,7 +4,6 @@
     /* "private attributes" -------------------------------------------------*/
 
     var _tocId = "tocDisplay";
-    var _tocIsReady = false;
     var _tocHiddenClass = "hidden";
     var _tocShownClass = "shown";
 
@@ -31,41 +30,14 @@
     function buildTableOfContents(menuTagId, parentTag, lectureTag, taskTag) {
         addTocToBody();
         addToggleLinkToMenu(menuTagId)
-
-        var toc = document.getElementById(_tocId);
-        var parentTags = document.getElementsByTagName(parentTag);
-
-        var lectureList = document.createElement("ul");
-        toc.appendChild(lectureList);
-
-        var lectureNameToTaskList = [];
-
-        for (var parentTagIndex = 0; parentTagIndex < parentTags.length; parentTagIndex++) {
-            var lectureName = getTextContentOfChildElement(parentTags, parentTagIndex, lectureTag);
-            var lectureListElement = createLectureListElement(lectureName);
-
-            if (lectureNameToTaskList[lectureName] === undefined) {
-                lectureList.appendChild(lectureListElement);
-
-                var taskList = document.createElement("ul");
-                lectureListElement.appendChild(taskList);
-
-                lectureNameToTaskList[lectureName] = taskList;
-            }
-
-            var taskName = getTextContentOfChildElement(parentTags, parentTagIndex, taskTag);
-            var taskListElement = createTaskListElement(taskName, parentTags[parentTagIndex]);
-
-            lectureNameToTaskList[lectureName].appendChild(taskListElement);
-        }
-
-        _tocIsReady = true;
     }
 
     function addToggleLinkToMenu(menuTagId) {
         var toggleLink = document.createElement("a");
         toggleLink.textContent = _toggleLinkText;
-        toggleLink.onclick = function(){toggleToc()};
+        toggleLink.onclick = function () {
+            toggleToc()
+        };
 
         document.getElementById(menuTagId).appendChild(toggleLink);
     }
@@ -77,7 +49,9 @@
 
         var closeButton = document.createElement("a");
         closeButton.textContent = "X";
-        closeButton.onclick = function(){toggleToc()};
+        closeButton.onclick = function () {
+            toggleToc()
+        };
 
         tocDisplay.appendChild(closeButton);
 
@@ -86,16 +60,65 @@
     }
 
     function toggleToc() {
-        if (_tocIsReady === true) {
-            var tocDisplay = document.getElementById(_tocId);
-            var className = tocDisplay.className;
+        var tocDisplay = document.getElementById(_tocId);
+        var className = tocDisplay.className;
 
-            if (className === _tocShownClass) {
-                tocDisplay.className = _tocHiddenClass;
-            } else if (className === _tocHiddenClass) {
-                tocDisplay.className = _tocShownClass;
-            }
+        if (className === _tocShownClass) {
+            tocDisplay.className = _tocHiddenClass;
+            clearToc();
+        } else if (className === _tocHiddenClass) {
+            updateToc();
+            tocDisplay.className = _tocShownClass;
         }
+    }
+
+    function clearToc() {
+        var lectureList = document.getElementById(_tocId)
+            .getElementsByTagName("ul")[0];
+
+        if (lectureList !== undefined) {
+            document.getElementById(_tocId).removeChild(lectureList);
+        }
+    }
+
+    function updateToc() {
+        var toc = document.getElementById(_tocId);
+        var parentTags = document.getElementsByTagName(parentTag);
+
+        var lectureList = document.createElement("ul");
+        toc.appendChild(lectureList);
+
+        var lectureNameToTaskList = [];
+
+        for (var tagIndex = 0; tagIndex < parentTags.length; tagIndex++) {
+
+            if (elementIsDisplayed(parentTags[tagIndex]) === false) {
+                continue;
+            }
+
+
+            var lectureName = getTextContentOfChildElement(parentTags, tagIndex, lectureTag);
+            var lectureListElement = createLectureListElement(lectureName);
+
+            if (lectureNameToTaskList[lectureName] === undefined) {
+                lectureList.appendChild(lectureListElement);
+
+                var taskList = document.createElement("ul");
+                lectureListElement.appendChild(taskList);
+
+                lectureNameToTaskList[lectureName] = taskList;
+            }
+
+            var taskName = getTextContentOfChildElement(parentTags, tagIndex, taskTag);
+            var taskListElement = createTaskListElement(taskName, parentTags[tagIndex]);
+
+            lectureNameToTaskList[lectureName].appendChild(taskListElement);
+        }
+    }
+
+    function elementIsDisplayed(element) {
+        return getComputedStyle(element)
+            .getPropertyValue("display") !== "none";
     }
 
     function createLectureListElement(textContent) {

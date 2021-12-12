@@ -17,15 +17,12 @@ type TemplateType = "image" | "iframe";
 
 class LectureContentLoader {
     private _lectureContent: LectureContent[];
-    private readonly _contentRootQuery: string;
 
     constructor(contentRootQuery: string, jsonFilePath: string) {
-        this._contentRootQuery = contentRootQuery;
-
         (async () => {
             try {
                 this._lectureContent = await this._loadLectureContent(jsonFilePath);
-                this._renderLectureContent();
+                this._renderLectureContent(contentRootQuery);
             } catch (e) {
                 console.error(e);
             }
@@ -37,20 +34,15 @@ class LectureContentLoader {
         return response.json();
     }
 
-    private _renderLectureContent() {
-        const contentRoot = document.querySelector(this._contentRootQuery);
+    private _renderLectureContent(contentRootQuery) {
         let content: LectureContent;
+        let html : string = "";
 
         for (content of this._lectureContent) {
-            contentRoot.insertAdjacentHTML(
-                "beforeend",
-                this._htmlCode(
-                    content,
-                    this._templateCode,
-                    this._linkCode
-                )
-            )
+            html += this._htmlCode(content, this._templateCode, this._linkCode);
         }
+
+        document.querySelector(contentRootQuery).innerHTML = html;
     }
 
     private _htmlCode(
