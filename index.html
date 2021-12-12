@@ -2,18 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, user-scalable=yes">
+    <meta content="width=device-width, initial-scale=1, user-scalable=yes"
+          name="viewport">
 
     <title>Web Engineering - Semesterprojekt</title>
 
-    <link rel="stylesheet" href="./style.css">
-    <script defer src="upgrade_to_javascript_and_dom.js"></script>
+    <link href="./style.css" rel="stylesheet">
+
+    <!-- adds a table of contents to the menu -->
+    <script defer src="./upgrade_to_javascript_and_dom.js"></script>
+
+    <!-- adds a fulltext search to the menu, that filters the sections -->
+    <script defer src="./upgrade_to_ecmascript.js"></script>
 </head>
 
 <body>
 
-<div id="menu"></div>
+<div id="menu">
+    <div id="menuToggle">
+        <!-- scalable "burger menu", source: https://icons8.com/icons/set/menu -->
+        <svg viewBox="0 0 24 24" x="0px" xmlns="http://www.w3.org/2000/svg"
+             y="0px">
+            <path d="M 2 5 L 2 7 L 22 7 L 22 5 L 2 5 z M 2 11 L 2 13 L 22 13 L 22 11 L 2 11 z M 2 17 L 2 19 L 22 19 L 22 17 L 2 17 z"/>
+        </svg>
+        <span>Menü</span>
+    </div>
+
+    <div id="menuContent"></div>
+</div>
 
 <header>
     <h1><span>Ein&shy;führ&shy;ung in </span>Web En&shy;gi&shy;nee&shy;ring</h1>
@@ -35,7 +51,7 @@
 
         <div class="taskDetails">
             <div class="taskTemplate">
-                <img loading="lazy" alt="Vorlage 1.1.4"
+                <img alt="Vorlage 1.1.4" loading="lazy"
                      src="./uebungen/01_einfuehrung/04_wireframe_vorlage.jpg">
             </div>
 
@@ -62,7 +78,8 @@
 
         <div class="taskDetails">
             <div class="taskTemplate">
-               <iframe loading="lazy" src="https://www.youtube.com/embed/PE3POxjDspo"></iframe>
+                <iframe loading="lazy"
+                        src="https://www.youtube.com/embed/PE3POxjDspo"></iframe>
             </div>
 
             <div class="taskLinks">
@@ -88,7 +105,8 @@
 
         <div class="taskDetails">
             <div class="taskTemplate">
-               <iframe loading="lazy" src="https://www.youtube.com/embed/HVmnv3k4__E"></iframe>
+                <iframe loading="lazy"
+                        src="https://www.youtube.com/embed/HVmnv3k4__E"></iframe>
             </div>
 
             <div class="taskLinks">
@@ -114,7 +132,7 @@
 
         <div class="taskDetails">
             <div class="taskTemplate">
-                <img loading="lazy" alt="Vorlage 2.2.3"
+                <img alt="Vorlage 2.2.3" loading="lazy"
                      src="./uebungen/02_css_teil_eins/03_wireframe.png">
             </div>
 
@@ -142,7 +160,7 @@
 
         <div class="taskDetails">
             <div class="taskTemplate">
-                <img loading="lazy" alt="Vorlage 3.3.1"
+                <img alt="Vorlage 3.3.1" loading="lazy"
                      src="./uebungen/03_css_teil_zwei/03_01_responsiv.png">
             </div>
 
@@ -169,7 +187,7 @@
 
         <div class="taskDetails">
             <div class="taskTemplate">
-                <img loading="lazy" alt="Vorlage 3.3.2"
+                <img alt="Vorlage 3.3.2" loading="lazy"
                      src="./uebungen/03_css_teil_zwei/03_01_responsiv.png">
             </div>
 
@@ -196,7 +214,7 @@
 
         <div class="taskDetails">
             <div class="taskTemplate">
-                <img loading="lazy" alt="Vorlage 3.3.3"
+                <img alt="Vorlage 3.3.3" loading="lazy"
                      src="./uebungen/03_css_teil_zwei/03_03_responsiv_mit_grid.png">
             </div>
 

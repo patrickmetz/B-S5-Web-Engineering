@@ -1,5 +1,3 @@
-/* upgrade homepage to use Javascript and DOM -------------------------------*/
-
 /* kind of a "fake class" created via IIFE ----------------------------------*/
 (function (menuTagId, parentTag, lectureTag, taskTag) {
 
@@ -10,7 +8,9 @@
     var _tocHiddenClass = "hidden";
     var _tocShownClass = "shown";
 
-    var _taskHighlightClass = "tocHighlight";
+    var _toggleLinkText = "Inhaltsverzeichnis";
+
+    var _taskHighlightClass = "taskHighlight";
     var _taskHighlightDuration = 750;
     var _taskHighlightDelay = 250;
 
@@ -64,6 +64,7 @@
 
     function addToggleLinkToMenu(menuTagId) {
         var toggleLink = document.createElement("a");
+        toggleLink.textContent = _toggleLinkText;
         toggleLink.onclick = function(){toggleToc()};
 
         document.getElementById(menuTagId).appendChild(toggleLink);
@@ -143,7 +144,7 @@
 
     /* invoke IIFE with arguments -------------------------------------------*/
 
-})('menu', 'section', 'h3', 'h4');
+})('menuContent', 'section', 'h3', 'h4');
 
 
 
