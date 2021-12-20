@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Übung 11.2</title>
+
+    <script defer src="https://unpkg.com/vue"></script>
+    <script type="module" src="02_menue_komponente.mjs"></script>
+
+    <script type="module">
+        new Vue({
+            el: '#app'
+        });
+    </script>
+
+    <style>
+        #app ul{
+            display: flex;
+            flex-direction: row;
+            list-style: none;
+            border:1px solid gray;
+            width:25%;
+        }
+
+        #app li{
+            padding-right:1em;
+        }
+
+        #app ul.vertical{
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- source: https://stackoverflow.com/a/54926442 -->
+        <my-menu :entries='[{id: 1, content: "eintrag 1"}, {id: 2, content: "eintrag 2"}]'></my-menu>
+        <my-menu is-vertical :entries='[{id: 1, content: "eintrag 1"}, {id: 2, content: "eintrag 2"}]'></my-menu>
+    </div>
+</body>
+</html>
