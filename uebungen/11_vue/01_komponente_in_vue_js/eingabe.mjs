@@ -3,9 +3,9 @@ Vue.component(
         template: `
           <div>
           <input @keyup="update" type="text" placeholder="Eingabe"/>
-          <input type="text" v-model="characterCount" placeholder="Buchstaben"/>
-          <input type="text" v-model="spaceCount" placeholder="Leerzeichen"/>
-          <input type="text" v-model="wordCount" placeholder="Wörter"/>
+          <input type="text" v-bind:value="characterCount" placeholder="Buchstaben"/>
+          <input type="text" v-bind:value="spaceCount" placeholder="Leerzeichen"/>
+          <input type="text" v-bind:value="wordCount" placeholder="Wörter"/>
           </div>
         `,
         data: function () {
