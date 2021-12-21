@@ -1,9 +1,6 @@
 <template>
   <aside class="left">
-    my-aside-left
-    {{topicId}}
     <my-menu :entries='menuEntries()' name="subtopic" v-on:menu="bubbleMenuEvent"></my-menu>
-
   </aside>
 </template>
 
@@ -50,9 +47,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-aside.left {
-  background: cornflowerblue;
-}
-</style>

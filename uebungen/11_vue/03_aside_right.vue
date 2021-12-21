@@ -1,5 +1,5 @@
 <template>
-  <aside class="right">my-aside-right {{content()}}</aside>
+  <aside class="right">{{content()}}</aside>
 </template>
 
 <script>
@@ -35,9 +35,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-aside.right{
-  background: cyan;
-}
-</style>

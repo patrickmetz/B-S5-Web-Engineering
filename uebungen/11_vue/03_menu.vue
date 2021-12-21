@@ -44,18 +44,5 @@ export default {
 </script>
 
 <style scoped>
-ul {
-  display: flex;
-  flex-direction: row;
-  list-style: none;
-  width: 25%;
-}
 
-li {
-  padding-right: 1em;
-}
-
-ul.vertical {
-  flex-direction: column;
-}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <article>my-article {{content()}}</article>
+  <article>{{content()}}</article>
 </template>
 
 <script>
@@ -35,9 +35,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-article {
-  background: springgreen;
-}
-</style>

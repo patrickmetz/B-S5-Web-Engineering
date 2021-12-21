@@ -1,6 +1,5 @@
 <template>
   <header>
-    my-header
     <my-menu :entries='menuEntries()' name="topic" v-on:menu="bubbleMenuEvent"></my-menu>
   </header>
 </template>
@@ -36,8 +35,3 @@ export default {
 }
 </script>
 
-<style scoped>
-header {
-  background: orange;
-}
-</style>
