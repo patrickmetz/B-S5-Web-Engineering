@@ -6,7 +6,7 @@
 
 <script>
 
-import MyMenu from "./03_menu.vue";
+import MyMenu from "./menu.vue";
 
 export default {
   name: "my-aside-left",

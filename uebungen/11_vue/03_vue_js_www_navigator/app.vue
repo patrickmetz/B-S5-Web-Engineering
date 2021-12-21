@@ -20,11 +20,11 @@
 // source: https://stackoverflow.com/a/45566350
 import json from './navigator_contents.json'
 
-import MyFooter from "./03_footer.vue";
-import MyHeader from "./03_header.vue";
-import MyAsideLeft from "./03_aside_left.vue";
-import MyAsideRight from "./03_aside_right.vue";
-import MyArticle from "./03_article.vue";
+import MyFooter from "./footer.vue";
+import MyHeader from "./header.vue";
+import MyAsideLeft from "./aside_left.vue";
+import MyAsideRight from "./aside_right.vue";
+import MyArticle from "./article.vue";
 
 export default {
   components: {MyArticle, MyAsideRight, MyAsideLeft, MyHeader, MyFooter},
