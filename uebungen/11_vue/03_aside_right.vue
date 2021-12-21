@@ -1,5 +1,7 @@
 <template>
-  <aside class="right">{{content()}}</aside>
+  <aside class="right">
+    <a v-if="content() !== ''" v-bind:href="content()" target="_blank">Quelle</a>
+  </aside>
 </template>
 
 <script>

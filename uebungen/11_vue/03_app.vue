@@ -103,13 +103,17 @@ body {
   padding-top: var(--padding);
 }
 
+#my-navigator a{
+  text-decoration: none;
+}
+
 #my-navigator li {
   padding-right: 1em;
   padding-bottom:1em;
   cursor:pointer;
 }
 
-#my-navigator li:hover{
+#my-navigator li:hover, #my-navigator a:hover{
   text-decoration: underline;
 }
 
@@ -132,6 +136,11 @@ body {
   grid-area: aside_right;
   background-color: var(--background-color-2);
   padding-left: var(--padding);
+}
+
+#my-navigator aside.right a{
+  display: block;
+  padding-top: var(--padding);
 }
 
 #my-navigator article {
