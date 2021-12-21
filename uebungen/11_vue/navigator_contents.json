@@ -1,0 +1,47 @@
+[
+  {
+    "topic": "html",
+    "subtopics": [
+      {
+        "name": "html",
+        "content": "html-content",
+        "references": "html-references"
+      },
+      {
+        "name": "headings",
+        "content": "headings-content",
+        "references": "headings-references"
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "subtopics": [
+      {
+        "name": "css",
+        "content": "css-content",
+        "references": "css-references"
+      },
+      {
+        "name": "selectors",
+        "content": "selectors-content",
+        "references": "selectors-references"
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "subtopics": [
+      {
+        "name": "javascript",
+        "content": "javascript-content",
+        "references": "javascript-references"
+      },
+      {
+        "name": "ecmascript",
+        "content": "ecmascript-content",
+        "references": "ecmascript-references"
+      }
+    ]
+  }
+]
