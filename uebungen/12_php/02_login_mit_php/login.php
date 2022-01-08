@@ -1,45 +1,15 @@
 <?php
 error_reporting(E_ALL ^ E_NOTICE);
 
-class Login
+require_once "../UserManagement.php";
+
+class Login extends UserManagement
 {
-    private $_userName;
-    private $_userPass;
-    private $_minLength = 3;
-
-    private $_hasError;
-    private $_errorMessage;
-
-    private $_isSuccess;
-    private $_successMessage;
-    private $_credentialsPath;
-
-    public function __construct($credentialsPath)
-    {
-        $this->_credentialsPath = $credentialsPath;
-        $this->_userName = $this->_filteredPostVariable('user_name');
-        $this->_userPass = $this->_filteredPostVariable('user_pass');
-
-        if (
-            $this->_isInputOk("Benutzername", $this->_userName)
-            and
-            $this->_isInputOk("Passwort", $this->_userPass)
-            and
-            $this->_startSession()
-
-        ) {
-            $this->_successMessage = "Benutzer {$this->_userName} wurde angemeldet.";
-            $this->_isSuccess = true;
-        } else {
-            $this->_hasError = true;
-        }
-    }
-
-    private function _startSession()
+    protected function _userAction()
     {
         if($this->_existsUser()){
-            setcookie("eingeloggt", "1", time() + 300); // five minutes session
-            $this->_successMessage = "Benutzer {$this->_userName} wurde angemeldet.";
+            setcookie("eingeloggt", "1", time() + 60); // one-minute session
+            $this->_successMessage = "Benutzer {$this->_userName} wurde eingeloggt.";
 
             return true;
         }
@@ -88,50 +58,6 @@ class Login
         fclose($file);
 
         return $fileContent;
-    }
-
-    private function _filteredPostVariable($name)
-    {
-        return filter_input(INPUT_POST, $name, FILTER_SANITIZE_STRING);
-    }
-
-    private function _isInputOk($name, $value)
-    {
-        $value = trim($value);
-
-        if ((empty($value)) or (strlen($value) < $this->_minLength)) {
-            $this->_logError(
-                $name . " muss mindestens {$this->_minLength} Zeichen lang sein.\n"
-            );
-            return false;
-        }
-
-        return true;
-    }
-
-    private function _logError($error)
-    {
-        $this->_errorMessage .= $error . "</br>";
-    }
-
-    public function hasError()
-    {
-        return $this->_hasError;
-    }
-
-    public function isSuccess()
-    {
-        return $this->_isSuccess;
-    }
-
-    public function getErrorMessage()
-    {
-        return $this->_errorMessage;
-    }
-
-    public function getSuccessMessage()
-    {
-        return $this->_successMessage;
     }
 }
 
