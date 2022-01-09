@@ -52,6 +52,10 @@ ul {
     top:1em;
 }
 
+#header nav.user_management li {
+    padding-left:1em;
+}
+
 aside{
     padding-top: var(--padding);
 }
