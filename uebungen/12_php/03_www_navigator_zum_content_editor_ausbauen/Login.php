@@ -1,8 +1,8 @@
 <?php
 
-require_once "./UserManagement.php";
+require_once "./Loggable.php";
 
-class Login extends UserManagement
+class Login extends Loggable
 {
     protected $_userName;
     protected $_userPass;
@@ -15,17 +15,9 @@ class Login extends UserManagement
         $this->_userName = $this->_filteredPostVariable('user_name');
         $this->_userPass = $this->_filteredPostVariable('user_pass');
 
-        if (
-            $this->_isInputOk("Benutzername", $this->_userName, $this->_minLength)
-            and
-            $this->_isInputOk("Passwort", $this->_userPass, $this->_minLength)
-            and
-            $this->_login()
-        ) {
-            $this->_isSuccess = true;
-        } else {
-            $this->_hasError = true;
-        }
+        $this->_checkInput("Benutzername", $this->_userName, $this->_minLength);
+        $this->_checkInput("Passwort", $this->_userPass, $this->_minLength);
+        $this->_login();
     }
 
     protected function _login()
@@ -33,12 +25,12 @@ class Login extends UserManagement
         if ($this->_existsUser()) {
             //todo: use php's session functionality, and a random session id
             setcookie("eingeloggt", "1", time() + 300); // five-minute session
-            $this->_successMessage = "Benutzer {$this->_userName} wurde eingeloggt.";
+            $this->logSuccess("Benutzer {$this->_userName} wurde eingeloggt.");
 
             return true;
         }
 
-        $this->_logError("Benutzer {$this->_userName} existiert nicht.");
+        $this->logError("Benutzer {$this->_userName} existiert nicht.");
 
         return false;
     }
@@ -77,11 +69,30 @@ class Login extends UserManagement
             $fileContent = fread($file, pow(2, 16)); // read up to 2 gigabyte
             flock($file, LOCK_UN);
         } else {
-            $this->_logError("Daten konnten nicht geladen werden.");
+            $this->logError("Daten konnten nicht geladen werden.");
         }
         fclose($file);
 
         return $fileContent;
+    }
+
+    protected function _filteredPostVariable($name)
+    {
+        return filter_input(INPUT_POST, $name, FILTER_SANITIZE_STRING);
+    }
+
+    protected function _checkInput($name, $value, $minLength)
+    {
+        $value = trim($value);
+
+        if ((empty($value)) or (strlen($value) < $minLength)) {
+            $this->logError(
+                $name . " muss mindestens $minLength Zeichen lang sein.\n"
+            );
+            return false;
+        }
+
+        return true;
     }
 }
 
