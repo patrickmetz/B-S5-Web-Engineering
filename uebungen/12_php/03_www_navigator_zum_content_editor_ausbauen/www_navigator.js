@@ -37,7 +37,16 @@ class WwwNavigator {
         let nav = document.createElement("nav");
         let ul = document.createElement("ul");
 
-        for (const topic in this._jsonContent) {
+        let shownTopics = new Set();
+
+        for (const object of this._jsonContent) {
+            let topic = object["topic"];
+
+            if (shownTopics.has(topic)) {
+                continue;
+            }
+            shownTopics.add(topic);
+
             let a = this.createLink(
                 () => {
                     this.clearContent();
@@ -56,15 +65,19 @@ class WwwNavigator {
     createSubNavigation(topic) {
         let ul = document.createElement("ul");
 
-        for (const subTopic in this._jsonContent[topic]) {
+        for (const object of this._jsonContent) {
+            if (object["topic"] !== topic) {
+                continue;
+            }
+
             let a = this.createLink(
                 () => {
                     this.clearContent();
                     this.clearReferences();
-                    this.loadContent(topic, subTopic);
-                    this.loadReferences(topic, subTopic);
+                    this.loadContent(topic, object["subtopic"]);
+                    this.loadReference(topic, object["subtopic"]);
                 },
-                subTopic
+                object["subtopic"]
             );
 
             ul.appendChild(this.createListElement(a));
@@ -74,29 +87,45 @@ class WwwNavigator {
         this._subNavi.appendChild(ul);
     }
 
-    loadContent(topic, subTopic) {
-        this._content.textContent =
-            this._jsonContent[topic][subTopic]["content"];
+    loadContent(topic, subtopic) {
+        for (const object of this._jsonContent) {
+            if (
+                !(
+                    (object["topic"] === topic)
+                    &&
+                    (object["subtopic"] === subtopic)
+                )
+            ) {
+                continue;
+            }
+
+            this._content.textContent = object["content"];
+        }
     }
 
     clearContent() {
         this._content.textContent = "";
     }
 
-    loadReferences(topic, subTopic) {
+    loadReference(topic, subtopic) {
         let ul = document.createElement("ul");
 
-        let references = this._jsonContent[topic][subTopic]["references"];
-        let referenceCount = 0;
+        for (const object of this._jsonContent) {
+            if (
+                !(
+                    (object["topic"] === topic)
+                    &&
+                    (object["subtopic"] === subtopic)
+                )
+            ) {
+                continue;
+            }
 
-        for (const reference of references) {
             let a = this.createLink(
                 () => {
                 },
-                (references.length > 1)
-                    ? `Quelle ${++referenceCount}`
-                    : "Quelle",
-                reference
+                "Quelle",
+                object["reference"]
             );
 
             ul.appendChild(this.createListElement(a));

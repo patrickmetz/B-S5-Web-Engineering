@@ -1,100 +1,17 @@
-{
-  "html": {
-    "html": {
-      "content": "HTML (HyperText Markup Language) ist der grundlegendste Baustein des Webs. Es beschreibt und definiert den Inhalt einer Webseite zusammen mit dem grundlegenden Layout der Webseite. Neben HTML werden im Allgemeinen andere Technologien verwendet, um das Erscheinungsbild (CSS) oder die Funktionalität/Verhalten (JavaScript) einer Webseite zu beschreiben.",
-      "references": [
-        "https://developer.mozilla.org/de/docs/Web/HTML"
-      ]
-    },
-    "headings": {
-      "content": "Die Überschriftenelemente bestehen aus sechs verschiedenen Leveln. <h1> ist die Überschrift mit der höchsten Gewichtung und <h6> mit der kleinsten. Ein Überschriften-Element beschreibt das Thema des Bereiches, welcher der Überschrift folgt. Überschriften können auch verwendet werden, um ein Inhaltsverzeichnis für ein Dokument automatisch zu erstellen.",
-      "references": [
-        "https://developer.mozilla.org/de/docs/Web/HTML/Element/h1-h6"
-      ]
-    },
-    "paragraph": {
-      "content": "Das <p>-Element erzeugt einen Absatz, den zusammenhängenden Abschnitt eines längeren Textes. In HTML kann <p> jedoch für jedwede Art von zu gruppierendem, zusammenhängendem Inhalt genutzt werden, zum Beispiel Bilder oder Formularfelder.",
-      "references": [
-        "https://developer.mozilla.org/de/docs/Web/HTML/Element/p"
-      ]
-    },
-    "body": {
-      "content": "Das HTML <body> Element repräsentiert den Inhalt eines HTML Dokuments. Es gibt nur ein <body> Element in einem Dokument.",
-      "references": [
-        "https://developer.mozilla.org/de/docs/Web/HTML/Element/body"
-      ]
-    },
-    "link": {
-      "content": "Das HTML-Element <a> (auch HTML-Anker-Element) definiert einen Hyperlink, ein benanntes Ziel für einen Hyperlink oder beides.",
-      "references": [
-        "https://developer.mozilla.org/de/docs/Web/HTML/Element/a"
-      ]
-    }
-  },
-  "css": {
-    "css": {
-      "content": "Cascading Style Sheets, meistens als CSS abgekürzt, ist eine Beschreibungssprache, die das Erscheinungsbild einer in HTML oder XML formatierten Datei (inklusive verschiedener XML-Sprachen wie SVG oder XHTML (en-US)) festlegt. CSS beschreibt, wie ein strukturiertes Element am Bildschirm, auf Papier, in Sprache oder anderen Medien dargestellt wird.",
-      "references": [
-        "https://developer.mozilla.org/de/docs/Web/CSS"
-      ]
-    },
-    "selectors": {
-      "content": "Selektoren definieren, auf welche Elemente eine Reihe von CSS Regeln angewendet wird.",
-      "references": [
-        "https://developer.mozilla.org/de/docs/Web/CSS/CSS_Selectors"
-      ]
-    },
-    "colors": {
-      "content": "Der CSS Datentyp Color beschreibt eine Farbe im sRGB Farbraum. Eine Farbe kann auf eine von drei Arten beschrieben werden: Schlüsselworte, rgb und rgba, hsl und hsla. ...",
-      "references": [
-        "https://developer.mozilla.org/de/docs/Web/CSS/Farben"
-      ]
-    },
-    "grid": {
-      "content": "CSS Grid Layout zeichnet sich dadurch aus, dass eine Seite in Hauptbereiche unterteilt wird oder die Beziehung zwischen Teilen eines Steuerelements, das aus HTML-Grundelementen besteht, in Bezug auf Größe, Position und Layer definiert wird.\n\nGrid Layout ermöglicht es, Elemente in Spalten und Reihen auszurichten, ähnlich wie in Tabellen. Jedoch gibt es viel mehr Gestaltungsmöglichkeiten und diese sind einfacher umzusetzen mit CSS Grid als es mit Tabellen der Fall war. Beispielsweise kann das Kindelement eines Grid-Container-Elements so positioniert werden, dass es andere überlappt und überlagert, ähnlich wie bei mit CSS positionierten Elementen.\n\n",
-      "references": [
-        "https://developer.mozilla.org/de/docs/Web/CSS/CSS_Grid_Layout"
-      ]
-    },
-    "media queries": {
-      "content": "Mit Media Queries können Sie Ihre Website oder App abhängig vom Vorhandensein oder Wert verschiedener Geräteeigenschaften und Parameter anpassen.\n\nSie sind eine Schlüsselkomponente des responsiven Designs. Eine Media Query kann zum Beispiel die Schriftgröße auf kleinen Geräten verkleinern, den Abstand zwischen Absätzen vergrößern, wenn eine Seite im Hochformat angezeigt wird, oder die Größe von Schaltflächen auf Touchscreens erhöhen.",
-      "references": [
-        "https://developer.mozilla.org/de/docs/Web/CSS/Media_Queries"
-      ]
-    }
-  },
-  "javascript": {
-    "javascript": {
-      "content": "JavaScript ist eine plattformübergreifende, objektorientierte Skriptsprache. Es ist eine kompakte und ressourcenschonende Sprache. Innerhalb einer Host-Umgebung kann JavaScript mit den Objekten seiner Umgebung verknüpft werden, um diese programmatisch zu steuern.",
-      "references": [
-        "https://developer.mozilla.org/de/docs/Web/JavaScript/Guide/Introduction#was_ist_javascript"
-      ]
-    },
-    "ecmascript": {
-      "content": "JavaScript wird durch Ecma International standardisiert — den europäischen Verband zur Standardisierung von Informations- und Telekommunikationssystemen (ECMA war vormals ein Akronym für 'European Computer Manufacturers Association'), um eine standardisierte, internationale Programmiersprache auf der Basis von JavaScript verfügbar zu machen. Diese standardisierte Version von JavaScript, genannt ECMAScript, verhält sich in allen standardkonformen Applikationen identisch. Unternehmen können die offene Sprachdefinition verwenden, um ihre eigene Implementierung von JavaScript zu entwickeln. Der ECMAScript-Standard ist in der Spezifikation ECMA-262 dokumentiert.",
-      "references": [
-        "https://developer.mozilla.org/de/docs/Web/JavaScript/Guide/Introduction#javascript_and_the_ecmascript_specification"
-      ]
-    },
-    "prototype": {
-      "content": "Prototypen dienen als Mechanismus, durch den JavaScript-Objekte Eigenschaften voneinander erben. In diesem Artikel erklären wir, wie Prototypketten funktionieren und betrachten, wie die Prototypeneigenschaft verwendet werden kann, um Methoden zu bestehenden Konstruktoren hinzuzufügen.",
-      "references": [
-        "https://developer.mozilla.org/de/docs/Learn/JavaScript/Objects/Object_prototypes"
-      ]
-    },
-    "function": {
-      "content": "Funktionen sind ein Grundbaustein in JavaScript. Eine Funktion ist eine Prozedur - eine Reihe von Anweisungen, um eine Aufgabe auszuführen oder eine Wert auszurechnen. Um Funktionen zu verwenden, müssen diese im Scope (Gültigkeitsbereich) deklariert werden, in dem sie ausgeführt werden soll.",
-      "references": [
-        "https://developer.mozilla.org/de/docs/Web/JavaScript/Guide/Funktionen"
-      ]
-    },
-    "object": {
-      "content": "Ein Objekt ist eine Sammlung von zusammenhängenden Daten und/oder Funktionalitäten. Diese bestehen üblicherweise aus verschiedenen Variablen und Funktionen, die Eigenschaften und Methoden genannt werden, wenn sie sich innerhalb von Objekten befinden.",
-      "references": [
-        "https://developer.mozilla.org/de/docs/Learn/JavaScript/Objects/Basics"
-      ]
-    }
-  }
-}
-
-
+[
+  {"topic" :  "html", "subtopic" : "html", "reference" :  "https://developer.mozilla.org/de/docs/Web/HTML", "content": "HTML (HyperText Markup Language) ist der grundlegendste Baustein des Webs. Es beschreibt und definiert den Inhalt einer Webseite zusammen mit dem grundlegenden Layout der Webseite. Neben HTML werden im Allgemeinen andere Technologien verwendet, um das Erscheinungsbild (CSS) oder die Funktionalität/Verhalten (JavaScript) einer Webseite zu beschreiben."},
+  {"topic" :  "html", "subtopic" : "headings", "reference" :  "https://developer.mozilla.org/de/docs/Web/HTML/Element/h1-h6", "content": "Die Überschriftenelemente bestehen aus sechs verschiedenen Leveln. <h1> ist die Überschrift mit der höchsten Gewichtung und <h6> mit der kleinsten. Ein Überschriften-Element beschreibt das Thema des Bereiches, welcher der Überschrift folgt. Überschriften können auch verwendet werden, um ein Inhaltsverzeichnis für ein Dokument automatisch zu erstellen."},
+  {"topic" :  "html", "subtopic" : "paragraph", "reference" :  "https://developer.mozilla.org/de/docs/Web/HTML/Element/p", "content": "Das <p>-Element erzeugt einen Absatz, den zusammenhängenden Abschnitt eines längeren Textes. In HTML kann <p> jedoch für jedwede Art von zu gruppierendem, zusammenhängendem Inhalt genutzt werden, zum Beispiel Bilder oder Formularfelder."},
+  {"topic" :  "html", "subtopic" : "body", "reference" :  "https://developer.mozilla.org/de/docs/Web/HTML/Element/body", "content": "Das HTML <body> Element repräsentiert den Inhalt eines HTML Dokuments. Es gibt nur ein <body> Element in einem Dokument."},
+  {"topic" :  "html", "subtopic" : "link", "reference" :  "https://developer.mozilla.org/de/docs/Web/HTML/Element/a", "content": "Das HTML-Element <a> (auch HTML-Anker-Element) definiert einen Hyperlink, ein benanntes Ziel für einen Hyperlink oder beides."},
+  {"topic" :  "css", "subtopic" : "css", "reference" :  "https://developer.mozilla.org/de/docs/Web/CSS", "content": "Cascading Style Sheets, meistens als CSS abgekürzt, ist eine Beschreibungssprache, die das Erscheinungsbild einer in HTML oder XML formatierten Datei (inklusive verschiedener XML-Sprachen wie SVG oder XHTML (en-US)) festlegt. CSS beschreibt, wie ein strukturiertes Element am Bildschirm, auf Papier, in Sprache oder anderen Medien dargestellt wird."},
+  {"topic" :  "css", "subtopic" : "selectors", "reference" :  "https://developer.mozilla.org/de/docs/Web/CSS/CSS_Selectors", "content": "Selektoren definieren, auf welche Elemente eine Reihe von CSS Regeln angewendet wird."},
+  {"topic" :  "css", "subtopic" : "colors", "reference" :  "https://developer.mozilla.org/de/docs/Web/CSS/Farben", "content": "Der CSS Datentyp Color beschreibt eine Farbe im sRGB Farbraum. Eine Farbe kann auf eine von drei Arten beschrieben werden: Schlüsselworte, rgb und rgba, hsl und hsla. ..."},
+  {"topic" :  "css", "subtopic" : "grid", "reference" :  "https://developer.mozilla.org/de/docs/Web/CSS/CSS_Grid_Layout", "content": "CSS Grid Layout zeichnet sich dadurch aus, dass eine Seite in Hauptbereiche unterteilt wird oder die Beziehung zwischen Teilen eines Steuerelements, das aus HTML-Grundelementen besteht, in Bezug auf Größe, Position und Layer definiert wird.\n\nGrid Layout ermöglicht es, Elemente in Spalten und Reihen auszurichten, ähnlich wie in Tabellen. Jedoch gibt es viel mehr Gestaltungsmöglichkeiten und diese sind einfacher umzusetzen mit CSS Grid als es mit Tabellen der Fall war. Beispielsweise kann das Kindelement eines Grid-Container-Elements so positioniert werden, dass es andere überlappt und überlagert, ähnlich wie bei mit CSS positionierten Elementen.\n\n"},
+  {"topic" :  "css", "subtopic" : "media queries", "reference" :  "https://developer.mozilla.org/de/docs/Web/CSS/Media_Queries", "content": "Mit Media Queries können Sie Ihre Website oder App abhängig vom Vorhandensein oder Wert verschiedener Geräteeigenschaften und Parameter anpassen.\n\nSie sind eine Schlüsselkomponente des responsiven Designs. Eine Media Query kann zum Beispiel die Schriftgröße auf kleinen Geräten verkleinern, den Abstand zwischen Absätzen vergrößern, wenn eine Seite im Hochformat angezeigt wird, oder die Größe von Schaltflächen auf Touchscreens erhöhen."},
+  {"topic" :  "javascript", "subtopic" : "javascript", "reference" :  "https://developer.mozilla.org/de/docs/Web/JavaScript/Guide/Introduction#was_ist_javascript", "content": "JavaScript ist eine plattformübergreifende, objektorientierte Skriptsprache. Es ist eine kompakte und ressourcenschonende Sprache. Innerhalb einer Host-Umgebung kann JavaScript mit den Objekten seiner Umgebung verknüpft werden, um diese programmatisch zu steuern."},
+  {"topic" :  "javascript", "subtopic" : "ecmascript", "reference" :  "https://developer.mozilla.org/de/docs/Web/JavaScript/Guide/Introduction#javascript_and_the_ecmascript_specification", "content": "JavaScript wird durch Ecma International standardisiert — den europäischen Verband zur Standardisierung von Informations- und Telekommunikationssystemen (ECMA war vormals ein Akronym für 'European Computer Manufacturers Association'), um eine standardisierte, internationale Programmiersprache auf der Basis von JavaScript verfügbar zu machen. Diese standardisierte Version von JavaScript, genannt ECMAScript, verhält sich in allen standardkonformen Applikationen identisch. Unternehmen können die offene Sprachdefinition verwenden, um ihre eigene Implementierung von JavaScript zu entwickeln. Der ECMAScript-Standard ist in der Spezifikation ECMA-262 dokumentiert."},
+  {"topic" :  "javascript", "subtopic" : "prototype", "reference" :  "https://developer.mozilla.org/de/docs/Learn/JavaScript/Objects/Object_prototypes", "content": "Prototypen dienen als Mechanismus, durch den JavaScript-Objekte Eigenschaften voneinander erben. In diesem Artikel erklären wir, wie Prototypketten funktionieren und betrachten, wie die Prototypeneigenschaft verwendet werden kann, um Methoden zu bestehenden Konstruktoren hinzuzufügen."},
+  {"topic" :  "javascript", "subtopic" : "function", "reference" :  "https://developer.mozilla.org/de/docs/Web/JavaScript/Guide/Funktionen", "content": "Funktionen sind ein Grundbaustein in JavaScript. Eine Funktion ist eine Prozedur - eine Reihe von Anweisungen, um eine Aufgabe auszuführen oder eine Wert auszurechnen. Um Funktionen zu verwenden, müssen diese im Scope (Gültigkeitsbereich) deklariert werden, in dem sie ausgeführt werden soll."},
+  {"topic" :  "javascript", "subtopic" : "object", "reference" :  "https://developer.mozilla.org/de/docs/Learn/JavaScript/Objects/Basics", "content": "Ein Objekt ist eine Sammlung von zusammenhängenden Daten und/oder Funktionalitäten. Diese bestehen üblicherweise aus verschiedenen Variablen und Funktionen, die Eigenschaften und Methoden genannt werden, wenn sie sich innerhalb von Objekten befinden."}
+]

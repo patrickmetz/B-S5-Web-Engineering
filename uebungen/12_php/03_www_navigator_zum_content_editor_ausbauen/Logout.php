@@ -16,5 +16,4 @@ class Logout extends Loggable
             $this->logError("Es ist Niemand eingeloggt.");
         }
     }
-
 }
