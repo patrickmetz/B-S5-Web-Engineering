@@ -1,10 +1,35 @@
 <?php
 $action = array_key_exists('action', $_GET) ? $_GET['action'] : null;
+
 $showLogin = ($action === 'showLogin');
 $doLogin = ($action === 'doLogin');
+$isLoggedIn = array_key_exists('eingeloggt', $_COOKIE);
 
-if($doLogin){
+$doLogout = ($action === 'doLogout');
 
+$sessionStateMessage = null;
+
+if ($doLogin) {
+    require_once "./Login.php";
+    $login = new Login("./credentials.txt");
+
+    if (!$login->hasError()) {
+        $isLoggedIn = true;
+        $sessionStateMessage = $login->getSuccessMessage();
+    } else {
+        $sessionStateMessage = $login->getErrorMessage();
+    }
+} elseif ($doLogout) {
+    require_once "./Logout.php";
+
+    $logout = new Logout();
+
+    if (!$logout->hasError()) {
+        $isLoggedIn = false;
+        $sessionStateMessage = $logout->getSuccessMessage();
+    } else {
+        $sessionStateMessage = $logout->getErrorMessage();
+    }
 }
 
 ?>
@@ -32,7 +57,11 @@ if($doLogin){
 <header id="header">
     <nav class="user_management">
         <ul>
-            <li><a href="www_navigator.php?action=showLogin">Login</a></li>
+            <?php if ($isLoggedIn): ?>
+                <li><a href="www_navigator.php?action=doLogout">Logout</a></li>
+            <?php else: ?>
+                <li><a href="www_navigator.php?action=showLogin">Login</a></li>
+            <?php endif; ?>
         </ul>
     </nav>
 </header>
@@ -44,8 +73,8 @@ if($doLogin){
         <h1>Einloggen</h1>
 
         <form
-            method="post" enctype="application/x-www-form-urlencoded"
-            action="./www_navigator.php?action=doLogin"
+                method="post" enctype="application/x-www-form-urlencoded"
+                action="./www_navigator.php?action=doLogin"
         >
             <table>
                 <tr>
@@ -54,30 +83,17 @@ if($doLogin){
                 </tr>
                 <tr>
                     <td>Passwort</td>
-                    <td><input type="password" name="user_pass" value="12345"></td>
+                    <td><input type="password" name="user_pass" value="12345">
+                    </td>
                 </tr>
                 <tr>
                     <td><input type="submit"></td>
                 </tr>
             </table>
         </form>
-    <?php elseif($doLogin): ?>
+    <?php elseif ($doLogin || $doLogout): ?>
         <div>
-            <?php
-                require_once "./login.php";
-
-                if ($_COOKIE["eingeloggt"] !== "1") {
-                    $login = new Login("./credentials.txt");
-
-                    if ($login->hasError()) {
-                        echo $login->getErrorMessage();
-                    } elseif ($login->isSuccess()) {
-                        echo $login->getSuccessMessage();
-                    }
-                } else {
-                    echo "Sie sind bereits angemeldet.";
-                }
-            ?>
+            <?php echo $sessionStateMessage; ?>
         </div>
     <?php endif; ?>
 </article>

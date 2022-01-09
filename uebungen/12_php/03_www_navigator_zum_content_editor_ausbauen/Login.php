@@ -1,10 +1,34 @@
 <?php
 
-require_once "./user_management.php";
+require_once "./UserManagement.php";
 
 class Login extends UserManagement
 {
-    protected function _userAction()
+    protected $_userName;
+    protected $_userPass;
+    protected $_credentialsPath;
+    protected $_minLength = 3;
+
+    public function __construct($credentialsPath)
+    {
+        $this->_credentialsPath = $credentialsPath;
+        $this->_userName = $this->_filteredPostVariable('user_name');
+        $this->_userPass = $this->_filteredPostVariable('user_pass');
+
+        if (
+            $this->_isInputOk("Benutzername", $this->_userName, $this->_minLength)
+            and
+            $this->_isInputOk("Passwort", $this->_userPass, $this->_minLength)
+            and
+            $this->_login()
+        ) {
+            $this->_isSuccess = true;
+        } else {
+            $this->_hasError = true;
+        }
+    }
+
+    protected function _login()
     {
         if ($this->_existsUser()) {
             //todo: use php's session functionality, and a random session id
