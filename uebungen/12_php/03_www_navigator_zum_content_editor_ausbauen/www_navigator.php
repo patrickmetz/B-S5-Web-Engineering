@@ -1,11 +1,15 @@
 <?php
 
+require_once "./Content.php";
+
 // form urls add GET params to all POST requests
 $do = array_key_exists('do', $_GET) ? $_GET['do'] : null;
 $isLoggedIn = array_key_exists('eingeloggt', $_COOKIE);
 
 $result = null;
 $showBackButton = false;
+
+$oldContent = null;
 
 function prepareResult(Loggable $loggable)
 {
@@ -30,6 +34,7 @@ if ($do === 'login') {
     prepareResult($login);
 } elseif ($do === 'logout') {
     require_once "./Logout.php";
+
     $logout = new Logout();
     $logout->logout();
 
@@ -39,7 +44,6 @@ if ($do === 'login') {
 
     prepareResult($logout);
 } elseif ($do === 'createEntry') {
-    require_once "./Content.php";
     $content = new Content(
         './contents.json',
         $_POST["topic"],
@@ -47,7 +51,31 @@ if ($do === 'login') {
         $_POST["reference"],
         $_POST["content"]
     );
-    $content->write();
+    $content->create();
+
+    prepareResult($content);
+} elseif ($do === 'showUpdateForm') {
+    $content = new Content(
+        './contents.json',
+        $_GET["topic"],
+        $_GET["subtopic"],
+        null,
+        null
+    );
+
+    global $oldContent;
+    $oldContent = $content->read();
+
+    prepareResult($content);
+}elseif ($do === 'updateEntry') {
+    $content = new Content(
+        './contents.json',
+        $_POST["topic"],
+        $_POST["subtopic"],
+        $_POST["reference"],
+        $_POST["content"]
+    );
+    $content->update();
 
     prepareResult($content);
 }
@@ -68,7 +96,8 @@ if ($do === 'login') {
 <?php if (!($do === 'showLogin')): ?>
 <body onload='new WwwNavigator(
     "header", "aside_left", "article", "aside_right",
-    "./contents.json"
+    "./contents.json",
+    "eingeloggt", "www_navigator.php?do=showUpdateForm"
 );'>
 <?php else: ?>
 <body>
@@ -78,7 +107,7 @@ if ($do === 'login') {
     <nav class="user_management">
         <ul>
             <?php if ($isLoggedIn): ?>
-                <li><a href="www_navigator.php?do=showContentForm">neuer
+                <li><a href="www_navigator.php?do=showCreateForm">neuer
                         Inhalt</a></li>
                 <li><a href="www_navigator.php?do=logout">Logout</a></li>
             <?php else: ?>
@@ -121,7 +150,7 @@ if ($do === 'login') {
                 </tr>
             </table>
         </form>
-    <?php elseif (($do === 'showContentForm') && $isLoggedIn): ?>
+    <?php elseif (($do === 'showCreateForm') && $isLoggedIn): ?>
         <h1>Neuen Inhalt anlegen</h1>
 
         <form
@@ -148,6 +177,55 @@ if ($do === 'login') {
                 </tr>
                 <tr>
                     <td><input type="submit" value="Anlegen"></td>
+                </tr>
+            </table>
+        </form>
+    <?php elseif (($do === 'showUpdateForm') && $isLoggedIn && $oldContent !== null): ?>
+        <h1>Inhalt bearbeiten</h1>
+
+        <form
+                method="post" enctype="application/x-www-form-urlencoded"
+                action="./www_navigator.php?do=updateEntry"
+        >
+            <table>
+                <tr>
+                    <td>Thema</td>
+                    <td>
+                        <input disabled type="text"
+                               value="<?php echo $oldContent->topic; ?>"
+                        >
+                        <input type="hidden" name="topic"
+                               value="<?php echo $oldContent->topic; ?>"
+                        >
+                    </td>
+                </tr>
+                <tr>
+                    <td>Unterhema</td>
+                    <td>
+                        <input disabled type="text"
+                               value="<?php echo $oldContent->subtopic; ?>"
+                        >
+                        <input type="hidden" name="subtopic"
+                               value="<?php echo $oldContent->subtopic; ?>"
+                        >
+                    </td>
+                </tr>
+                <tr>
+                    <td>Quelle</td>
+                    <td>
+                        <input type="text" name="reference"
+                               value="<?php echo $oldContent->reference; ?>"
+                        >
+                    </td>
+                </tr>
+                <tr>
+                    <td>Inhalt</td>
+                    <td>
+                        <textarea name="content" cols="40" rows="20"><?php echo $oldContent->content; ?></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Speichern"></td>
                 </tr>
             </table>
         </form>

@@ -77,8 +77,21 @@ aside{
     padding: var(--padding);
 }
 
-td{
-    padding:0.5em;
+#article td{
+    padding:var(--padding);
+}
+
+#article a{
+    font-weight: bold;
+}
+
+#article a:before{
+   content: " ";
+}
+
+
+#article input[disabled]{
+    cursor: not-allowed;
 }
 
 #footer {

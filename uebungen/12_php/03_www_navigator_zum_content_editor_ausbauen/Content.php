@@ -3,11 +3,6 @@
 require_once "./Loggable.php";
 require_once "./FormHelper.php";
 
-class JsonContent
-{
-
-}
-
 class Content extends Loggable
 {
     private $_jsonFilePath;
@@ -27,7 +22,7 @@ class Content extends Loggable
         $this->_content = htmlspecialchars($content);
     }
 
-    public function write()
+    public function create()
     {
         if (
             $this->_isInputOk("Thema", $this->_topic, $this->_minLength)
@@ -38,24 +33,77 @@ class Content extends Loggable
             &&
             $this->_isInputOk("Inhalt", $this->_content, $this->_minLength)
         ) {
-            $this->_write();
+            $json = json_decode($this->_readFile());
+
+            if ($this->_existsContent($json)) {
+                $this->logError("Unterthema '$this->_subtopic' existiert bereits in Thema '$this->_topic'");
+            } else {
+                $this->_addContentToJson($json);
+
+                $json = $this->_jsonObjectArrayToString($json);
+
+                $this->_writeFile($json);
+            }
         }
     }
 
-
-    private function _write()
+    public function read()
     {
-        $json = json_decode($this->_readFile());
+        if (
+            $this->_isInputOk("Thema", $this->_topic, $this->_minLength)
+            &&
+            $this->_isInputOk("Unterthema", $this->_subtopic, $this->_minLength)
+        ) {
+            $json = json_decode($this->_readFile());
+            $content = $this->_readContent($json);
 
-        if ($this->_existsContent($json)) {
-            $this->logError("Unterthema '$this->_subtopic' existiert bereits in Thema '$this->_topic'");
-        } else {
-            $this->_addContentToJson($json);
-
-            $json = $this->_jsonObjectArrayToString($json);
-
-            $this->_writeFile($json);
+            if ($content !== null) {
+                return $content;
+            } else {
+                $this->logError("Inhalt wurde nicht gefunden.");
+            }
         }
+
+        return null;
+    }
+
+    public function update()
+    {
+        if (
+            $this->_isInputOk("Thema", $this->_topic, $this->_minLength)
+            &&
+            $this->_isInputOk("Unterthema", $this->_subtopic, $this->_minLength)
+            &&
+            $this->_isInputOk("Quelle", $this->_reference, $this->_minLength)
+            &&
+            $this->_isInputOk("Inhalt", $this->_content, $this->_minLength)
+        ) {
+            $json = json_decode($this->_readFile());
+
+            if (!$this->_existsContent($json)) {
+                $this->logError("Inhalt wurde nicht gefunden.");
+            } else {
+                $this->_updateContent($json);
+
+                $json = $this->_jsonObjectArrayToString($json);
+
+                $this->_writeFile($json);
+            }
+        }
+    }
+
+    private function _readContent(&$arrayOfObjects)
+    {
+        foreach ($arrayOfObjects as $content) {
+            if (
+                ($content->topic === $this->_topic)
+                && ($content->subtopic === $this->_subtopic)
+            ) {
+                return $content;
+            }
+        }
+
+        return null;
     }
 
     protected function _isInputOk($name, $value, $minLength)
@@ -72,6 +120,31 @@ class Content extends Loggable
 
     private function _addContentToJson(&$jsonArray)
     {
+        // source: https://stackoverflow.com/a/12138925
+        $content = new stdClass();
+
+        $content->topic = $this->_topic;
+        $content->subtopic = $this->_subtopic;
+        $content->reference = $this->_reference;
+        $content->topic = $this->_topic;
+        $content->content = $this->_content;
+
+        $jsonArray[] = $content;
+    }
+
+    private function _updateContent(&$arrayOfObjects)
+    {
+        foreach ($arrayOfObjects as $content) {
+            if (
+                ($content->topic === $this->_topic)
+                && ($content->subtopic === $this->_subtopic)
+            ) {
+                $content->reference = $this->_reference;
+                $content->content = $this->_content;
+            }
+            return;
+        }
+
         // source: https://stackoverflow.com/a/12138925
         $content = new stdClass();
 
@@ -110,7 +183,7 @@ class Content extends Loggable
         }
     }
 
-    private function _existsContent($arrayOfObjects)
+    private function _existsContent(&$arrayOfObjects)
     {
         foreach ($arrayOfObjects as $object) {
             if (
@@ -132,4 +205,6 @@ class Content extends Loggable
             . implode("," . PHP_EOL, $json)
             . PHP_EOL . "]";
     }
+
+
 }

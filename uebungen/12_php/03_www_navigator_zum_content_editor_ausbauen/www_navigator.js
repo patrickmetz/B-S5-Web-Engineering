@@ -6,34 +6,41 @@ class WwwNavigator {
 
     _jsonContent;
 
-    constructor(idMainNavi, idSubNavi, idContent, idReferences, contentUrl) {
-        this._mainNavi = idToElement(idMainNavi);
-        this._subNavi = idToElement(idSubNavi);
-        this._content = idToElement(idContent);
-        this._references = idToElement(idReferences);
+    _loginCookieName;
+    _editForm;
 
-        function idToElement(id) {
-            return document.getElementById(id);
-        }
+
+    constructor(idMainNavi, idSubNavi, idContent, idReferences, contentUrl, loginCookieName, editForm) {
+        this._mainNavi = document.getElementById(idMainNavi);
+        this._subNavi = document.getElementById(idSubNavi);
+        this._content = document.getElementById(idContent);
+        this._references = document.getElementById(idReferences);
+
+        this._loginCookieName = loginCookieName;
+        this._editForm = editForm;
 
         (async () => {
             try {
-                await this.loadJsonContent(contentUrl);
-                this.createMainNavigation();
+                await this._loadJsonContent(contentUrl);
+                this._createMainNavigation();
             } catch (e) {
                 console.error(e);
             }
         })();
     }
 
-    async loadJsonContent(url) {
+    async _loadJsonContent(url) {
         if (typeof this._jsonContent === "object") return;
 
         const response = await fetch(url);
         this._jsonContent = await response.json();
     }
 
-    createMainNavigation() {
+    _isLoggedIn() {
+        return document.cookie.indexOf(this._loginCookieName) !== -1
+    }
+
+    _createMainNavigation() {
         let nav = document.createElement("nav");
         let ul = document.createElement("ul");
 
@@ -47,22 +54,22 @@ class WwwNavigator {
             }
             shownTopics.add(topic);
 
-            let a = this.createLink(
+            let a = this._createLink(
                 () => {
-                    this.clearContent();
-                    this.createSubNavigation(topic)
+                    this._clearContent();
+                    this._createSubNavigation(topic)
                 },
                 topic
             );
 
-            ul.appendChild(this.createListElement(a));
+            ul.appendChild(this._createListElement(a));
         }
 
         nav.appendChild(ul);
         this._mainNavi.appendChild(nav);
     }
 
-    createSubNavigation(topic) {
+    _createSubNavigation(topic) {
         let ul = document.createElement("ul");
 
         for (const object of this._jsonContent) {
@@ -70,24 +77,25 @@ class WwwNavigator {
                 continue;
             }
 
-            let a = this.createLink(
+            let a = this._createLink(
                 () => {
-                    this.clearContent();
-                    this.clearReferences();
-                    this.loadContent(topic, object["subtopic"]);
-                    this.loadReference(topic, object["subtopic"]);
+                    this._clearContent();
+                    this._clearReferences();
+                    this._loadContent(topic, object["subtopic"]);
+                    this._loadReference(topic, object["subtopic"]);
                 },
                 object["subtopic"]
             );
 
-            ul.appendChild(this.createListElement(a));
+            ul.appendChild(this._createListElement(a));
         }
 
         this._subNavi.innerHTML = "";
         this._subNavi.appendChild(ul);
     }
 
-    loadContent(topic, subtopic) {
+
+    _loadContent(topic, subtopic) {
         for (const object of this._jsonContent) {
             if (
                 !(
@@ -100,14 +108,26 @@ class WwwNavigator {
             }
 
             this._content.textContent = object["content"];
+
+            if (this._isLoggedIn()) {
+                let a = this._createLink(
+                    null,
+                    "Bearbeiten",
+                    this._editForm
+                    + "&topic=" + encodeURI(object["topic"])
+                    + "&subtopic=" + encodeURI(object["subtopic"])
+                );
+
+                this._content.appendChild(a)
+            }
         }
     }
 
-    clearContent() {
+    _clearContent() {
         this._content.textContent = "";
     }
 
-    loadReference(topic, subtopic) {
+    _loadReference(topic, subtopic) {
         let ul = document.createElement("ul");
 
         for (const object of this._jsonContent) {
@@ -121,25 +141,25 @@ class WwwNavigator {
                 continue;
             }
 
-            let a = this.createLink(
+            let a = this._createLink(
                 () => {
                 },
                 "Quelle",
                 object["reference"]
             );
 
-            ul.appendChild(this.createListElement(a));
+            ul.appendChild(this._createListElement(a));
         }
 
-        this.clearReferences();
+        this._clearReferences();
         this._references.appendChild(ul);
     }
 
-    clearReferences() {
+    _clearReferences() {
         this._references.innerHTML = "";
     }
 
-    createLink(clickHandler, textContent, href = "#") {
+    _createLink(clickHandler, textContent, href = "#") {
         let a = document.createElement("a");
 
         a.setAttribute("href", href);
@@ -149,7 +169,7 @@ class WwwNavigator {
         return a;
     }
 
-    createListElement(childElement) {
+    _createListElement(childElement) {
         let li = document.createElement("li");
         li.appendChild(childElement);
 

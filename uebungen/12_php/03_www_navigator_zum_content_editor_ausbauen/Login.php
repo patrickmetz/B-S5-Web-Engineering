@@ -32,7 +32,7 @@ class Login extends Loggable
     {
         if ($this->_existsUser()) {
             //todo: use php's session functionality, and a random session id
-            setcookie("eingeloggt", "1", time() + 300); // five-minute session
+            setcookie("eingeloggt", "1", time() + 600); // ten-minute session
             $this->logSuccess("Benutzer {$this->_userName} wurde eingeloggt.");
 
             return true;
