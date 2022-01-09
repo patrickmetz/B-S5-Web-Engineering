@@ -34,7 +34,6 @@ ul {
     display: flex;
     justify-content: space-evenly;
     align-content: center;
-    padding-top: var(--padding);
 }
 
 #header {
@@ -42,9 +41,19 @@ ul {
     background-color: var(--background-color-1);
 }
 
-#header ul {
+#header nav:not(.user_management) {
     height: 5vh;
     margin-top: 5vh;
+}
+
+#header nav.user_management {
+    position:absolute;
+    right:1em;
+    top:1em;
+}
+
+aside{
+    padding-top: var(--padding);
 }
 
 #aside_left {
@@ -80,7 +89,7 @@ ul {
                     "footer footer"
     }
 
-    #header ul {
+    #header nav:not(.user_management) ul{
         height: 5vh;
         margin-top: 15vh;
     }

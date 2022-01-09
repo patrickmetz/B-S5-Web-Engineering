@@ -34,6 +34,7 @@ class WwwNavigator {
     }
 
     createMainNavigation() {
+        let nav = document.createElement("nav");
         let ul = document.createElement("ul");
 
         for (const topic in this._jsonContent) {
@@ -48,7 +49,8 @@ class WwwNavigator {
             ul.appendChild(this.createListElement(a));
         }
 
-        this._mainNavi.appendChild(ul);
+        nav.appendChild(ul);
+        this._mainNavi.appendChild(nav);
     }
 
     createSubNavigation(topic) {
