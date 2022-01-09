@@ -4,28 +4,28 @@
 $do = array_key_exists('do', $_GET) ? $_GET['do'] : null;
 $isLoggedIn = array_key_exists('eingeloggt', $_COOKIE);
 
-$message = null;
+$log = null;
 
-function setLoggedMessage(Loggable $loggable)
+function logResult(Loggable $loggable)
 {
-    global $message;
+    global $log;
 
     if ($loggable->hasError()) {
-        $message = $loggable->getErrorMessage();
+        $log = $loggable->getErrorMessage();
     } else {
-        $message = $loggable->getSuccessMessage();
+        $log = $loggable->getSuccessMessage();
     }
 }
 
 if ($do === 'login') {
     require_once "./Login.php";
-    $login = new Login("./credentials.txt");
+    $login = new Login("./credentials.txt",  $_POST["user_name"], $_POST["user_pass"]);
     $login->login();
 
     if (!$login->hasError()) {
         $isLoggedIn = true;
     }
-    setLoggedMessage($login);
+    logResult($login);
 } elseif ($do === 'logout') {
     require_once "./Logout.php";
     $logout = new Logout();
@@ -35,7 +35,7 @@ if ($do === 'login') {
         $isLoggedIn = false;
     }
 
-    setLoggedMessage($logout);
+    logResult($logout);
 } elseif ($do === 'doCreateEntry') {
     require_once "./Content.php";
     $content = new Content(
@@ -47,7 +47,7 @@ if ($do === 'login') {
     );
     $content->write();
 
-    setLoggedMessage($content);
+    logResult($content);
 }
 
 ?>
@@ -113,7 +113,7 @@ if ($do === 'login') {
         </form>
     <?php elseif (($do === 'login') || ($do === 'logout')): ?>
         <div>
-            <?php echo $message; ?>
+            <?php echo $log; ?>
         </div>
     <?php elseif (($do === 'showCreateEntry')): ?>
         <h1>Neuen Inhalt anlegen</h1>

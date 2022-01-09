@@ -9,11 +9,11 @@ class Login extends Loggable
     protected $_credentialsPath;
     protected $_minLength = 3;
 
-    public function __construct($credentialsPath)
+    public function __construct($credentialsPath, $userName, $userPass)
     {
         $this->_credentialsPath = $credentialsPath;
-        $this->_userName = $this->_filteredPostVariable('user_name');
-        $this->_userPass = $this->_filteredPostVariable('user_pass');
+        $this->_userName = $userName;
+        $this->_userPass = $userPass;
     }
 
     public function login(){
@@ -76,11 +76,6 @@ class Login extends Loggable
         fclose($file);
 
         return $fileContent;
-    }
-
-    protected function _filteredPostVariable($name)
-    {
-        return filter_input(INPUT_POST, $name, FILTER_SANITIZE_STRING);
     }
 
     protected function _checkInput($name, $value, $minLength)
