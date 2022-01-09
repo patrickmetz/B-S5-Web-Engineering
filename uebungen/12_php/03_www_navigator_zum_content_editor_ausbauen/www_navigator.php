@@ -4,29 +4,50 @@
 $do = array_key_exists('do', $_GET) ? $_GET['do'] : null;
 $isLoggedIn = array_key_exists('eingeloggt', $_COOKIE);
 
-$sessionMessage = null;
+$message = null;
 
-if (($do === 'login')) {
+function setLoggedMessage(Loggable $loggable)
+{
+    global $message;
+
+    if ($loggable->hasError()) {
+        $message = $loggable->getErrorMessage();
+    } else {
+        $message = $loggable->getSuccessMessage();
+    }
+}
+
+if ($do === 'login') {
     require_once "./Login.php";
     $login = new Login("./credentials.txt");
+    $login->login();
 
-    if ($login->hasError()) {
-        $sessionMessage = $login->getErrorMessage();
-    } else {
+    if (!$login->hasError()) {
         $isLoggedIn = true;
-        $sessionMessage = $login->getSuccessMessage();
     }
-} elseif (($do === 'logout')) {
+    setLoggedMessage($login);
+} elseif ($do === 'logout') {
     require_once "./Logout.php";
-
     $logout = new Logout();
+    $logout->logout();
 
-    if ($logout->hasError()) {
-        $sessionMessage = $logout->getErrorMessage();
-    } else {
+    if (!$logout->hasError()) {
         $isLoggedIn = false;
-        $sessionMessage = $logout->getSuccessMessage();
     }
+
+    setLoggedMessage($logout);
+} elseif ($do === 'doCreateEntry') {
+    require_once "./Content.php";
+    $content = new Content(
+        './contents.json',
+        $_POST["topic"],
+        $_POST["subtopic"],
+        $_POST["reference"],
+        $_POST["content"]
+    );
+    $content->write();
+
+    setLoggedMessage($content);
 }
 
 ?>
@@ -55,7 +76,8 @@ if (($do === 'login')) {
     <nav class="user_management">
         <ul>
             <?php if ($isLoggedIn): ?>
-                <li><a href="www_navigator.php?do=showCreateEntry">neuer Inhalt</a></li>
+                <li><a href="www_navigator.php?do=showCreateEntry">neuer
+                        Inhalt</a></li>
                 <li><a href="www_navigator.php?do=logout">Logout</a></li>
             <?php else: ?>
                 <li><a href="www_navigator.php?do=showLogin">Login</a></li>
@@ -91,7 +113,7 @@ if (($do === 'login')) {
         </form>
     <?php elseif (($do === 'login') || ($do === 'logout')): ?>
         <div>
-            <?php echo $sessionMessage; ?>
+            <?php echo $message; ?>
         </div>
     <?php elseif (($do === 'showCreateEntry')): ?>
         <h1>Neuen Inhalt anlegen</h1>
@@ -111,11 +133,12 @@ if (($do === 'login')) {
                 </tr>
                 <tr>
                     <td>Quelle</td>
-                    <td><input type="text" name="topic"></td>
+                    <td><input type="text" name="reference"></td>
                 </tr>
                 <tr>
                     <td>Inhalt</td>
-                    <td><textarea name="content" cols="40" rows="20"></textarea></td>
+                    <td><textarea name="content" cols="40" rows="20"></textarea>
+                    </td>
                 </tr>
                 <tr>
                     <td><input type="submit"></td>

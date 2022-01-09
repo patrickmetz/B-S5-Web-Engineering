@@ -4,7 +4,7 @@ require_once "./Loggable.php";
 
 class Logout extends Loggable
 {
-    public function __construct()
+    public function logout()
     {
         if (isset($_COOKIE['eingeloggt'])) {
             unset($_COOKIE['eingeloggt']);

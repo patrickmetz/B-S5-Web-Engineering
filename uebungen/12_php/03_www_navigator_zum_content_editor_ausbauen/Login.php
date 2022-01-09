@@ -14,7 +14,9 @@ class Login extends Loggable
         $this->_credentialsPath = $credentialsPath;
         $this->_userName = $this->_filteredPostVariable('user_name');
         $this->_userPass = $this->_filteredPostVariable('user_pass');
+    }
 
+    public function login(){
         $this->_checkInput("Benutzername", $this->_userName, $this->_minLength);
         $this->_checkInput("Passwort", $this->_userPass, $this->_minLength);
         $this->_login();
