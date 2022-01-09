@@ -1,6 +1,7 @@
 <?php
 
 require_once "./Loggable.php";
+require_once "./FormHelper.php";
 
 class Login extends Loggable
 {
@@ -16,10 +17,15 @@ class Login extends Loggable
         $this->_userPass = $userPass;
     }
 
-    public function login(){
-        $this->_checkInput("Benutzername", $this->_userName, $this->_minLength);
-        $this->_checkInput("Passwort", $this->_userPass, $this->_minLength);
-        $this->_login();
+    public function login()
+    {
+        if (
+            $this->_isInputOk("Benutzername", $this->_userName, $this->_minLength)
+            &&
+            $this->_isInputOk("Passwort", $this->_userPass, $this->_minLength)
+        ) {
+            $this->_login();
+        }
     }
 
     protected function _login()
@@ -78,11 +84,9 @@ class Login extends Loggable
         return $fileContent;
     }
 
-    protected function _checkInput($name, $value, $minLength)
+    protected function _isInputOk($name, $value, $minLength)
     {
-        $value = trim($value);
-
-        if ((empty($value)) or (strlen($value) < $minLength)) {
+        if (FormHelper::isTooShort($value, $minLength)) {
             $this->logError(
                 $name . " muss mindestens $minLength Zeichen lang sein.\n"
             );

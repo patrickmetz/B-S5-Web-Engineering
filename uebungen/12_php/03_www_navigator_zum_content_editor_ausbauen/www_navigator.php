@@ -4,28 +4,30 @@
 $do = array_key_exists('do', $_GET) ? $_GET['do'] : null;
 $isLoggedIn = array_key_exists('eingeloggt', $_COOKIE);
 
-$log = null;
+$result = null;
+$showBackButton = false;
 
-function logResult(Loggable $loggable)
+function prepareResult(Loggable $loggable)
 {
-    global $log;
+    global $result, $showBackButton;
 
     if ($loggable->hasError()) {
-        $log = $loggable->getErrorMessage();
+        $result = $loggable->getErrorMessage();
+        $showBackButton = true;
     } else {
-        $log = $loggable->getSuccessMessage();
+        $result = $loggable->getSuccessMessage();
     }
 }
 
 if ($do === 'login') {
     require_once "./Login.php";
-    $login = new Login("./credentials.txt",  $_POST["user_name"], $_POST["user_pass"]);
+    $login = new Login("./credentials.txt", $_POST["user_name"], $_POST["user_pass"]);
     $login->login();
 
     if (!$login->hasError()) {
         $isLoggedIn = true;
     }
-    logResult($login);
+    prepareResult($login);
 } elseif ($do === 'logout') {
     require_once "./Logout.php";
     $logout = new Logout();
@@ -35,8 +37,8 @@ if ($do === 'login') {
         $isLoggedIn = false;
     }
 
-    logResult($logout);
-} elseif ($do === 'doCreateEntry') {
+    prepareResult($logout);
+} elseif ($do === 'createEntry') {
     require_once "./Content.php";
     $content = new Content(
         './contents.json',
@@ -47,7 +49,7 @@ if ($do === 'login') {
     );
     $content->write();
 
-    logResult($content);
+    prepareResult($content);
 }
 
 ?>
@@ -76,7 +78,7 @@ if ($do === 'login') {
     <nav class="user_management">
         <ul>
             <?php if ($isLoggedIn): ?>
-                <li><a href="www_navigator.php?do=showCreateEntry">neuer
+                <li><a href="www_navigator.php?do=showContentForm">neuer
                         Inhalt</a></li>
                 <li><a href="www_navigator.php?do=logout">Logout</a></li>
             <?php else: ?>
@@ -89,7 +91,15 @@ if ($do === 'login') {
 <aside id="aside_left"></aside>
 
 <article id="article">
-    <?php if (($do === 'showLogin')): ?>
+    <?php if ($result !== null): ?>
+        <div>
+            <?php echo $result; ?>
+
+            <?php if ($showBackButton): ?>
+                <input type="button" value="zurück" onclick="history.back();">
+            <?php endif; ?>
+        </div>
+    <?php elseif (($do === 'showLogin')): ?>
         <h1>Einloggen</h1>
 
         <form
@@ -111,16 +121,12 @@ if ($do === 'login') {
                 </tr>
             </table>
         </form>
-    <?php elseif (($do === 'login') || ($do === 'logout')): ?>
-        <div>
-            <?php echo $log; ?>
-        </div>
-    <?php elseif (($do === 'showCreateEntry')): ?>
+    <?php elseif (($do === 'showContentForm') && $isLoggedIn): ?>
         <h1>Neuen Inhalt anlegen</h1>
 
         <form
                 method="post" enctype="application/x-www-form-urlencoded"
-                action="./www_navigator.php?do=doCreateEntry"
+                action="./www_navigator.php?do=createEntry"
         >
             <table>
                 <tr>
