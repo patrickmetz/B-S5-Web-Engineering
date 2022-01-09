@@ -117,7 +117,7 @@ if ($do === 'login') {
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="submit"></td>
+                    <td><input type="submit" value="Einloggen"></td>
                 </tr>
             </table>
         </form>
@@ -147,7 +147,7 @@ if ($do === 'login') {
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="submit"></td>
+                    <td><input type="submit" value="Anlegen"></td>
                 </tr>
             </table>
         </form>

@@ -77,6 +77,10 @@ aside{
     padding: var(--padding);
 }
 
+td{
+    padding:0.5em;
+}
+
 #footer {
     grid-area: footer;
     background-color: var(--background-color-1)
