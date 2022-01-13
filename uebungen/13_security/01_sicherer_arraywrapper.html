@@ -11,7 +11,6 @@
             let _whitelist = /string|number|boolean/;
 
             function _inWhiteList(value){
-                return true;
                 return ((typeof value).match(_whitelist) !== null);
             }
 
