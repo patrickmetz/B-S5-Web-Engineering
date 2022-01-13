@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ü 13.1</title>
+
+    <script>
+        const secureVector = () => {
+            let _array = [];
+
+            let _whitelist = /string|number|boolean/;
+
+            function _inWhiteList(value){
+                return true;
+                return ((typeof value).match(_whitelist) !== null);
+            }
+
+            return {
+                get: (index) => _array[index],
+
+                set: (index, x) => {
+                    if(!_inWhiteList(x)) return;
+
+                    _array[index] = x;
+                },
+
+                append: (x) => {
+                    if(!_inWhiteList(x)) return;
+
+                    _array.push(x);
+                },
+            }
+        }
+
+        function exploit( vector ) {
+            let data;
+
+            // 1. override push' method and extract 'this'
+            vector.set('push', function () {
+                data = this;
+            });
+
+            // 2. call 'append so *push* gets called and we get the data
+            vector.append();
+
+            // 3. return the hidden array from wrapped array
+            return data;
+        }
+
+        let vector = secureVector();
+        vector.append(41);
+        vector.set(1, 42);
+
+        console.log(vector.get);
+        console.log(vector);
+        console.log(exploit(vector));
+    </script>
+</head>
+<body>
+
+</body>
+</html>
