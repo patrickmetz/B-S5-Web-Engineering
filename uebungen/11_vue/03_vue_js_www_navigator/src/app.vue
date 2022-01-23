@@ -1,5 +1,5 @@
 <template>
-  <div id="my-navigator">
+  <div id="my-navigator">TEST
     <my-header :json="json" v-on:menu="changeTopicId"></my-header>
 
     <my-aside-left :json="json" v-on:menu="changeTopicId"
