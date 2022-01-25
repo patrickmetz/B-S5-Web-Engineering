@@ -138,6 +138,7 @@ section:nth-child(odd) {
     section:hover .taskLinks a {
         color: #0f4257;
     }
+
     section:hover .taskLinks a:hover {
         color: darkorange;
     }
@@ -154,8 +155,8 @@ section:nth-child(odd) {
     font-weight: bold;
     border-bottom-left-radius: 20px;
     border-top-left-radius: 20px;
-    box-shadow: 5px 5px rgba(100,100,100,0.125);
-    border:2px solid lightgray;
+    box-shadow: 5px 5px rgba(100, 100, 100, 0.125);
+    border: 2px solid lightgray;
     opacity: 0.8;
 }
 
@@ -163,20 +164,20 @@ section:nth-child(odd) {
     opacity: 1;
 }
 
-#menu:hover #menuContent{
+#menu:hover #menuContent {
     display: block;
 }
 
 #menuToggle svg, #menuToggle span {
-    height:1.2em; /* auto scales svg */
+    height: 1.2em; /* auto scales svg */
     vertical-align: top;
 }
 
-#menuToggle svg{
+#menuToggle svg {
     fill: #0f4257
 }
 
-#menuContent{
+#menuContent {
     margin-top: 1em;
     display: none;
 }
@@ -186,17 +187,24 @@ section:nth-child(odd) {
     margin-bottom: 1em;
 }
 
-#menuContent a {
+#menuContent a,
+#menuContent input[type=button],
+#menuContent input[type=submit] {
     text-decoration: none;
     border: 2px solid lightgray;
     border-radius: 5px;
     padding: 0.5em;
     cursor: pointer;
+    background: white;
+    text-align: center;
+    font-weight: bold;
 }
 
-#menuContent a:hover {
+#menuContent a:hover,
+#menuContent input[type=button]:hover,
+#menuContent input[type=submit]:hover {
     border-color: #0f4257;
-    color:darkorange;
+    color: darkorange;
 }
 
 #menuContent input {
@@ -207,21 +215,22 @@ section:nth-child(odd) {
     padding: 0.5em;
 }
 
-#menuContent input:hover{
+#menuContent input:hover {
     border-color: #0f4257;
 }
+
 /* table of contents - display ----------------------------------------------*/
 
 #tocDisplay {
     background: white;
     border-radius: 20px;
-    box-shadow: 10px 10px rgba(100,100,100,0.125);
+    box-shadow: 10px 10px rgba(100, 100, 100, 0.125);
     width: 90vw;
     height: 80vh;
     position: fixed;
     top: 10vh;
     left: 5vw;
-    border:2px solid lightgray;
+    border: 2px solid lightgray;
     overflow-y: auto;
 }
 
@@ -234,25 +243,25 @@ section:nth-child(odd) {
     font-weight: bold;
     position: absolute;
     font-size: 2em;
-    height:2em;
+    height: 2em;
     width: 2em;
     display: block;
     text-align: center;
     vertical-align: center;
-    top:0;
+    top: 0;
     right: 0;
     background: white;
     border-bottom-left-radius: 20px;
     border-top-right-radius: 20px;
     opacity: 0.8;
-    border:2px solid lightgray;
-    border-top:none;
+    border: 2px solid lightgray;
+    border-top: none;
     border-right: none;
 }
 
-#tocDisplay > a:hover{
-  opacity: 1;
-    border-color:#0f4257;
+#tocDisplay > a:hover {
+    opacity: 1;
+    border-color: #0f4257;
 }
 
 #tocDisplay:hover {
@@ -267,7 +276,7 @@ section:nth-child(odd) {
     display: block;
 }
 
-#tocDisplay ul, #tocDisplay li{
+#tocDisplay ul, #tocDisplay li {
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
@@ -278,11 +287,11 @@ section:nth-child(odd) {
     padding-top: 2em;
     padding-left: 1em;
     padding-right: 1em;
-    height:available;
+    height: available;
     overflow-y: auto;
 }
 
-#tocDisplay > ul  > li {
+#tocDisplay > ul > li {
     padding-top: 1em;
     font-weight: bold;
 }
@@ -319,14 +328,14 @@ section:nth-child(odd) {
 
 /* search -------------------------------------------------------------------*/
 
-section.searchMatch{
+section.searchMatch {
     animation-duration: 0.5s;
     animation-iteration-count: 2;
     animation-name: blinkGreen;
 }
 
-section.noSearchMatch{
-    display:none;
+section.noSearchMatch {
+    display: none;
 }
 
 @keyframes blinkGreen {
@@ -340,6 +349,14 @@ section.noSearchMatch{
         background-color: initial
     }
 }
+
+/* login menu ---------------------------------------------------------------*/
+
+#menu #app form {
+    display: flex;
+    flex-direction: column;
+}
+
 /* breakpoint: 400px width --------------------------------------------------*/
 
 @media screen and (min-width: 400px) {
