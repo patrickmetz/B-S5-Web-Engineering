@@ -5,7 +5,7 @@
              value="Anmelden">
       <input v-show="showForm" type="text" placeholder="Benutzer">
       <input v-show="showForm" type="password" placeholder="Passwort">
-      <input v-show="showForm" type="submit" value="abschicken">
+      <input v-show="showForm" type="submit" value="Abschicken">
     </form>
   </div>
 </template>
