@@ -54,6 +54,31 @@ footer div {
     text-align: center;
 }
 
+/* login message ------------------------------------------------------------*/
+
+#login_message{
+    font-weight: bold;
+    padding: 0.25em;
+    color:darkorange;
+}
+
+#login_error{
+    animation-duration: 0.25s;
+    animation-iteration-count: 8;
+    animation-name: highlightLoginError;
+}
+
+@keyframes highlightLoginError {
+    0% {
+        background-color: initial
+    }
+    100% {
+        color: red;
+        background-color: yellow;
+    }
+}
+
+
 /* sections -----------------------------------------------------------------*/
 
 section {

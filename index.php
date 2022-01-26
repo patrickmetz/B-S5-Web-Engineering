@@ -1,3 +1,9 @@
+<?php
+require_once "./upgrade_php/Session.php";
+Session::loginIfAttempted();
+Session::logoutIfAttempted();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,18 +15,21 @@
 
     <link href="./style.css" rel="stylesheet">
 
-    <!-- javascript+dom-upgrade: adds a table of contents to the menu -->
-    <script defer src="upgrade_javascript_and_dom.js"></script>
+    <?php if (Session::isLoggedIn()): ?>
+        <!-- javascript+dom-upgrade: adds a table of contents to the menu -->
+        <script defer src="upgrade_javascript_and_dom.js"></script>
 
-    <!-- ecmascript-upgrade: adds a fulltext search to the menu -->
-    <script defer src="upgrade_ecmascript.js"></script>
+        <!-- ecmascript-upgrade: adds a fulltext search to the menu -->
+        <script defer src="upgrade_ecmascript.js"></script>
 
-    <!-- typscript+functional+async-upgrade: adds json based content-loading -->
-    <script defer src="upgrade_typescript_and_functional_and_async.js"></script>
+        <!-- typscript+functional+async-upgrade: adds json based content-loading -->
+        <script defer src="upgrade_typescript_and_functional_and_async.js"></script>
+    <?php endif; ?>
 
     <!-- vue-upgrade: add dynamic login form to the menu -->
-    <script defer src="./upgrade_vue/dist/js/app.5cb4507c.js"></script>
+    <script defer src="./upgrade_vue/dist/js/app.6689ceb9.js"></script>
     <script defer src="./upgrade_vue/dist/js/chunk-vendors.4102dc7c.js"></script>
+
 </head>
 
 <body>
@@ -47,10 +56,24 @@
 </header>
 
 
-<article></article>
+<article>
+    <?php if (Session::isLoggedIn()): ?>
+        <section></section>
+    <?php else: ?>
+        <div id="login_message">
+            <?php if (Session::hasError()): ?>
+                <div id="login_error">
+                    <?php echo implode("<br/>", Session::getErrors()) ?>
+                </div>
+            <?php else: ?>
+                Bitte melden Sie sich an, um Inhalte zu sehen.
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+</article>
 
 <footer>
-    <div>&copy; 2020 / 2021</div>
+    <div>&copy; 2021 / 2022</div>
     <div><a href="mailto:patrick.metz@smail.inf.h-brs.de">Patrick Metz 📧</a>
     </div>
     <div>Ma&shy;tri&shy;kel&shy;num&shy;mer 9033945</div>
