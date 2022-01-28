@@ -1,7 +1,6 @@
 <?php
 
 require_once "./upgrade_php/Session.php";
-Session::blockHttp();
 Session::loginIfAttempted();
 Session::logoutIfAttempted();
 ?>

@@ -1,6 +1,12 @@
 <?php
 error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
+// https://stackoverflow.com/a/3729513
+if (empty($_SERVER['HTTPS'])) {
+    echo Session::ERROR_ONLY_HTTPS_SUPPORTED;
+    exit;
+}
+
 final class Session
 {
     private static $_credentialsPath = "/upgrade_php/passwords.txt";
@@ -18,15 +24,6 @@ final class Session
     const ACTION_LOGIN_USER = "username";
 
     const SESSION_USER = "username";
-
-    public static function blockHttp()
-    {
-        // https://stackoverflow.com/a/3729513
-        if (empty($_SERVER['HTTPS'])) {
-            echo self::ERROR_ONLY_HTTPS_SUPPORTED;
-            exit;
-        }
-    }
 
     public static function loginIfAttempted()
     {
