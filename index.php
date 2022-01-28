@@ -45,7 +45,14 @@ Session::logoutIfAttempted();
     </div>
 
     <div id="menuContent">
-        <div id="app"></div>
+        <?php if (Session::isLoggedIn()): ?>
+            <form method="post" action="./index.php">
+                <input type ="hidden" name="session_action" value="logout">
+                <input type="submit" value="Abmelden">
+            </form>
+        <?php else: ?>
+            <div id="app"></div>
+        <?php endif; ?>
     </div>
 </div>
 

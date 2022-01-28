@@ -375,11 +375,15 @@ section.noSearchMatch {
     }
 }
 
-/* login menu ---------------------------------------------------------------*/
+/* login/logout menu --------------------------------------------------------*/
 
 #menu #app form {
     display: flex;
     flex-direction: column;
+}
+
+#menu input{
+    min-width:15vw;
 }
 
 /* breakpoint: 400px width --------------------------------------------------*/
