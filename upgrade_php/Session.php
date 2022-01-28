@@ -106,8 +106,12 @@ final class Session
             $splittedByTab = preg_split("/\t/", $line);
             $userFound = $splittedByTab[0];
             $passwordFound = $splittedByTab[1];
+            $saltFound = $splittedByTab[2];
 
-            if (($userFound === $user) && ($passwordFound === $password)) {
+            if (
+                ($userFound === hash('sha384', $user))
+                && ($passwordFound === hash('sha384', $password . $saltFound))
+            ) {
                 return true;
             }
         }
@@ -119,7 +123,7 @@ final class Session
     {
         $fileContent = null;
 
-        $file = fopen(getcwd().self::$_credentialsPath, "r");
+        $file = fopen(getcwd() . self::$_credentialsPath, "r");
 
         if ($file === false) {
             Session::_logError(self::ERROR_NO_PASSWORD_FILE);
