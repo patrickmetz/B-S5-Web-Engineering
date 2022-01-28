@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
-class Session
+final class Session
 {
     private static $_credentialsPath = "/upgrade_php/passwords.txt";
     private static $_errors = [];
@@ -63,7 +63,7 @@ class Session
 
     public static function _isLogoutAttempt()
     {
-        return isset($_GET[self::ACTION])
+        return isset($_POST[self::ACTION])
             && ($_POST[self::ACTION] === self::ACTION_LOGOUT);
     }
 
