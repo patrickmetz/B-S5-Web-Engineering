@@ -1,0 +1,4 @@
+<FilesMatch "^credentials.txt$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
