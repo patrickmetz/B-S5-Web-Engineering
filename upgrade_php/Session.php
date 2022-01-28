@@ -6,6 +6,7 @@ final class Session
     private static $_credentialsPath = "/upgrade_php/passwords.txt";
     private static $_errors = [];
 
+    const ERROR_ONLY_HTTPS_SUPPORTED = "Bitte benutzen Sie das HTTPS-Protokoll.";
     const ERROR_USER_DOES_NOT_EXIST = "Der Benutzer wurde nicht gefunden.";
     const ERROR_NO_PASSWORD_FILE = "Es existiert keine Password-Datei.";
 
@@ -18,6 +19,14 @@ final class Session
 
     const SESSION_USER = "username";
 
+    public static function blockHttp()
+    {
+        // https://stackoverflow.com/a/3729513
+        if (empty($_SERVER['HTTPS'])) {
+            echo self::ERROR_ONLY_HTTPS_SUPPORTED;
+            exit;
+        }
+    }
 
     public static function loginIfAttempted()
     {
