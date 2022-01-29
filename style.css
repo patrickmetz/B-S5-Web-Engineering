@@ -63,14 +63,15 @@ footer div {
 }
 
 #login_error{
-    animation-duration: 0.25s;
-    animation-iteration-count: 8;
+    color:darkorange;
+    animation-duration: 0.5s;
+    animation-iteration-count: 4;
     animation-name: highlightLoginError;
 }
 
 @keyframes highlightLoginError {
     0% {
-        background-color: initial
+        background-color: initial;
     }
     100% {
         color: red;
@@ -386,6 +387,23 @@ section.noSearchMatch {
     min-width:15vw;
 }
 
+#menu input.error{
+    animation-duration: 0.5s;
+    animation-iteration-count: 4;
+    animation-name: blinkRed;
+}
+
+@keyframes blinkRed {
+    0% {
+        background-color: white;
+    }
+    50% {
+        background-color: rgba(255, 0, 0, 0.5);
+    }
+    100% {
+        background-color: white;
+    }
+}
 /* breakpoint: 400px width --------------------------------------------------*/
 
 @media screen and (min-width: 400px) {

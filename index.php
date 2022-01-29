@@ -1,5 +1,4 @@
 <?php
-
 require_once "./upgrade_php/Session.php";
 Session::loginIfAttempted();
 Session::logoutIfAttempted();
@@ -28,7 +27,7 @@ Session::logoutIfAttempted();
     <?php endif; ?>
 
     <!-- vue-upgrade: add dynamic login form to the menu -->
-    <script defer src="./upgrade_vue/dist/js/app.6689ceb9.js"></script>
+    <script defer src="./upgrade_vue/dist/js/app.6de28b4b.js"></script>
     <script defer src="./upgrade_vue/dist/js/chunk-vendors.4102dc7c.js"></script>
 
 </head>
