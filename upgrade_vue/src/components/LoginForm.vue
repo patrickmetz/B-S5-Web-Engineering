@@ -1,6 +1,6 @@
 <template>
   <div id="login">
-    <form @submit="submitForm" @mouseleave="showForm = false">
+    <form @submit="submitForm" @mouseleave="showForm = false" method="post" action="/">
       <input type="hidden" name="session_action" value="login">
 
       <input @click="showForm = !showForm" v-show="!showForm" type="button"
