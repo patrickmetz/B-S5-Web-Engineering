@@ -6,13 +6,13 @@
       <input @click="showForm = !showForm" v-show="!showForm" type="button"
              value="Anmelden">
 
-      <input type="text" @keyup="checkFields();"
-             v-bind:class="{error: usernameIsEmpty}" v-show="showForm"
-             v-model="username" name="username" placeholder="Benutzer">
+      <input type="text" v-bind:class="{error: usernameIsEmpty}"
+             v-show="showForm" v-model="username" name="username"
+             placeholder="Benutzer">
 
-      <input type="password" @keyup="checkFields();"
-             v-bind:class="{error: passwordIsEmpty}" v-show="showForm"
-             v-model="password" name="password" placeholder="Passwort">
+      <input type="password" v-bind:class="{error: passwordIsEmpty}"
+             v-show="showForm" v-model="password" name="password"
+             placeholder="Passwort">
 
       <input type="submit" v-show="showForm" value="Abschicken">
     </form>
