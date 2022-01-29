@@ -64,4 +64,8 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.error{
+  background: orangered;
+}
+</style>
