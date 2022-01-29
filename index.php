@@ -34,30 +34,10 @@ Session::logoutIfAttempted();
 
 <body>
 
-<div id="menu">
-    <div id="menuToggle">
-        <img src="./upgrade_svg/menu.svg">
-        <span>Menü</span>
-    </div>
-
-    <div id="menuContent">
-        <?php if (Session::isLoggedIn()): ?>
-            <form method="post" action="./index.php">
-                <input type ="hidden" name="session_action" value="logout">
-                <input type="submit" value="Abmelden">
-            </form>
-        <?php else: ?>
-            <div id="app"></div>
-        <?php endif; ?>
-    </div>
-</div>
-
 <header>
     <h1><span>Ein&shy;führ&shy;ung in </span>Web En&shy;gi&shy;nee&shy;ring</h1>
     <h2>Se&shy;mes&shy;ter&shy;pro&shy;jekt <span>"ei&shy;ge&shy;ne Home&shy;page"</span></h2>
 </header>
-
-
 
 <article>
     <?php if (Session::isLoggedIn()): ?>
@@ -77,13 +57,31 @@ Session::logoutIfAttempted();
 
 <footer>
     <div>&copy; 2021 / 2022</div>
-    <div><a href="mailto:patrick.metz@smail.inf.h-brs.de">Patrick Metz 📧</a>
+    <div><a href="mailto:patrick.metz@smail.inf.h-brs.de">Patrick Metz</a>
     </div>
     <div>Ma&shy;tri&shy;kel&shy;num&shy;mer 9033945</div>
     <div>
         <a href="#">Git-Re&shy;po&shy;si&shy;to&shy;ry</a>
     </div>
 </footer>
+
+<div id="menu">
+    <div id="menuToggle">
+        <img src="./upgrade_svg/menu.svg">
+        <span>Menü</span>
+    </div>
+
+    <div id="menuContent">
+        <?php if (Session::isLoggedIn()): ?>
+            <form method="post" action="./index.php">
+                <input type ="hidden" name="session_action" value="logout">
+                <input type="submit" value="Abmelden">
+            </form>
+        <?php else: ?>
+            <div id="app"></div>
+        <?php endif; ?>
+    </div>
+</div>
 
 </body>
 </html>
