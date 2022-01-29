@@ -1,13 +1,20 @@
 <template>
   <div id="login">
-    <form @mouseleave="showForm = false" method="post" action="./index.php">
+    <form @submit="submitForm" @mouseleave="showForm = false">
       <input type="hidden" name="session_action" value="login">
 
-      <input @click="showForm = !showForm" v-show="!showForm" type="button" value="Anmelden">
+      <input @click="showForm = !showForm" v-show="!showForm" type="button"
+             value="Anmelden">
 
-      <input v-show="showForm" type="text" name="username" placeholder="Benutzer">
-      <input v-show="showForm" type="password" name="password" placeholder="Passwort">
-      <input v-show="showForm" type="submit" value="Abschicken">
+      <input type="text" @keyup="checkFields();"
+             v-bind:class="{error: usernameIsEmpty}" v-show="showForm"
+             v-model="username" name="username" placeholder="Benutzer">
+
+      <input type="password" @keyup="checkFields();"
+             v-bind:class="{error: passwordIsEmpty}" v-show="showForm"
+             v-model="password" name="password" placeholder="Passwort">
+
+      <input type="submit" v-show="showForm" value="Abschicken">
     </form>
   </div>
 </template>
@@ -16,11 +23,37 @@
 export default {
   name: 'LoginForm',
   props: {
-    msg: String,
+    username: String,
+    usernameIsEmpty: {type: Boolean, default: false},
+
+    password: String,
+    passwordIsEmpty: {type: Boolean, default: false},
+
     showForm: {type: Boolean, default: false}
+  },
+  methods: {
+    submitForm: function (event) {
+      this.checkFields();
+
+      if (this.username && this.password) {
+        return true;
+      }
+
+      event.preventDefault();
+    },
+    checkUsername: function () {
+      this.usernameIsEmpty = !this.username;
+    },
+    checkPassword: function () {
+      this.passwordIsEmpty = !this.password;
+    },
+    checkFields: function () {
+      this.checkUsername();
+      this.checkPassword();
+    }
   }
+
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
