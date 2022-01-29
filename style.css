@@ -194,7 +194,7 @@ section:nth-child(odd) {
     display: block;
 }
 
-#menuToggle svg, #menuToggle span {
+#menuToggle img, #menuToggle span {
     height: 1.2em; /* auto scales svg */
     vertical-align: top;
 }

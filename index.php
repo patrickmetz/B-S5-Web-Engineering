@@ -36,11 +36,7 @@ Session::logoutIfAttempted();
 
 <div id="menu">
     <div id="menuToggle">
-        <!-- scalable "burger menu", source: https://icons8.com/icons/set/menu -->
-        <svg viewBox="0 0 24 24" x="0px" xmlns="http://www.w3.org/2000/svg"
-             y="0px">
-            <path d="M 2 5 L 2 7 L 22 7 L 22 5 L 2 5 z M 2 11 L 2 13 L 22 13 L 22 11 L 2 11 z M 2 17 L 2 19 L 22 19 L 22 17 L 2 17 z"/>
-        </svg>
+        <img src="./upgrade_svg/menu.svg">
         <span>Menü</span>
     </div>
 
@@ -58,9 +54,9 @@ Session::logoutIfAttempted();
 
 <header>
     <h1><span>Ein&shy;führ&shy;ung in </span>Web En&shy;gi&shy;nee&shy;ring</h1>
-    <h2>Se&shy;mes&shy;ter&shy;pro&shy;jekt <span>"ei&shy;ge&shy;ne Home&shy;page"</span>
-    </h2>
+    <h2>Se&shy;mes&shy;ter&shy;pro&shy;jekt <span>"ei&shy;ge&shy;ne Home&shy;page"</span></h2>
 </header>
+
 
 
 <article>
