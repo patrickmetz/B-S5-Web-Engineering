@@ -33,6 +33,7 @@ export default {
   },
   methods: {
     submitForm: function (event) {
+      this.resetEmptyStates();
       this.checkFields();
 
       if (this.username && this.password) {
@@ -41,15 +42,22 @@ export default {
 
       event.preventDefault();
     },
+
     checkUsername: function () {
       this.usernameIsEmpty = !this.username;
     },
+
     checkPassword: function () {
       this.passwordIsEmpty = !this.password;
     },
+
     checkFields: function () {
       this.checkUsername();
       this.checkPassword();
+    },
+
+    resetEmptyStates() {
+      this.usernameIsEmpty = this.passwordIsEmpty = false;
     }
   }
 
