@@ -58,9 +58,20 @@ Session::logoutIfAttempted();
 
 <footer>
     <div>&copy; 2021 / 2022</div>
-    <div><a href="mailto:patrick.metz@smail.inf.h-brs.de">Patrick Metz</a>
+    <div>Patrick Metz</div>
+    <div>
+        <a href="#" class="e-m-a-i-l"
+           data-a="patrick.metz"
+           data-b="smail.inf.h-brs"
+           data-c="de"
+           onclick="
+            window.location.href = 'mailto:'
+            + this.dataset.a + '@'
+            + this.dataset.b + '.'
+            + this.dataset.c; return false;
+        ">
+        </a>
     </div>
-    <div>Ma&shy;tri&shy;kel&shy;num&shy;mer 9033945</div>
     <div>
         <a href="https://github.com/patrickmetz/B-S5-Web-Engineering"
            target="_blank">Git-Re&shy;po&shy;si&shy;to&shy;ry</a>

@@ -643,3 +643,10 @@ body.development .taskDetails .taskTemplate {
 body.development .taskDetails .taskLinks {
     background: orange;
 }
+
+/* e-m-a-i-l -----------------------------------------------------------------*/
+
+/* https://stackoverflow.com/a/41566570 */
+.e-m-a-i-l:after {
+    content: "E-Mail";
+}
