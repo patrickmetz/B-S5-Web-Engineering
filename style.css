@@ -75,6 +75,14 @@ footer *{
     color:gray;
 }
 
+footer a{
+    color:var(--color-primary);
+}
+
+footer a:hover{
+    color:var(--color-activity);
+}
+
 /* login message ------------------------------------------------------------*/
 
 #login_message{

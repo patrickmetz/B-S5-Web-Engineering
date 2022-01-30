@@ -36,7 +36,8 @@ Session::logoutIfAttempted();
 
 <header>
     <h1><span>Ein&shy;führ&shy;ung in </span>Web En&shy;gi&shy;nee&shy;ring</h1>
-    <h2>Se&shy;mes&shy;ter&shy;pro&shy;jekt <span>"ei&shy;ge&shy;ne Home&shy;page"</span></h2>
+    <h2>Se&shy;mes&shy;ter&shy;pro&shy;jekt <span>"ei&shy;ge&shy;ne Home&shy;page"</span>
+    </h2>
 </header>
 
 <article>
@@ -61,7 +62,8 @@ Session::logoutIfAttempted();
     </div>
     <div>Ma&shy;tri&shy;kel&shy;num&shy;mer 9033945</div>
     <div>
-        <a href="#">Git-Re&shy;po&shy;si&shy;to&shy;ry</a>
+        <a href="https://github.com/patrickmetz/B-S5-Web-Engineering"
+           target="_blank">Git-Re&shy;po&shy;si&shy;to&shy;ry</a>
     </div>
 </footer>
 
@@ -74,7 +76,7 @@ Session::logoutIfAttempted();
     <div id="menuContent">
         <?php if (Session::isLoggedIn()): ?>
             <form method="post" action="./index.php">
-                <input type ="hidden" name="session_action" value="logout">
+                <input type="hidden" name="session_action" value="logout">
                 <input type="submit" value="Abmelden">
             </form>
         <?php else: ?>
