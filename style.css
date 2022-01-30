@@ -1,17 +1,33 @@
 
-* {
-    box-sizing: border-box;
-    font-family: Verdana, sans-serif;
-    color: #0f4257;
-    margin: 0;
-    padding: 0;
-}
 
 :root {
     /* responsive font size: https://websemantics.uk/tools/responsive-font-calculator/ */
     font-size: clamp(12px, calc(0.75rem + ((1vw - 3px) * 0.3704)), 18px);
     min-height: 0vw; /* safari fix */
-    --alternate-color: #d6eef8;
+
+    --color-primary: #0f4257;
+    --color-activity: darkorange;
+    --color-tile: #d6eef8;
+    --color-border: lightgray;
+
+    --padding-small: 0.25em;
+    --padding-medium: 0.5em;
+    --padding-big: 1em;
+    --padding-huge: 2em;
+
+    --radius-small:5px;
+    --radius-medium:10px;
+    --radius-big:20px;
+
+    --width-border:2px;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Verdana, sans-serif;
+    color: var(--color-primary);
+    margin: 0;
+    padding: 0;
 }
 
 /* main grid ----------------------------------------------------------------*/
@@ -29,7 +45,7 @@ body {
 
 header {
     grid-area: header;
-    padding: 0.25em;
+    padding: var(--padding-small);
 }
 
 header h1, header h2 {
@@ -63,12 +79,12 @@ footer *{
 
 #login_message{
     font-weight: bold;
-    padding: 0.25em;
-    color:darkorange;
+    padding: var(--padding-small);
+    color:var(--color-activity);
 }
 
 #login_error{
-    color:darkorange;
+    color:var(--color-activity);
     animation-duration: 0.5s;
     animation-iteration-count: 4;
     animation-name: highlightLoginError;
@@ -93,25 +109,25 @@ section {
 
 section h3 {
     min-height: 5vh;
-    padding: 0.25em;
+    padding: var(--padding-small);
 }
 
 section h4 {
     min-height: 5vh;
-    padding: 0.25em;
+    padding: var(--padding-small);
 }
 
 section:nth-child(odd) {
-    background: var(--alternate-color);
-    border: 2px solid lightgray;
-    border-radius: 10px;
+    background: var(--color-tile);
+    border: var(--width-border) solid var(--color-border);
+    border-radius: var(--radius-medium);
 }
 
 /* tasks --------------------------------------------------------------------*/
 
 .taskInfo {
     min-height: 10vh;
-    padding: 0.25em 0.25em 0.25em 2em;
+    padding: var(--padding-small) var(--padding-small) var(--padding-small) var(--padding-huge);
 }
 
 .taskDetails {
@@ -138,8 +154,8 @@ section:nth-child(odd) {
 .taskTemplate > * {
     max-width: 90%;
     max-height: 100%;
-    border: 2px solid lightgray;
-    border-radius: 5px;
+    border: var(--width-border) solid var(--color-border);
+    border-radius: var(--radius-small);
 }
 
 .taskTemplate > img {
@@ -153,13 +169,13 @@ section:nth-child(odd) {
         display: inline-block;
         text-align: center;
         text-decoration: none;
-        border-radius: 5px;
-        padding: 0.25em;
-        border: 2px solid lightgray;
+        border-radius: var(--radius-small);
+        padding: var(--padding-small);
+        border: var(--width-border) solid var(--color-border);
     }
 
     .taskLinks a:hover {
-        border-color: #0f4257;
+        border-color: var(--color-primary);
     }
 
     .taskLinks a:after {
@@ -167,11 +183,11 @@ section:nth-child(odd) {
     }
 
     section:hover .taskLinks a {
-        color: #0f4257;
+        color: var(--color-primary);
     }
 
     section:hover .taskLinks a:hover {
-        color: darkorange;
+        color: var(--color-activity);
     }
 }
 
@@ -182,12 +198,12 @@ section:nth-child(odd) {
     top: 15vh;
     right: 0px;
     background: white;
-    padding: 1em;
+    padding: var(--padding-big);
     font-weight: bold;
-    border-bottom-left-radius: 20px;
-    border-top-left-radius: 20px;
+    border-bottom-left-radius: var(--radius-big);
+    border-top-left-radius: var(--radius-big);
     box-shadow: 5px 5px rgba(100, 100, 100, 0.125);
-    border: 2px solid lightgray;
+    border: var(--width-border) solid var(--color-border);
     opacity: 0.8;
 }
 
@@ -205,11 +221,11 @@ section:nth-child(odd) {
 }
 
 #menuToggle svg {
-    fill: #0f4257
+    fill: var(--color-primary)
 }
 
 #menuContent {
-    margin-top: 1em;
+    padding-top: var(--padding-big);
     display: none;
 }
 
@@ -222,9 +238,9 @@ section:nth-child(odd) {
 #menuContent input[type=button],
 #menuContent input[type=submit] {
     text-decoration: none;
-    border: 2px solid lightgray;
-    border-radius: 5px;
-    padding: 0.5em;
+    border: var(--width-border) solid var(--color-border);
+    border-radius: var(--radius-small);
+    padding:var(--padding-medium);
     cursor: pointer;
     background: white;
     text-align: center;
@@ -234,42 +250,42 @@ section:nth-child(odd) {
 #menuContent a:hover,
 #menuContent input[type=button]:hover,
 #menuContent input[type=submit]:hover {
-    border-color: #0f4257;
-    color: darkorange;
+    border-color: var(--color-primary);
+    color: var(--color-activity);
 }
 
 #menuContent input {
     font-size: inherit;
     text-decoration: none;
-    border: 2px solid lightgray;
-    border-radius: 5px;
-    padding: 0.5em;
+    border: var(--width-border) solid var(--color-border);
+    border-radius: var(--radius-small);
+    padding:var(--padding-medium);
 }
 
 #menuContent input:hover {
-    border-color: #0f4257;
+    border-color: var(--color-primary);
 }
 
 /* table of contents - display ----------------------------------------------*/
 
 #tocDisplay {
     background: white;
-    border-radius: 20px;
+    border-radius: var(--radius-big);
     box-shadow: 10px 10px rgba(100, 100, 100, 0.125);
     width: 90vw;
     height: 80vh;
     position: fixed;
     top: 10vh;
     left: 5vw;
-    border: 2px solid lightgray;
+    border: var(--width-border) solid var(--color-border);
     overflow-y: auto;
 }
 
 /* close button */
 #tocDisplay > a {
-    color: #0f4257;
+    color: var(--color-primary);
     text-decoration: none;
-    padding: 0.25em;
+    padding: var(--padding-small);
     cursor: pointer;
     font-weight: bold;
     position: absolute;
@@ -282,17 +298,17 @@ section:nth-child(odd) {
     top: 0;
     right: 0;
     background: white;
-    border-bottom-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-bottom-left-radius: var(--radius-big);
+    border-top-right-radius: var(--radius-big);
     opacity: 0.8;
-    border: 2px solid lightgray;
+    border: var(--width-border) solid var(--color-border);
     border-top: none;
     border-right: none;
 }
 
 #tocDisplay > a:hover {
     opacity: 1;
-    border-color: #0f4257;
+    border-color: var(--color-primary);
 }
 
 #tocDisplay:hover {
@@ -315,20 +331,20 @@ section:nth-child(odd) {
 }
 
 #tocDisplay > ul {
-    padding-top: 2em;
-    padding-left: 1em;
-    padding-right: 1em;
+    padding-top: var(--padding-huge);
+    padding-left: var(--padding-big);
+    padding-right: var(--padding-big);
     height: available;
     overflow-y: auto;
 }
 
 #tocDisplay > ul > li {
-    padding-top: 1em;
+    padding-top: var(--padding-big);
     font-weight: bold;
 }
 
 #tocDisplay > ul > li > ul {
-    padding-left: 1em;
+    padding-left: var(--padding-big);
 }
 
 #tocDisplay ul a {
@@ -338,7 +354,7 @@ section:nth-child(odd) {
 }
 
 #tocDisplay a:hover {
-    color: darkorange;
+    color: var(--color-activity);
 }
 
 /* animated highlight https://stackoverflow.com/a/41391835 */
@@ -479,9 +495,9 @@ section.noSearchMatch {
 
     section:nth-child(4n+1),
     section:nth-child(4n+4) {
-        background-color: var(--alternate-color);
-        border: 2px solid lightgray;
-        border-radius: 10px;
+        background-color: var(--color-tile);
+        border: var(--width-border) solid var(--color-border);
+        border-radius: var(--radius-medium);
     }
 
     .taskDetails {
@@ -498,16 +514,16 @@ section.noSearchMatch {
     }
 
     .taskLinks a:hover {
-        border-color: #0f4257;
+        border-color: var(--color-primary);
     }
 
     section:hover .taskLinks a {
-        color: #0f4257;
-        border: 2px solid lightgray;
+        color: var(--color-primary);
+        border: var(--width-border) solid var(--color-border);
     }
 
     section:hover .taskLinks a:hover {
-        border-color: #0f4257;
+        border-color: var(--color-primary);
     }
 
     section:hover .taskLinks a:after {
@@ -536,9 +552,9 @@ section.noSearchMatch {
 
     /* checkerboard layout */
     section:nth-child(odd) {
-        background: var(--alternate-color);
-        border: 2px solid lightgray;
-        border-radius: 10px;
+        background: var(--color-tile);
+        border: var(--width-border) solid var(--color-border);
+        border-radius: var(--radius-medium);
     }
 
     section:nth-child(even) {
