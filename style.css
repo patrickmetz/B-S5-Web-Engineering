@@ -6,8 +6,9 @@
     min-height: 0vw; /* safari fix */
 
     --color-primary: #0f4257;
+    --color-secondary: gray;
     --color-activity: darkorange;
-    --color-tile: #d6eef8;
+    --color-tile: #c5e7f5;
     --color-border: lightgray;
 
     --padding-small: 0.25em;
@@ -52,6 +53,10 @@ header h1, header h2 {
     display: inline;
 }
 
+header h2, header h2 *{
+    color: var(--color-secondary);
+}
+
 article {
     grid-area: article;
 }
@@ -72,7 +77,7 @@ footer div {
 }
 
 footer *{
-    color:gray;
+    color:var(--color-secondary);
 }
 
 footer a{
@@ -112,17 +117,25 @@ footer a:hover{
 /* sections -----------------------------------------------------------------*/
 
 section {
+    background: white;
     min-height: 75vh; /* 100 - header - footer */
 }
 
 section h3 {
     min-height: 5vh;
+    position: sticky;
+    top:0;
     padding: var(--padding-small);
+    background: inherit;
 }
 
 section h4 {
     min-height: 5vh;
+    position: sticky;
+    top:5vh;
     padding: var(--padding-small);
+    background: inherit;
+
 }
 
 section:nth-child(odd) {
@@ -203,8 +216,8 @@ section:nth-child(odd) {
 
 #menu {
     position: fixed;
-    top: 15vh;
-    right: 0px;
+    top:0;
+    right: 0;
     background: white;
     padding: var(--padding-big);
     font-weight: bold;
@@ -470,14 +483,6 @@ section.noSearchMatch {
     }
 }
 
-/* breakpoint: 600px width --------------------------------------------------*/
-
-@media screen and (min-width: 600px) {
-    #menu {
-        top: 0px;
-    }
-}
-
 /* breakpoint: 800px width --------------------------------------------------*/
 
 /* two column layout */
@@ -489,6 +494,14 @@ section.noSearchMatch {
 
     section {
         width: 49vw; /* 50 doesn't work because of scroll bar width */
+    }
+
+    section h3 {
+        position: static;
+    }
+
+    section h4 {
+        position: static;
     }
 
     section:nth-child(odd) {
@@ -538,9 +551,6 @@ section.noSearchMatch {
         content: " ↗";
     }
 
-    #menu {
-        top: 0px;
-    }
 
     #tocDisplay {
         width: 50vw;

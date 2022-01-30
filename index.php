@@ -11,7 +11,7 @@ Session::logoutIfAttempted();
     <meta content="width=device-width, initial-scale=1, user-scalable=yes"
           name="viewport">
 
-    <title>Web Engineering - Semesterprojekt</title>
+    <title>Semesterprojekt - Einführung in Web Engineering</title>
 
     <link href="./style.css" rel="stylesheet">
 
@@ -35,9 +35,9 @@ Session::logoutIfAttempted();
 <body>
 
 <header>
-    <h1><span>Ein&shy;führ&shy;ung in </span>Web En&shy;gi&shy;nee&shy;ring</h1>
-    <h2>Se&shy;mes&shy;ter&shy;pro&shy;jekt <span>"ei&shy;ge&shy;ne Home&shy;page"</span>
-    </h2>
+    <h1>Se&shy;mes&shy;ter&shy;pro&shy;jekt <span>"ei&shy;ge&shy;ne Home&shy;page"</span>
+    <h2><span>Ein&shy;führ&shy;ung in </span>Web En&shy;gi&shy;nee&shy;ring</h2>
+    </h1>
 </header>
 
 <article>
