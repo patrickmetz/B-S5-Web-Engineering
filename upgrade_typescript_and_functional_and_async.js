@@ -37,6 +37,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var LectureContentLoader = /** @class */ (function () {
     function LectureContentLoader(contentRootQuery, jsonFilePath) {
         var _this = this;
+        this.infoMaxLength = 100;
+        this.infoMinRestLength = 100;
+        this.infoClassRest = "rest";
+        this.infoClassCut = "cut";
         (function () { return __awaiter(_this, void 0, void 0, function () {
             var _a, e_1;
             return __generator(this, function (_b) {
@@ -44,10 +48,10 @@ var LectureContentLoader = /** @class */ (function () {
                     case 0:
                         _b.trys.push([0, 2, , 3]);
                         _a = this;
-                        return [4 /*yield*/, this._loadLectureContent(jsonFilePath)];
+                        return [4 /*yield*/, this.loadLectureContent(jsonFilePath)];
                     case 1:
-                        _a._lectureContent = _b.sent();
-                        this._renderLectureContent(contentRootQuery);
+                        _a.lectureContents = _b.sent();
+                        this.renderLectureContent(contentRootQuery);
                         return [3 /*break*/, 3];
                     case 2:
                         e_1 = _b.sent();
@@ -58,7 +62,7 @@ var LectureContentLoader = /** @class */ (function () {
             });
         }); })();
     }
-    LectureContentLoader.prototype._loadLectureContent = function (jsonFilePath) {
+    LectureContentLoader.prototype.loadLectureContent = function (jsonFilePath) {
         return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
@@ -71,28 +75,28 @@ var LectureContentLoader = /** @class */ (function () {
             });
         });
     };
-    LectureContentLoader.prototype._renderLectureContent = function (contentRootQuery) {
+    LectureContentLoader.prototype.renderLectureContent = function (contentRootQuery) {
         var content;
         var html = "";
-        for (var _i = 0, _a = this._lectureContent; _i < _a.length; _i++) {
+        for (var _i = 0, _a = this.lectureContents; _i < _a.length; _i++) {
             content = _a[_i];
-            html += this._htmlCode(content, this._templateCode, this._linkCode);
+            html += this.htmlCode(content, this.contentCode, this.templateCode, this.linkCode);
         }
         document.querySelector(contentRootQuery).innerHTML = html;
     };
-    LectureContentLoader.prototype._htmlCode = function (content, templateFunction, linksFunction) {
-        var htmlCode = "\n             <section>\n                <h3>" + content.lectureName + "</h3>\n                <h4>" + content.taskName + "</h4>\n        \n                <ul class=\"taskInfo\">\n                    <li>\n                        " + content.taskInfo + "\n                    </li>\n                </ul>\n        \n                <div class=\"taskDetails\">\n                    <div class=\"taskTemplate\">\n                        " + templateFunction.call(this, content) + "\n                    </div>\n        \n                    <div class=\"taskLinks\">\n                        " + linksFunction.call(this, content) + "\n                    </div>\n                </div>\n            </section>\n        ";
+    LectureContentLoader.prototype.htmlCode = function (content, contentFunction, templateFunction, linksFunction) {
+        var htmlCode = "\n             <section onfocusout=\"LectureContentLoader.removeMoreClass(this)\">\n                <h3>" + content.lectureName + "</h3>\n                <h4>" + content.taskName + "</h4>\n        \n                <ul class=\"taskInfo\">\n                    <li>\n                        " + contentFunction.call(this, content) + "\n                    </li>\n                </ul>\n        \n                <div class=\"taskDetails\">\n                    <div class=\"taskTemplate\">\n                        " + templateFunction.call(this, content) + "\n                    </div>\n        \n                    <div class=\"taskLinks\">\n                        " + linksFunction.call(this, content) + "\n                    </div>\n                </div>\n            </section>\n        ";
         return htmlCode;
     };
-    LectureContentLoader.prototype._templateCode = function (content) {
-        switch (this._templateType(content)) {
+    LectureContentLoader.prototype.templateCode = function (content) {
+        switch (this.templateType(content)) {
             case "iframe":
                 return "<iframe loading=\"lazy\" \n                            src=\"" + content.taskLinks.template + "\"\n                            title=\"" + content.taskName + "\"\n                            ></iframe>";
             case "image":
                 return "<img loading=\"lazy\" \n                            src=\"" + content.taskLinks.template + "\"\n                            alt=\"" + content.taskName + "\"\n                            title=\"" + content.taskName + "\"\n                            \">";
         }
     };
-    LectureContentLoader.prototype._templateType = function (content) {
+    LectureContentLoader.prototype.templateType = function (content) {
         var pictureRegex = /png|jpg|jpeg|gif$/;
         var iframeRegex = /youtube\.com|youtu\.be/;
         if ((content.taskLinks.template.match(pictureRegex)) !== null) {
@@ -103,8 +107,20 @@ var LectureContentLoader = /** @class */ (function () {
         }
         throw "unknown template type";
     };
-    LectureContentLoader.prototype._linkCode = function (content) {
+    LectureContentLoader.prototype.linkCode = function (content) {
         return "\n            <a href=\"" + content.taskLinks.template + "\">Vorlage</a>\n            <a href=\"" + content.taskLinks.result + "\">Ergebnis</a>\n            <a href=\"" + content.taskLinks.source + "\">Quelle</a>\n        ";
+    };
+    LectureContentLoader.prototype.contentCode = function (content) {
+        if (content.taskInfo.length
+            > (this.infoMaxLength + this.infoMinRestLength)) {
+            var contentStart = content.taskInfo.slice(0, this.infoMaxLength);
+            var contentEnd = content.taskInfo.slice(this.infoMaxLength);
+            return contentStart
+                + "<span class='" + this.infoClassCut + "'></span>"
+                + "<span class='" + this.infoClassRest + "'>" + contentEnd + "</span>"
+                + "<a onclick='this.parentElement.classList.toggle(\"more\");'></a>";
+        }
+        return content.taskInfo;
     };
     return LectureContentLoader;
 }());

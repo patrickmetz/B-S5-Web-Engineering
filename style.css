@@ -93,7 +93,6 @@ footer a:hover{
 #login_message{
     font-weight: bold;
     padding: var(--padding-small);
-    color:var(--color-activity);
 }
 
 #login_error{
@@ -210,6 +209,42 @@ section:nth-child(odd) {
     section:hover .taskLinks a:hover {
         color: var(--color-activity);
     }
+}
+
+/* more / less-links --------------------------------------------------------*/
+
+.taskInfo a{
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.taskInfo a:hover{
+    color:var(--color-activity);
+}
+
+.taskInfo a:after{
+    content: "mehr";
+}
+
+.taskInfo .more a:after{
+    content: "weniger";
+}
+
+.taskInfo .rest{
+    display:none;
+}
+
+.taskInfo .more .rest{
+    display:inline;
+}
+
+.taskInfo .cut:after{
+    content: "...";
+}
+
+.taskInfo .more .cut{
+    display:none;
 }
 
 /* menu ---------------------------------------------------------------------*/

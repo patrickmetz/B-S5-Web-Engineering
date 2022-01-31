@@ -72,7 +72,7 @@
   {
     "lectureName": "4. JavaScript",
     "taskName": "4.1. Funktionen",
-    "taskInfo": "Schreiben Sie folgende Funktionen in JavaScript...",
+    "taskInfo": "Schreiben Sie folgende Funktionen in JavaScript.",
     "taskLinks": {
       "template": "./uebungen/no_template.png",
       "result": "./uebungen/04_javascript/01_funktionen.html",
