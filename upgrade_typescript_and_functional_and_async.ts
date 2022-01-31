@@ -1,15 +1,14 @@
-interface TaskLinks {
-    template: string,
-    result: string,
-    sourceCode: string,
-    source: string
-}
-
 interface LectureContent {
     lectureName: string,
     taskName: string,
     taskInfo: string,
     taskLinks: TaskLinks
+}
+
+interface TaskLinks {
+    template: string,
+    result: string,
+    source: string
 }
 
 type TemplateFunction = (LectureContent) => string;
@@ -109,7 +108,7 @@ class LectureContentLoader {
         return `
             <a href="${content.taskLinks.template}">Vorlage</a>
             <a href="${content.taskLinks.result}">Ergebnis</a>
-            <a href="${content.taskLinks.sourceCode}">Quellcode</a>
+            <a href="${content.taskLinks.source}">Quelle</a>
         `;
     }
 

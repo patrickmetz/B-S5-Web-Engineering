@@ -72,14 +72,13 @@ var LectureContentLoader = /** @class */ (function () {
         });
     };
     LectureContentLoader.prototype._renderLectureContent = function (contentRootQuery) {
-        var contentRoot = document.querySelector(contentRootQuery);
         var content;
         var html = "";
         for (var _i = 0, _a = this._lectureContent; _i < _a.length; _i++) {
             content = _a[_i];
             html += this._htmlCode(content, this._templateCode, this._linkCode);
         }
-        contentRoot.innerHTML = html;
+        document.querySelector(contentRootQuery).innerHTML = html;
     };
     LectureContentLoader.prototype._htmlCode = function (content, templateFunction, linksFunction) {
         var htmlCode = "\n             <section>\n                <h3>" + content.lectureName + "</h3>\n                <h4>" + content.taskName + "</h4>\n        \n                <ul class=\"taskInfo\">\n                    <li>\n                        " + content.taskInfo + "\n                    </li>\n                </ul>\n        \n                <div class=\"taskDetails\">\n                    <div class=\"taskTemplate\">\n                        " + templateFunction.call(this, content) + "\n                    </div>\n        \n                    <div class=\"taskLinks\">\n                        " + linksFunction.call(this, content) + "\n                    </div>\n                </div>\n            </section>\n        ";
@@ -105,7 +104,7 @@ var LectureContentLoader = /** @class */ (function () {
         throw "unknown template type";
     };
     LectureContentLoader.prototype._linkCode = function (content) {
-        return "\n            <a href=\"" + content.taskLinks.template + "\">Vorlage</a>\n            <a href=\"" + content.taskLinks.result + "\">Ergebnis</a>\n            <a href=\"" + content.taskLinks.sourceCode + "\">Quellcode</a>\n        ";
+        return "\n            <a href=\"" + content.taskLinks.template + "\">Vorlage</a>\n            <a href=\"" + content.taskLinks.result + "\">Ergebnis</a>\n            <a href=\"" + content.taskLinks.source + "\">Quelle</a>\n        ";
     };
     return LectureContentLoader;
 }());

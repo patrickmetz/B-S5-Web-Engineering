@@ -6,7 +6,6 @@
     "taskLinks": {
       "template": "./uebungen/01_einfuehrung/04_wireframe_vorlage.jpg",
       "result": "./uebungen/01_einfuehrung/04_wireframe.html",
-      "sourceCode": "./uebungen/01_einfuehrung/04_wireframe_quellcode.txt",
       "source": "https://kaul.inf.h-brs.de/we/#app-2-3"
     }
   },
@@ -17,7 +16,6 @@
     "taskLinks": {
       "template": "https://www.youtube.com/embed/PE3POxjDspo",
       "result": "./uebungen/02_css_teil_eins/02_01_css_positionierung.html",
-      "sourceCode": "./uebungen/02_css_teil_eins/02_01_css_positionierung.txt",
       "source": "https://kaul.inf.h-brs.de/we/#app-3-3"
     }
   },
@@ -28,7 +26,6 @@
     "taskLinks": {
       "template": "https://www.youtube.com/embed/HVmnv3k4__E",
       "result": "./uebungen/02_css_teil_eins/02_02_css_positionierung.html",
-      "sourceCode": "./uebungen/02_css_teil_eins/02_02_css_positionierung.txt",
       "source": "https://kaul.inf.h-brs.de/we/#app-3-3"
     }
   },
@@ -39,7 +36,6 @@
     "taskLinks": {
       "template": "./uebungen/02_css_teil_eins/03_wireframe.png",
       "result": "./uebungen/02_css_teil_eins/03_wireframe.html",
-      "sourceCode": "./uebungen/02_css_teil_eins/03_wireframe.txt",
       "source": "https://kaul.inf.h-brs.de/we/#app-3-3"
     }
   },
@@ -50,7 +46,6 @@
     "taskLinks": {
       "template": "./uebungen/03_css_teil_zwei/03_01_responsiv.png",
       "result": "./uebungen/03_css_teil_zwei/03_01_responsiv_mit_flexbox_desktop_first.html",
-      "sourceCode": "./uebungen/03_css_teil_zwei/03_01_responsiv_mit_flexbox_desktop_first.txt",
       "source": "https://kaul.inf.h-brs.de/we/#app-4-3"
     }
   },
@@ -61,7 +56,6 @@
     "taskLinks": {
       "template": "./uebungen/03_css_teil_zwei/03_01_responsiv.png",
       "result": "./uebungen/03_css_teil_zwei/03_02_responsiv_mit_grid_mobile_first.html",
-      "sourceCode": "./uebungen/03_css_teil_zwei/03_02_responsiv_mit_grid_mobile_first.txt",
       "source": "https://kaul.inf.h-brs.de/we/#app-4-3"
     }
   },
@@ -72,8 +66,297 @@
     "taskLinks": {
       "template": "uebungen/03_css_teil_zwei/03_03_responsiv_mit_grid.png",
       "result": "./uebungen/03_css_teil_zwei/03_03_responsiv_mit_grid.html",
-      "sourceCode": "./uebungen/03_css_teil_zwei/03_03_responsiv_mit_grid.txt",
       "source": "https://kaul.inf.h-brs.de/we/#app-4-3"
+    }
+  },
+  {
+    "lectureName": "4. JavaScript",
+    "taskName": "4.1. Funktionen",
+    "taskInfo": "Schreiben Sie folgende Funktionen in JavaScript...",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/04_javascript/01_funktionen.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-5-3"
+    }
+  },
+  {
+    "lectureName": "4. JavaScript",
+    "taskName": "4.2. Objekte",
+    "taskInfo": "Schreiben Sie die Prototypen Person und Auto in JavaScript, so dass jede Person weiß, welche Autos sie besitzt. Schreiben Sie eine Funktion conflict(), die feststellt, ob ein Auto von mehr als einer Person besessen wird.",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/04_javascript/02_objekte.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-5-3"
+    }
+  },
+  {
+    "lectureName": "4. JavaScript",
+    "taskName": "4.3. Fibonacci",
+    "taskInfo": "Schreiben Sie im Browser die Fibonacci-Funktion in JavaScript und geben Sie die ersten 2000 Fibonacci-Zahlen 0,1,1,2,3,5,8,13,... auf der Konsole mit console.log() aus.\n\nAchten Sie auf Performanz: Berechnen Sie jeden Fibonacci-Wert nur einmal. Speichern Sie zu diesem Zweck jede bereits berechnete Fibonacci-Zahl in einer Tabelle.",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/04_javascript/03_fibonacci_int.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-5-3"
+    }
+  },
+  {
+    "lectureName": "4. JavaScript",
+    "taskName": "4.3. Fibonacci",
+    "taskInfo": "Wechseln Sie zu BigInt, um alle 2000 Fibonacci-Zahlen korrekt anzuzeigen.",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/04_javascript/03_fibonacci_bigint.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-5-3"
+    }
+  },
+  {
+    "lectureName": "4. JavaScript",
+    "taskName": "4.4. Topsort",
+    "taskInfo": "In jedem Projekt fallen Aufgaben (Tasks) an. Zwischen den Aufgaben gibt es paarweise Abhängigkeiten. Z.B. kann Task2 von Task1 abhängen, d.h. erst muss Task1 fertig sein, bevor Task2 starten kann, weil es dessen Ergebnisse benötigt. Tasks können auch unabhängig voneinander sein und parallel ablaufen. In JavaScript können Sie die Abhängigkeiten in Arrays codieren, z.B. kann man bei [ [\"schlafen\", \"studieren\"], [\"essen\", \"studieren\"], [\"studieren\", \"prüfen\"] ] nicht prüfen, ohne vorher gegessen zu haben. Transitive Abhängigkeiten müssen also berücksichtigt werden.\n\nSchreiben Sie in JavaScript eine Funktion topsort(), die eine topologische Sortierung berechnet. Topologische Sortierung ist eine Form von Sortierung. Sie kennen die Funktion Array.prototype.sort() und wissen, was als Ergebnis erwartet wird, nämlich eine sortiere Liste. Genauso ist das hier. Die Funktion topsort() soll eine sortierte Liste ausgeben, die keine der eingegebenen Abhängigkeiten verletzt.\n\nAchten Sie auf Performanz. Berechnen Sie die topologische Sortierung in linearer Zeit (Average Case).",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/04_javascript/04_topsort.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-5-3"
+    }
+  },
+  {
+    "lectureName": "5. DOM",
+    "taskName": "5.1. Performanzmessungen von DOM-Operationen",
+    "taskInfo": "Implementieren Sie Performanzmessungen zum Vergleich von innerHTML, innerText, textContent und outerHTML selbstständig in JavaScript durch Nutzung der DOM API. Geben Sie die Messergebnisse als Tabelle aus. Verwenden Sie die eingebauten Zeitmess-Funktionen performance.now (), siehe auch When-milliseconds-are-not-enough-performance-now. Suchen Sie eine möglichst kurze und elegante Lösung.",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/05_dom/01_performanzmessungen_von_dom_operationen.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-6-3"
+    }
+  },
+  {
+    "lectureName": "5. DOM",
+    "taskName": "5.2. Rednerliste mit Zeitmessung ",
+    "taskInfo": "Implementieren Sie die interaktive Anwendung \"Rednerliste mit Zeitmessung\" selbstständig in JavaScript durch Nutzung der DOM API und der Timer-Funktionen. Neue Redner sollen auf Knopfdruck hinzugefügt werden können. Deren Uhr wird dann sofort automatisch gestartet und alle anderen Uhren angehalten. Bei jedem Redner soll die individuelle, gemessene Redezeit sekundengenau angezeigt werden. Für jeden Redner soll es einen eigenen Start-/Stopp-Button geben. Es soll immer nur eine Uhr laufen. Angezeigt werden sollen die bisherigen Summenzeiten aller Redebeiträge der betreffenden Person. Suchen Sie eine möglichst kurze und elegante Lösung. Achten Sie gleichzeitig auf gute Usability: z.B. wenn die Eingabe mit einem Return beendet wird, soll der Button-Click nicht mehr erforderlich sein, usw.",
+    "taskLinks": {
+      "template": "./uebungen/05_dom/02_rednerliste_mit_zeitmessung.png",
+      "result": "./uebungen/05_dom/02_rednerliste_mit_zeitmessung.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-6-3"
+    }
+  },
+  {
+    "lectureName": "5. DOM",
+    "taskName": "5.3. TopSort als WebApp ⭐️",
+    "taskInfo": "Schreiben Sie eine Web-Oberfläche, in der man beliebige Beziehungen (Vorrang-Relationen) eingeben kann, für die dann die topologische Sortierung per Knopfdruck auf der Webseite ausgegeben wird.\n\nFür die Eingabe können Sie HTML5-Eingabefelder oder contentEditable verwenden.",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/05_dom/03_topsort_als_webapp.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-6-3"
+    }
+  },
+  {
+    "lectureName": "6. ECMAScript",
+    "taskName": "6.1. Klammerpaare",
+    "taskInfo": "Schreiben Sie eine Webseite, in die man eine Zeichenkette mit beliebigen Buchstaben, Zahlen und Sonderzeichen eingeben kann, die beliebig geschachtelte Klammern [...], (...) und {...} enthält, so dass sofort geprüft wird, ob alle Klammerpaare korrekt geschachtelt sind. Das Eingabefeld der Zeichenkette soll rot gefärbt werden, wenn es ein Klammerpaar gibt, das falsch geschachtelt ist.Geben Sie die HTML-Seite inkl. ES6-Code inkl. Tests hier ein. Verwenden Sie für Ihre Tests die Funktion console.assert.",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/06_ecmascript/01_klammerpaare.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-7-3"
+    }
+  },
+  {
+    "lectureName": "6. ECMAScript",
+    "taskName": "6.1. Klammerpaare",
+    "taskInfo": "Bonus: Verallgemeinern Sie Ihren Algorithmus, so dass man Klammerpaare als Parameter frei definieren kann. Es müssen also nicht [...], (...) und {...} sein, sondern es können auch andere Zeichen gewählt werden.",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/06_ecmascript/01_klammerpaare_bonus.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-7-3"
+    }
+  },
+  {
+    "lectureName": "6. ECMAScript",
+    "taskName": "6.2. Topologische Iterierbarkeit ⭐",
+    "taskInfo": "Schreiben Sie eine ES6-Klasse Vorrang für Vorrangrelationen, z.B. new Vorrang([ [\"schlafen\", \"studieren\"], [\"essen\", \"studieren\"], [\"studieren\", \"prüfen\"] ]). Wählen Sie eine Implementierung, die universell gültig, also nicht nur für dieses Beispiel gilt. (Überlegen Sie sich, über welche Properties und Methoden eine solche Klasse verfügen sollte und wie TopSort hier hineinspielt. Topologische Iterierbarkeit und topologischer Generator sind jedoch Gegenstand der nächsten Übungen weiter unten auf diesem Übungsblatt und sollten für die folgenden Aufgaben aufgespart werden.)\n\nStellen Sie bei Ihrer Klasse die topologische Iterierbarkeit her (zunächst über das Iterationsprotokoll, ohne Generator, ohne yield).",
+    "taskLinks": {
+      "template": "./uebungen/06_ecmascript/02_topologische_iterierbarkeit.png",
+      "result": "./uebungen/06_ecmascript/02_topologische_iterierbarkeit.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-7-3"
+    }
+  },
+  {
+    "lectureName": "6. ECMAScript",
+    "taskName": "6.3. Topologischer Generator",
+    "taskInfo": "Stellen Sie bei Ihrer Klasse aus der letzten Aufgabe die topologische Iterierbarkeit mittels Generator her.\n\nWählen Sie eine Implementierung, die universell gültig, also nicht nur für das Beispiel gilt.",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/06_ecmascript/03_topologischer_generator.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-7-3"
+    }
+  },
+  {
+    "lectureName": "6. ECMAScript",
+    "taskName": "6.4. Proxy",
+    "taskInfo": "Erweitern Sie Ihre Vorrang-Klasse um Logging, indem Sie ein Proxy einfügen. Lassen Sie sich vom Logger bei jedem Schritt ausgeben, wie viele der Vorrangrelationen noch übrig bleiben. Verwenden Sie so weit wie möglich High-Level-Methoden wie Object.keys und High-Level-Datenstrukturen wie Map und Set und deren Methoden, anstatt mühsam von Hand zu iterieren und zu zählen.",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/06_ecmascript/04_proxy.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-7-3"
+    }
+  },
+  {
+    "lectureName": "6. ECMAScript",
+    "taskName": "6.5. DeepCopy",
+    "taskInfo": "Schreiben Sie eine rekursive Funktion deepCopy( struct ) als ES6-Ausdruck, so dass beliebig geschachtelte Arrays und Objekte struct tiefenkopiert werden können. Verwenden Sie zu diesem Zweck den konditionalen ternären Operator, Array.map(), Object.fromEntries() und Object.entries(). Verwenden Sie dabei nur Arrow Functions und Ausdrücke, keine Anweisungen, keine Blöcke. Verwenden Sie nicht die JSON-Methoden.",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/06_ecmascript/05_deepcopy.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-7-3"
+    }
+  },
+  {
+    "lectureName": "7. Funktionale Programmierung",
+    "taskName": "7.1. Funktionen in JavaScript",
+    "taskInfo": "Schreiben Sie [folgende Funktionen]...",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/07_funktional/01_funktionen_in_javascript.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-8-3"
+    }
+  },
+  {
+    "lectureName": "7. Funktionale Programmierung",
+    "taskName": "7.2. Textanalyse mit filter-map-reduce ⭐",
+    "taskInfo": "Schreiben Sie in JavaScript eine Textanalyse. Ermitteln Sie die häufigsten Begriffe im Text Plagiatsresolution. Filtern Sie dabei alle Stoppworte und HTML-Tags. Reduzieren Sie das Ergebnis auf die 3 häufigsten Begriffe.",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/07_funktional/02_textanalyse_mit_filter_map_reduce.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-8-3"
+    }
+  },
+  {
+    "lectureName": "8. Async",
+    "taskName": "8.1. Promises",
+    "taskInfo": "Erstellen Sie auf Ihrem Server www2.inf.h-brs.de (oder localhost) zwei Text-Dateien A.txt und B.txt mit ungefähr gleich vielen Zeilen. Laden Sie mit der fetch-API parallel beide Text-Dateien vom Server. Geben Sie auf einer Webseite den Inhalt beider Dateien zeilenweise aus, wobei der Anfang der Zeile aus A.txt und das Ende aus B.txt stammen soll. Die beiden Dateien sollen also zeilenweise konkateniert werden. Erzielen Sie max. Geschwindigkeit durch maximale Parallelität. Achten Sie gleichzeitig auf Korrektheit. Verwenden Sie dabei ausschließlich die Promise API ohne async / await.",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/08_async/01_promises.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-9-3"
+    }
+  },
+  {
+    "lectureName": "8. Async",
+    "taskName": "8.2. async / await",
+    "taskInfo": "Lösen Sie die letzte Aufgabe mit async / await statt Promise.",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/08_async/02_async_await.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-9-3"
+    }
+  },
+  {
+    "lectureName": "8. Async",
+    "taskName": "8.3. WWW-Navigator ⭐",
+    "taskInfo": "Schreiben Sie einen Navigator für die Fachbegriffe des WWW zu den Oberthemen HTML, CSS und JavaScript. Im Hauptmenü sollen diese 3 Oberthemen zur Auswahl stehen. Im Untermenü soll eine zugehörige Liste von Fachbegriffen zum jeweiligen ausgewählten Oberthema stehen. In der Mitte soll eine Dokumentation zum ausgewählten Fachbegriff erscheinen.",
+    "taskLinks": {
+      "template": "./uebungen/08_async/03_www_navigator.png",
+      "result": "./uebungen/08_async/03_www_navigator.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-9-3"
+    }
+  },
+  {
+    "lectureName": "9. SVG",
+    "taskName": "9.1. SVG Grafik von Hand erstellen",
+    "taskInfo": "Codieren Sie eine HTML-Datei mit Inline SVG, so dass sich folgendes Aussehen ergibt:\n\n\nFügen Sie als Hover-Effekt eine CSS-Animation hinzu, die die Größe der SVG-Grafik verdoppelt, wenn man mit dem Cursor über die Grafik geht.",
+    "taskLinks": {
+      "template": "./uebungen/09_svg/01_svg_grafik_von_hand_erstellen.png",
+      "result": "./uebungen/09_svg/01_svg_grafik_von_hand_erstellen.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-9-3"
+    }
+  },
+  {
+    "lectureName": "9. SVG",
+    "taskName": "9.2. Statistik-Balkendiagramm in SVG",
+    "taskInfo": "Implementieren Sie ein eigenes Balkendiagramm mit HTML, Inline SVG, CSS und JavaScript. Geben Sie die Daten für das Balkendiagramm im JSON-Format vor. Nehmen Sie als Beispieldaten die COVID-19: Fallzahlen in Deutschland. Animieren Sie die Grafik (siehe z.B. Highchart Bar Chart).",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/09_svg/02_statistik_balkendiagramm_in_svg.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-10-3"
+    }
+  },
+  {
+    "lectureName": "9. SVG",
+    "taskName": "9.3. Interaktive SVG Grafik ⭐",
+    "taskInfo": "Implementieren Sie das Spiel Tic-Tac-Toe als HTML-Datei mit Inline SVG, CSS und JavaScript.",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/09_svg/03_interaktive_svg_grafik.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-10-3"
+    }
+  },
+  {
+    "lectureName": "10. TypeScript",
+    "taskName": "10.3. TypeScript auf Deno ⭐",
+    "taskInfo": "Auf Deno ist TypeScript ohne Übersetzung direkt ablauffähig. Deno ist also die Runtime Engine für TypeScript.\n\nSchreiben Sie in TypeScript möglichst umfangreich statisch typisiert ein auf Deno ablauffähiges Programm server.ts, das Sie mit deno run --allow-net server.ts starten können, das die COVID-19-Fallzahlen in Deutschland einliest, Minimum, Maximum, Durchschnitt und Summe berechnet und diese auf einer Webseite ausgibt.\n\nEin Beispiel-Programm zu server.ts finden Sie im Deno-Manual unter Making an HTTP request",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "javascript:alert('Bitte starten Sie server.ts via `deno run --allow-net --allow-read`');",
+      "source": "https://kaul.inf.h-brs.de/we/#app-11-3"
+    }
+  },
+  {
+    "lectureName": "11. Vue",
+    "taskName": "11.1. Komponente in Vue.js",
+    "taskInfo": "Schreiben Sie eine Vue.js Single File Component mit einem Text-Eingabefeld und 3 Ausgabefeldern, in denen man während des Tippens sehen kann, (a) wie viele Buchstaben (b) wie viele Leerzeichen und (c) wie viele Worte man in das Text-Eingabefeld bereits eingegeben hat.\n\nBetten Sie Ihre Komponente in eine Webseite zweimal ein und testen Sie, ob beide Komponenten unabhängig voneinander sind.",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/11_vue/01_komponente_in_vue_js.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-12-3"
+    }
+  },
+  {
+    "lectureName": "11. Vue",
+    "taskName": "11.2. Menü-Komponente",
+    "taskInfo": "Schreiben Sie eine möglichst flexible Vue.js Single File Component für Menüs und wenden Sie diese in derselben Webseite zweimal an, einmal horizontal, das andere Mal vertikal.",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/11_vue/02_menue_komponente.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-12-3"
+    }
+  },
+  {
+    "lectureName": "11. Vue",
+    "taskName": "11.3. Vue.js WWW-Navigator ⭐",
+    "taskInfo": "Schreiben Sie Ihren WWW-Navigator als SPA in Vue.js",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/11_vue/03_vue_js_www_navigator/dist/index.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-12-3"
+    }
+  },
+  {
+    "lectureName": "12. PHP",
+    "taskName": "12.1. Registrierung mit PHP",
+    "taskInfo": "Erstellen Sie mit PHP 5 auf www2.inf.h-brs.de ein Registrierungsformular. Speichern Sie die eingegebenen Daten persistent in einer Datei auf www2.inf.h-brs.de. Schreiben Sie Ihre PHP-Scripte so, dass es zu keinen Nebenläufigkeitsartefakten (z.B. Lost Update) kommen kann, egal wie viele Nutzer sich gleichzeitig registrieren.",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/12_php/01_registrierung_mit_php/registrierung.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-13-3"
+    }
+  },
+  {
+    "lectureName": "12. PHP",
+    "taskName": "12.2. Login mit PHP",
+    "taskInfo": "Schreiben Sie eine sichere PHP-Lösung für Login, das die persistierten Registrierungsdaten aus der letzten Aufgabe nutzt.",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/12_php/02_login_mit_php/login.html",
+      "source": "https://kaul.inf.h-brs.de/we/#app-13-3"
+    }
+  },
+  {
+    "lectureName": "12. PHP",
+    "taskName": "12.3. WWW-Navigator zum Content-Editor ausbauen ⭐",
+    "taskInfo": "Bauen Sie Ihren WWW-Navigator zum Content-Editor aus, mit dem Sie weitere Inhalte hinzu fügen können, die persistent auf dem Server mittels PHP gespeichert werden. Schreiben Sie Ihre PHP-Scripte so, dass es zu keinen Nebenläufigkeitsartefakten kommen kann, egal wie viele Nutzer gleichzeitig editieren und speichern.\n\nSpeichern Sie die Inhalte Ihres WWW-Navigators auf dem Server www2.inf.h-brs.de. Erweitern Sie Ihren WWW-Navigator um eine Edit-Funktionalität, so dass Inhalte editiert und ergänzt werden können. Vermeiden Sie die Lost Update-Anomalie.\n\nSchützen Sie Ihre Inhalte mit einem Login.",
+    "taskLinks": {
+      "template": "./uebungen/no_template.png",
+      "result": "./uebungen/12_php/03_www_navigator_zum_content_editor_ausbauen/www_navigator.php",
+      "source": "https://kaul.inf.h-brs.de/we/#app-13-3"
     }
   }
 ]
