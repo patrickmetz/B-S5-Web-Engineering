@@ -227,7 +227,7 @@ section:hover a{
 
 #menu:hover {
     opacity: 1;
-    min-width:15vw;
+    min-width:25vw;
 }
 
 #menu:hover #menuContent {
@@ -510,7 +510,7 @@ section.noSearchMatch {
     }
 }
 
-/* breakpoint: 600px width --------------------------------------------------*/
+/* breakpoint: 800px width --------------------------------------------------*/
 
 /* two column layout */
 @media screen and (min-width: 800px) {
@@ -542,6 +542,10 @@ section.noSearchMatch {
 
     .taskDetails {
         grid-template-columns: 34vw 15vw; /* = section width */
+    }
+
+    #menu:hover {
+        min-width:15vw;
     }
 
     #tocDisplay {
