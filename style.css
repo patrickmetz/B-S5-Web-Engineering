@@ -139,6 +139,18 @@ section:nth-child(odd) {
     padding: var(--padding-medium);
 }
 
+.taskLinks a{
+    color:var(--color-border);
+}
+
+section:hover a{
+    color:var(--color-primary);
+}
+
+.taskLinks a:hover{
+    color:var(--color-activity);
+}
+
 .taskTemplate {
     height: 50vh;
     display: none;
@@ -215,6 +227,7 @@ section:nth-child(odd) {
 
 #menu:hover {
     opacity: 1;
+    min-width:15vw;
 }
 
 #menu:hover #menuContent {
@@ -251,6 +264,10 @@ section:nth-child(odd) {
     background: white;
     text-align: center;
     font-weight: bold;
+}
+
+#menu input, #menu a{
+    width:95%;
 }
 
 #menuContent a:hover,
@@ -403,15 +420,11 @@ section.noSearchMatch {
     }
 }
 
-/* login/logout menu --------------------------------------------------------*/
+/* login/logout  ------------------------------------------------------------*/
 
 #menu #app form {
     display: flex;
     flex-direction: column;
-}
-
-#menu input{
-    min-width:15vw;
 }
 
 #menu input.error{
@@ -456,9 +469,13 @@ section.noSearchMatch {
     }
 }
 
-/* breakpoint: 300px width --------------------------------------------------*/
+/* breakpoint: 400px width --------------------------------------------------*/
 
-@media screen and (min-width: 300px) {
+@media screen and (min-width: 400px) {
+    header h1, header h2 {
+        display: block;
+    }
+
     .taskLinks a {
         display: inline-block;
         text-align: center;
@@ -467,6 +484,7 @@ section.noSearchMatch {
         padding: var(--padding-small);
         border: var(--width-border) solid var(--color-border);
         width:30%;
+        border-color: transparent;
     }
 
     .taskLinks a:hover {
@@ -475,19 +493,13 @@ section.noSearchMatch {
 
     section:hover .taskLinks a {
         color: var(--color-primary);
+        border: var(--width-border) solid var(--color-border);
         background: white;
     }
 
     section:hover .taskLinks a:hover {
         color: var(--color-activity);
-    }
-}
-
-/* breakpoint: 400px width --------------------------------------------------*/
-
-@media screen and (min-width: 400px) {
-    header h1, header h2 {
-        display: block;
+        border-color: var(--color-primary);
     }
 
     #tocDisplay {
@@ -498,7 +510,7 @@ section.noSearchMatch {
     }
 }
 
-/* breakpoint: 800px width --------------------------------------------------*/
+/* breakpoint: 600px width --------------------------------------------------*/
 
 /* two column layout */
 @media screen and (min-width: 800px) {
@@ -509,10 +521,6 @@ section.noSearchMatch {
 
     section {
         width: 49vw; /* 50 doesn't work because of scroll bar width */
-    }
-
-    section.hasTemplate:hover .taskTemplate{
-        display: flex;
     }
 
     section:nth-child(odd) {
@@ -534,24 +542,6 @@ section.noSearchMatch {
 
     .taskDetails {
         grid-template-columns: 34vw 15vw; /* = section width */
-    }
-
-    .taskLinks a {
-        color: lightgray;
-        border-color: transparent;
-    }
-
-    .taskLinks a:hover {
-        border-color: var(--color-primary);
-    }
-
-    section:hover .taskLinks a {
-        color: var(--color-primary);
-        border: var(--width-border) solid var(--color-border);
-    }
-
-    section:hover .taskLinks a:hover {
-        border-color: var(--color-primary);
     }
 
     #tocDisplay {
@@ -580,6 +570,10 @@ section.noSearchMatch {
     section:nth-child(even) {
         background: white;
         border: none;
+    }
+
+    section.hasTemplate:hover .taskTemplate{
+        display: flex;
     }
 
     .taskDetails {
