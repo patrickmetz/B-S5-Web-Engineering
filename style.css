@@ -97,7 +97,6 @@ section {
 
 section h3 {
     min-height: 5vh;
-    position: sticky;
     top:0;
     padding: var(--padding-small);
     background: inherit;
@@ -105,7 +104,6 @@ section h3 {
 
 section h4 {
     min-height: 5vh;
-    position: sticky;
     top:5vh;
     padding: var(--padding-small);
     background: inherit;
@@ -116,10 +114,6 @@ section:nth-child(odd) {
     background: var(--color-tile);
     border: var(--width-border) solid var(--color-border);
     border-radius: var(--radius-medium);
-}
-
-section.hasTemplate:hover .taskTemplate{
-    display: flex;
 }
 
 /* tasks --------------------------------------------------------------------*/
@@ -172,6 +166,7 @@ section.hasTemplate:hover .taskTemplate{
     text-decoration: underline;
     cursor: pointer;
     font-weight: bold;
+    padding: var(--padding-small);
 }
 
 .taskInfo a:hover{
@@ -371,7 +366,7 @@ section.hasTemplate:hover .taskTemplate{
 /* animated highlight https://stackoverflow.com/a/41391835 */
 .taskHighlight {
     animation-duration: 0.25s;
-    animation-iteration-count: 3;
+    animation-iteration-count: 4;
     animation-name: turnYellow;
 }
 
@@ -387,8 +382,8 @@ section.hasTemplate:hover .taskTemplate{
 /* search -------------------------------------------------------------------*/
 
 section.searchMatch {
-    animation-duration: 0.5s;
-    animation-iteration-count: 2;
+    animation-duration: 0.25s;
+    animation-iteration-count: 4;
     animation-name: blinkGreen;
 }
 
@@ -516,12 +511,8 @@ section.noSearchMatch {
         width: 49vw; /* 50 doesn't work because of scroll bar width */
     }
 
-    section h3 {
-        position: static;
-    }
-
-    section h4 {
-        position: static;
+    section.hasTemplate:hover .taskTemplate{
+        display: flex;
     }
 
     section:nth-child(odd) {

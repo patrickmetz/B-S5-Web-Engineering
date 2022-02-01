@@ -10,7 +10,7 @@
     var _toggleLinkText = "Inhaltsverzeichnis";
 
     var _taskHighlightClass = "taskHighlight";
-    var _taskHighlightDuration = 750;
+    var _taskHighlightDuration = 2000;
     var _taskHighlightDelay = 250;
 
     // "constructor" --------------------------------------------------------*/
