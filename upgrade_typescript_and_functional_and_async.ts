@@ -6,13 +6,13 @@ interface LectureContent {
 }
 
 interface TaskLinks {
-    template: string,
+    template: string | null,
     result: string,
     source: string
 }
 
 type TemplateFunction = (LectureContent) => string;
-type TemplateType = "image" | "iframe";
+type TemplateType = "image" | "iframe" | null;
 
 class LectureContentLoader {
     private lectureContents: LectureContent[];
@@ -43,41 +43,43 @@ class LectureContentLoader {
         let html: string = "";
 
         for (content of this.lectureContents) {
-            html += this.htmlCode(
+            html += this.createHtmlCode(
                 content,
-                this.contentCode,
-                this.templateCode,
-                this.linkCode
+                this.sectionClassFunction,
+                this.taskInfoFunction,
+                this.taskTemplateFunction,
+                this.taskLinksFunction
             );
         }
 
         document.querySelector(contentRootQuery).innerHTML = html;
     }
 
-    private htmlCode(
+    private createHtmlCode(
         content: LectureContent,
-        contentFunction: TemplateFunction,
-        templateFunction: TemplateFunction,
-        linksFunction: TemplateFunction,
+        sectionClassFunction: TemplateFunction,
+        taskInfoFunction: TemplateFunction,
+        taskTemplateFunction: TemplateFunction,
+        taskLinksFunction: TemplateFunction,
     ): string {
         const htmlCode = `
-             <section onfocusout="LectureContentLoader.removeMoreClass(this)">
+             <section class="${sectionClassFunction.call(this, content)}">
                 <h3>${content.lectureName}</h3>
                 <h4>${content.taskName}</h4>
         
                 <ul class="taskInfo">
                     <li>
-                        ${contentFunction.call(this, content)}
+                        ${taskInfoFunction.call(this, content)}
                     </li>
                 </ul>
         
                 <div class="taskDetails">
-                    <div class="taskTemplate">
-                        ${templateFunction.call(this, content)}
-                    </div>
-        
                     <div class="taskLinks">
-                        ${linksFunction.call(this, content)}
+                        ${taskLinksFunction.call(this, content)}
+                    </div>
+                    
+                    <div class="taskTemplate">
+                        ${taskTemplateFunction.call(this, content)}
                     </div>
                 </div>
             </section>
@@ -86,8 +88,10 @@ class LectureContentLoader {
         return htmlCode;
     }
 
-    private templateCode(content: LectureContent): string {
+    private taskTemplateFunction(content: LectureContent): string {
         switch (this.templateType(content)) {
+            case null:
+                return "";
             case "iframe":
                 return `<iframe loading="lazy" 
                             src="${content.taskLinks.template}"
@@ -106,7 +110,9 @@ class LectureContentLoader {
         const pictureRegex = /png|jpg|jpeg|gif$/;
         const iframeRegex = /youtube\.com|youtu\.be/;
 
-        if ((content.taskLinks.template.match(pictureRegex)) !== null) {
+        if (content.taskLinks.template === null) {
+            return null;
+        } else if ((content.taskLinks.template.match(pictureRegex)) !== null) {
             return "image";
         } else if (content.taskLinks.template.match(iframeRegex) !== null) {
             return "iframe";
@@ -115,15 +121,20 @@ class LectureContentLoader {
         throw "unknown template type";
     }
 
-    private linkCode(content: LectureContent): string {
+    private taskLinksFunction(content: LectureContent): string {
+        let templateLink: String
+            = content.taskLinks.template !== null
+            ? ` <a href="${content.taskLinks.template}">Vorlage</a>`
+            : "";
+
         return `
-            <a href="${content.taskLinks.template}">Vorlage</a>
+            ${templateLink}
             <a href="${content.taskLinks.result}">Ergebnis</a>
             <a href="${content.taskLinks.source}">Quelle</a>
         `;
     }
 
-    private contentCode(content: LectureContent): string {
+    private taskInfoFunction(content: LectureContent): string {
         if (
             content.taskInfo.length
             > (this.infoMaxLength + this.infoMinRestLength)
@@ -139,6 +150,10 @@ class LectureContentLoader {
 
         return content.taskInfo;
 
+    }
+
+    private sectionClassFunction(content: LectureContent): string{
+        return content.taskLinks.template === null ? "" : "hasTemplate";
     }
 }
 

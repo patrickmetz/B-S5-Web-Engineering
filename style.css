@@ -88,36 +88,11 @@ footer a:hover{
     color:var(--color-activity);
 }
 
-/* login message ------------------------------------------------------------*/
-
-#login_message{
-    font-weight: bold;
-    padding: var(--padding-small);
-}
-
-#login_error{
-    color:var(--color-activity);
-    animation-duration: 0.5s;
-    animation-iteration-count: 4;
-    animation-name: highlightLoginError;
-}
-
-@keyframes highlightLoginError {
-    0% {
-        background-color: initial;
-    }
-    100% {
-        color: red;
-        background-color: yellow;
-    }
-}
-
-
-/* sections -----------------------------------------------------------------*/
+/* sections (contain content/tasks) -----------------------------------------*/
 
 section {
     background: white;
-    min-height: 75vh; /* 100 - header - footer */
+    max-height: 75vh; /* 100 - header - footer */
 }
 
 section h3 {
@@ -143,15 +118,20 @@ section:nth-child(odd) {
     border-radius: var(--radius-medium);
 }
 
+section.hasTemplate:hover .taskTemplate{
+    display: flex;
+}
+
 /* tasks --------------------------------------------------------------------*/
 
 .taskInfo {
     min-height: 10vh;
-    padding: var(--padding-small) var(--padding-small) var(--padding-small) var(--padding-huge);
+    padding: var(--padding-big);
+    list-style-position: inside;
 }
 
 .taskDetails {
-    height: 55vh;
+    max-height: 55vh;
 }
 
 .taskLinks {
@@ -162,18 +142,20 @@ section:nth-child(odd) {
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-content: center;
+    padding: var(--padding-medium);
 }
 
 .taskTemplate {
     height: 50vh;
-    display: flex;
+    display: none;
     justify-content: center;
     align-content: center;
+    padding: var(--padding-medium);
 }
 
 .taskTemplate > * {
-    max-width: 90%;
-    max-height: 100%;
+    max-width: 95%;
+    max-height: 95%;
     border: var(--width-border) solid var(--color-border);
     border-radius: var(--radius-small);
 }
@@ -183,35 +165,8 @@ section:nth-child(odd) {
     object-fit: cover;
 }
 
-@media screen and (min-width: 300px) {
-    .taskLinks a {
-        font-weight: bold;
-        display: inline-block;
-        text-align: center;
-        text-decoration: none;
-        border-radius: var(--radius-small);
-        padding: var(--padding-small);
-        border: var(--width-border) solid var(--color-border);
-    }
 
-    .taskLinks a:hover {
-        border-color: var(--color-primary);
-    }
-
-    .taskLinks a:after {
-        content: " ↗";
-    }
-
-    section:hover .taskLinks a {
-        color: var(--color-primary);
-    }
-
-    section:hover .taskLinks a:hover {
-        color: var(--color-activity);
-    }
-}
-
-/* more / less-links --------------------------------------------------------*/
+/* more/less-links -----------------------------------------------------------*/
 
 .taskInfo a{
     text-decoration: underline;
@@ -481,33 +436,63 @@ section.noSearchMatch {
         background-color: white;
     }
 }
+
+/* login message ------------------------------------------------------------*/
+
+#login_message{
+    font-weight: bold;
+    padding: var(--padding-small);
+}
+
+#login_error{
+    color:var(--color-activity);
+    animation-duration: 0.5s;
+    animation-iteration-count: 4;
+    animation-name: highlightLoginError;
+}
+
+@keyframes highlightLoginError {
+    0% {
+        background-color: initial;
+    }
+    100% {
+        color: red;
+        background-color: yellow;
+    }
+}
+
+/* breakpoint: 300px width --------------------------------------------------*/
+
+@media screen and (min-width: 300px) {
+    .taskLinks a {
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+        border-radius: var(--radius-small);
+        padding: var(--padding-small);
+        border: var(--width-border) solid var(--color-border);
+        width:30%;
+    }
+
+    .taskLinks a:hover {
+        border-color: var(--color-primary);
+    }
+
+    section:hover .taskLinks a {
+        color: var(--color-primary);
+        background: white;
+    }
+
+    section:hover .taskLinks a:hover {
+        color: var(--color-activity);
+    }
+}
+
 /* breakpoint: 400px width --------------------------------------------------*/
 
 @media screen and (min-width: 400px) {
     header h1, header h2 {
         display: block;
-    }
-
-    .taskDetails {
-        display: grid;
-        grid-template-columns: 50vw 45vw;
-        grid-template-areas:
-                "template links";
-    }
-
-    .taskLinks {
-        grid-area: links;
-        flex-direction: column;
-        min-height: 55vh;
-    }
-
-    .taskLinks a {
-        width: 90%;
-    }
-
-    .taskTemplate {
-        grid-area: template;
-        justify-content: center;
     }
 
     #tocDisplay {
@@ -565,10 +550,6 @@ section.noSearchMatch {
         border-color: transparent;
     }
 
-    .taskLinks a:after {
-        content: " ";
-    }
-
     .taskLinks a:hover {
         border-color: var(--color-primary);
     }
@@ -581,11 +562,6 @@ section.noSearchMatch {
     section:hover .taskLinks a:hover {
         border-color: var(--color-primary);
     }
-
-    section:hover .taskLinks a:after {
-        content: " ↗";
-    }
-
 
     #tocDisplay {
         width: 50vw;
