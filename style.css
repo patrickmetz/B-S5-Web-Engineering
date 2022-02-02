@@ -510,17 +510,17 @@ section.noSearchMatch {
     }
 }
 
-/* breakpoint: 800px width --------------------------------------------------*/
+/* breakpoint: 600px width --------------------------------------------------*/
 
 /* two column layout */
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 600px) {
     article {
         display: flex;
         flex-wrap: wrap;
     }
 
     section {
-        width: 49vw; /* 50 doesn't work because of scroll bar width */
+        width: 48vw; /* 50 doesn't work because of scroll bar width */
     }
 
     section:nth-child(odd) {
@@ -545,7 +545,7 @@ section.noSearchMatch {
     }
 
     #menu:hover {
-        min-width:15vw;
+        min-width:20vw;
     }
 
     #tocDisplay {
@@ -582,6 +582,10 @@ section.noSearchMatch {
 
     .taskDetails {
         grid-template-columns: 22vw 10vw; /* = section width */
+    }
+
+    #menu:hover {
+        min-width:15vw;
     }
 
     #tocDisplay {
