@@ -141,7 +141,7 @@
   },
   {
     "lectureName": "5. DOM",
-    "taskName": "5.3. TopSort als WebApp ⭐️",
+    "taskName": "5.3. TopSort als WebApp ⭐",
     "taskInfo": "Schreiben Sie eine Web-Oberfläche, in der man beliebige Beziehungen (Vorrang-Relationen) eingeben kann, für die dann die topologische Sortierung per Knopfdruck auf der Webseite ausgegeben wird.\n\nFür die Eingabe können Sie HTML5-Eingabefelder oder contentEditable verwenden.",
     "taskLinks": {
       "template": null,
@@ -221,7 +221,7 @@
   },
   {
     "lectureName": "7. Funktionale Programmierung",
-    "taskName": "7.2. Textanalyse mit filter-map-reduce ⭐",
+    "taskName": "7.2. Textanalyse mit filter-map-reduce",
     "taskInfo": "Schreiben Sie in JavaScript eine Textanalyse. Ermitteln Sie die häufigsten Begriffe im Text Plagiatsresolution. Filtern Sie dabei alle Stoppworte und HTML-Tags. Reduzieren Sie das Ergebnis auf die 3 häufigsten Begriffe.",
     "taskLinks": {
       "template": null,
