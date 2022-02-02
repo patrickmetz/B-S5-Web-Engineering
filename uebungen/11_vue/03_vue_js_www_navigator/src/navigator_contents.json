@@ -4,7 +4,7 @@
     "subtopics": [
       {
         "name": "html",
-        "content": "HTMLXXXXX (HyperText Markup Language) ist der grundlegendste Baustein des Webs. Es beschreibt und definiert den Inhalt einer Webseite zusammen mit dem grundlegenden Layout der Webseite. Neben HTML werden im Allgemeinen andere Technologien verwendet, um das Erscheinungsbild (CSS) oder die Funktionalität bzw. Verhalten (JavaScript) einer Webseite zu beschreiben.",
+        "content": "HTML (HyperText Markup Language) ist der grundlegendste Baustein des Webs. Es beschreibt und definiert den Inhalt einer Webseite zusammen mit dem grundlegenden Layout der Webseite. Neben HTML werden im Allgemeinen andere Technologien verwendet, um das Erscheinungsbild (CSS) oder die Funktionalität bzw. Verhalten (JavaScript) einer Webseite zu beschreiben.",
         "references": "https://developer.mozilla.org/de/docs/Web/HTML"
       },
       {
