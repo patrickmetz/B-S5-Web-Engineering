@@ -114,9 +114,9 @@ var LectureContentLoader = /** @class */ (function () {
     };
     LectureContentLoader.prototype.taskLinksFunction = function (content) {
         var templateLink = content.taskLinks.template !== null
-            ? " <a href=\"".concat(content.taskLinks.template, "\">Vorlage</a>")
+            ? " <a target=\"_blank\" href=\"".concat(content.taskLinks.template, "\">Vorlage</a>")
             : "";
-        return "\n            ".concat(templateLink, "\n            <a href=\"").concat(content.taskLinks.result, "\">Ergebnis</a>\n            <a href=\"").concat(content.taskLinks.source, "\">Quelle</a>\n        ");
+        return "\n            ".concat(templateLink, "\n            <a target=\"_blank\" href=\"").concat(content.taskLinks.result, "\">Ergebnis</a>\n            <a target=\"_blank\" href=\"").concat(content.taskLinks.source, "\">Quelle</a>\n        ");
     };
     LectureContentLoader.prototype.taskInfoFunction = function (content) {
         if (content.taskInfo.length

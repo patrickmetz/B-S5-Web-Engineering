@@ -124,13 +124,13 @@ class LectureContentLoader {
     private taskLinksFunction(content: LectureContent): string {
         let templateLink: String
             = content.taskLinks.template !== null
-            ? ` <a href="${content.taskLinks.template}">Vorlage</a>`
+            ? ` <a target="_blank" href="${content.taskLinks.template}">Vorlage</a>`
             : "";
 
         return `
             ${templateLink}
-            <a href="${content.taskLinks.result}">Ergebnis</a>
-            <a href="${content.taskLinks.source}">Quelle</a>
+            <a target="_blank" href="${content.taskLinks.result}">Ergebnis</a>
+            <a target="_blank" href="${content.taskLinks.source}">Quelle</a>
         `;
     }
 
