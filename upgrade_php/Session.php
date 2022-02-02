@@ -46,7 +46,7 @@ final class Session
 
     public static function getUser()
     {
-        return $_SESSION[self::SESSION_USER];
+        return htmlspecialchars($_SESSION[self::SESSION_USER]);
     }
 
     public static function hasError()
