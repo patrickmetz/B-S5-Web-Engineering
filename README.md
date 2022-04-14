@@ -16,7 +16,7 @@
     - Typescript: asynchrones [Laden der Inhalte](upgrade_typescript_and_functional_and_async.ts) via JSON und funktional komponierten Templates
     - Ecmascript: Bereitstellung einer [Volltextsuche](upgrade_ecmascript.js) im Menü
     - Javascript: Bereitstellung eines dynamischen [Inhaltsverzeichnisses](upgrade_javascript_and_dom.js) im Menü
-    - Vue: Einbindung eines validierenden [Login-Formulars](upgrade_vue/src) im Menü
+    - Vue: Einbindung eines validierenden [Login-Formulars](upgrade_vue/src/components/LoginForm.vue) im Menü
     - PHP: Realisierung von sicherem [Login](upgrade_php)
 
 ## meine besten Beiträge
